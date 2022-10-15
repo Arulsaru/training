@@ -1,0 +1,46 @@
+.form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin-left: 20%;
+    margin-top: 7%;
+  }
+  
+  .input-field {
+    width: 70%;
+  }
+
+  mat-label {
+    font-size: 15px;
+  }
+
+  .btn {
+    background-color:rgb(75, 73, 73);
+    color: white;
+    width: 80px;
+    text-align: center !important;
+    margin-left: 25%;
+  }
+
+  .btn:hover {
+    background-color: white;
+    color: rgb(75, 73, 73);
+  }
+
+  div {
+    padding: 15px;
+  }
+
+  .main-div {
+    background-color: rgb(30, 29, 31);
+    height: 100%;
+  }
+
+  .sub-container {
+    width: 600px;
+    background-color: white;
+    margin-left: 30%;
+    margin-top: 10%;
+    border-radius: 15px;
+    // text-align: center;
+  }

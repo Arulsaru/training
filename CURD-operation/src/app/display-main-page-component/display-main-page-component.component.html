@@ -1,0 +1,27 @@
+<div class="container">
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr class="table-head">
+                <th>S.NO</th>
+                <th>NAME</th>
+                <th>PHONE NUMBER</th>
+                <th>EMAIL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of detailsData  | paginate:{ itemsPerPage:limit, currentPage:page }">
+                <td>{{i.user_id}}</td>
+                <td>{{i.Name}}</td>
+                <td>{{i.phone_number}}</td>
+                <td>{{i.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="pagination">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</div>
+<p class="p-add-data">To Add New Data</p>
+<button class="btn add-button" routerLink="form">ADD</button>
+<p class="p-delete-data">To Delete User Data</p>
+<button class="btn add-button" routerLink="deleteUser">DELETE</button>
