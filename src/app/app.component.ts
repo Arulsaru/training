@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FetchDataService } from './fetch-data.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'api';
+
+  p: number = 1;
+  count: number = 10;
+
+  element: boolean = true;
+  
+  datas: Array<any> = [];
+  
+  constructor() {}
+
 }

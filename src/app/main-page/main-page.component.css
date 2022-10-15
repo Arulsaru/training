@@ -1,0 +1,67 @@
+.title {
+    color: black;
+    font-size: 25px;
+    margin-left: 500px;
+    margin-bottom: 30px;
+    padding-top: 30px;
+    font-family: 'Times New Roman', serif;
+}
+
+.center {
+    margin-left: 250px;
+    /* margin-top: 20px; */
+    margin-right: 250px; 
+}
+
+tr:hover {
+    background-color: #212529;
+    color: white;
+}
+
+table, th, td, tr {
+    vertical-align: center !important;
+    vertical-align: center !important;
+    text-align: center !important;
+}
+
+.btn-secondary {
+    background-color: #212529;
+}
+
+#edit-user,
+#delete-user {
+    line-height: 15px;    
+    border-radius: 120.25rem !important;
+}
+
+.add-user-div,
+.delete-user-div,
+.get-one-div {
+    position: absolute;
+    top: 210px;
+    left: 955px;
+    width: 150px;
+    background-color: #212529;
+}
+
+.delete-user-div {
+    margin-top: 60px;
+}
+
+.get-one-div {
+    margin-top: 120px;
+}
+
+.pagination {
+    position: relative;
+    top: 20px;
+    justify-content: center;
+}
+
+#delete-user-id {
+    width: 70px;
+    position: relative;
+    bottom: 262px;
+    left: 1050px;
+}
+
