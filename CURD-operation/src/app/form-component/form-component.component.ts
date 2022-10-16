@@ -13,17 +13,24 @@ export class FormComponentComponent implements OnInit {
   phoneNumber:string= '';
   email:string='';
 
+  editUserData:object = {};
+
   constructor(private service: RedirectService) {
     
   }
 
   ngOnInit(): void {
+    this.editUserData = this.service.getUserData();
+    this.editUserData;
   }
 
   onSubmit(data:  object) {
-    return this.service.sendData(data).subscribe();
+    return this.service.createDataSend(data).subscribe();
   }
 }
+
+
+
 
 function subscribe(arg0: (result: string) => void) {
   throw new Error('Function not implemented.');

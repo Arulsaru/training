@@ -6,14 +6,22 @@
                 <th>NAME</th>
                 <th>PHONE NUMBER</th>
                 <th>EMAIL</th>
+                <th>DELETE</th>
+                <th>EDIT</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let i of detailsData  | paginate:{ itemsPerPage:limit, currentPage:page }">
                 <td>{{i.user_id}}</td>
-                <td>{{i.Name}}</td>
+                <td>{{i.name}}</td>
                 <td>{{i.phone_number}}</td>
                 <td>{{i.email}}</td>
+                <td>
+                    <button class="btn delete-button" (click)="delete(i.user_id)">DELETE</button>
+                </td>
+                <td>
+                    <button class="btn edit-button" (click)="editUser(i)" routerLink="form">EDIT</button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -23,5 +31,4 @@
 </div>
 <p class="p-add-data">To Add New Data</p>
 <button class="btn add-button" routerLink="form">ADD</button>
-<p class="p-delete-data">To Delete User Data</p>
-<button class="btn add-button" routerLink="deleteUser">DELETE</button>
+

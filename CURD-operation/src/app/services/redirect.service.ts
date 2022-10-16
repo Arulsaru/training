@@ -8,13 +8,29 @@ import { Observable } from 'rxjs';
 })
 export class RedirectService {
 
+  userData:object = {};
+  
   constructor(private _http:HttpClient) { }
 
   getAllDetails() :Observable<any> {
     return this._http.get('http://localhost:8000/list');
   }
 
-  sendData(data: object) {
+  createDataSend(data: object) {
     return this._http.post('http://localhost:8000/create', data);
   }
+
+  deleteDataSend(userId: number) {
+    return this._http.delete<object>('http://localhost:8000/delete?user_id=' + userId);
+  }
+
+ 
+  setUserData(data: object) {
+    this.userData = data
+  }
+
+  getUserData() {
+    return this.userData;
+  }
+
 }

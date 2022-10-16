@@ -20,6 +20,14 @@ export class DisplayMainPageComponentComponent implements OnInit {
     )
    }
 
+   delete(data: number) {
+    return this.allDetails.deleteDataSend(data).subscribe();    
+   }
+
+   editUser(userDetail: object) {
+    return this.allDetails.setUserData(userDetail);
+   }
+
   ngOnInit(): void {
     
   }

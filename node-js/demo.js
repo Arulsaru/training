@@ -5,7 +5,6 @@ const _ = require('lodash');
 const { MAX_LIMIT } = require('./constant-var');
 const app = express()
 const cors = require('cors');
-const { loadavg } = require('os');
 app.use(cors());
 
 app.use(function (req, res, next) {
@@ -107,8 +106,8 @@ app.get('/details', (req, res) => {
 
 app.post('/create', (req, res) => {
   const employees = parseJson();
-  const phoneNo = _.find(employees, { phone_number: req.query.phone_number });
-
+  const phoneNo = _.find(employees, { phone_number: req.body.phone_number });
+  
   const ids = employees.map(object => {
     return object.user_id;
     })

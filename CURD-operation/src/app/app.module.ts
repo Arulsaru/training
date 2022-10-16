@@ -11,15 +11,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { DeleteUserDataComponentComponent } from './delete-user-data-component/delete-user-data-component.component';
-
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayMainPageComponentComponent,
     FormComponentComponent,
-    DeleteUserDataComponentComponent
   ],
   imports: [
     BrowserModule,
