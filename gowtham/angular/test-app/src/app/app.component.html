@@ -1,0 +1,59 @@
+<!-- <div class="body">
+  <img *ngFor="let image of images" src="{{image}}" appRoundImage> 
+  <div class="date">
+    {{D}}
+</div>
+<div class="seconds">
+    {{seconds}}
+</div> -->
+
+<!-- <button onclick="changeColor()">Change</button>
+</div> -->
+
+<!-- <div class="color">
+    even
+</div> -->
+<!-- 
+<input type="text"/>
+
+<button (click)="display()">Display</button>
+<app-life-cycle *ngIf="showLifeCycle"></app-life-cycle> -->
+
+<div *ngIf="element==true">
+    <div class="container">
+        <div class="row">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#Id</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Edit</th>
+                        <th scope=""col>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of employeeData | paginate: { itemsPerPage: limit, currentPage: page}">
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.first_name }}</td>
+                        <td>{{ data.last_name }}</td>
+                        <td>{{ data.phone_number }}</td>
+                        <td>{{ data.email }}</td>
+                        <td><button mat-raised-button id="edit" (click)="editEmployee('update', data.id)">edit</button></td>
+                        <td><button mat-raised-button color="warn" id="delete" (click)="deleteEmployee(data.id)">delete</button></td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="paginattion index">
+        <pagination-controls (pageChange) = "page = $event"></pagination-controls>
+    </div>
+    <div class="button">
+        <button mat-raised-button color="primary" id="add" (click)="addEmployee('create')">Add</button>
+        <button mat-raised-button color="primary" id="view" (click)="viewEmployee('view')">View</button>
+    </div>
+</div>
+<router-outlet></router-outlet>

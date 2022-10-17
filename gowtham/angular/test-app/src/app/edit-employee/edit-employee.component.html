@@ -1,0 +1,92 @@
+<!-- <div class="button">
+    <button mat-raised-button color="primary" id="editFirstName">First Name</button>
+    <button mat-raised-button color="primary" id="editLastName">Last Name</button>
+    <button mat-raised-button color="primary" id="editPhoneNumber">Phone Number</button>
+    <button mat-raised-button color="primary" id="editEmail">email</button>
+</div> -->
+
+<!-- <div class="example-action-buttons">
+    <button mat-button (click)="accordion.openAll()">Expand All</button>
+    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+  </div> -->
+
+<mat-accordion class="example-headers-align" multi>
+    <form #employeeFirstName="ngForm" class="example-form" autocomplete="off">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>First Name</mat-panel-title>
+                <mat-panel-description>to change your First Name
+                    <mat-icon>account_circle</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+      
+            <mat-form-field appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput name="first_name" ngModel>
+            </mat-form-field>  
+    
+            <button mat-raised-button color="primary" id="updateFirstName" (click)="updateFirstName(employeeFirstName.value)">Update</button>
+        </mat-expansion-panel>
+    </form>
+</mat-accordion>
+ 
+<mat-accordion class="example-headers-align" multi>
+    <form #employeeLastName="ngForm" class="example-form" autocomplete="off">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Last Name</mat-panel-title>
+                <mat-panel-description>to change your Last Name
+                    <mat-icon>account_circle</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+      
+            <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput name="last_name" ngModel>
+            </mat-form-field>  
+    
+            <button mat-raised-button color="primary" id="updateLastName" (click)="updateLastName(employeeLastName.value)">Update</button>
+        </mat-expansion-panel>
+    </form>
+</mat-accordion>
+
+<mat-accordion class="example-headers-align" multi>
+    <form #employeePhoneNumber="ngForm" class="example-form" autocomplete="off">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Phone Number</mat-panel-title>
+                <mat-panel-description>to change your Phone Number
+                    <mat-icon>phone</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+      
+            <mat-form-field appearance="fill">
+                <mat-label>Phone Number</mat-label>
+                <input matInput name="phone_number" ngModel>
+            </mat-form-field>  
+    
+            <button mat-raised-button color="primary" id="updatePhoneNumber" (click)="updatePhoneNumber(employeePhoneNumber.value)">Update</button>
+        </mat-expansion-panel>
+    </form>
+</mat-accordion>
+
+<mat-accordion class="example-headers-align" multi>
+    <form #employeeEmail="ngForm" class="example-form" autocomplete="off">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>email</mat-panel-title>
+                <mat-panel-description>to change your email
+                    <mat-icon>mailbox</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+      
+            <mat-form-field appearance="fill">
+                <mat-label>email</mat-label>
+                <input matInput name="email" ngModel>
+            </mat-form-field>  
+    
+            <button mat-raised-button color="primary" id="updateEmail" (click)="updateEmail(employeeEmail.value)">Update</button>
+        </mat-expansion-panel>
+    </form>
+</mat-accordion>
+  
