@@ -1,0 +1,72 @@
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FetchDataService } from '../fetch-data.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
+@Component({
+  selector: 'app-main-page',
+  templateUrl: './main-page.component.html',
+  styleUrls: ['./main-page.component.css']
+})
+export class MainPageComponent implements OnInit {
+
+  ngOnInit(): void {
+  }
+
+  page: number = 1;
+  count: number = 6;
+  datas: Array<any> = [];
+
+  firstName: string = '';
+  lastName: string = '';
+  phoneNumber: number | null = null;
+
+  deleteUser(userId: number) {
+
+    const tempRouter = this.router;
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This will delete the entire details of the selected employee',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.service.deleteUser(userId).subscribe();
+        Swal.fire(
+          'Deleted!',
+          'The employee has been deleted.',
+          'success'
+        ).then((result) => {
+          if(result.isConfirmed) {
+            window.location.reload();
+          }
+        })
+      }
+    })
+
+    
+  }
+
+  getOne() {
+    const tempRouter = this.router;
+    tempRouter.navigate(['employees/get-one']);
+  }
+
+  navigateEditUser(userId: number, firstName: string, lastName: string, phoneNumber: number) {
+    this.service.setId(userId);
+    this.service.setDetails(firstName, lastName, phoneNumber);
+    this.router.navigateByUrl('employees/update/' + userId);
+    // this.router.navigate(['employees/update/', userId]);
+  }
+  
+  constructor(private service: FetchDataService, private router: Router) {
+      this.service.fetchData().subscribe(response => {
+          this.datas = response;
+        })
+     }
+
+}
