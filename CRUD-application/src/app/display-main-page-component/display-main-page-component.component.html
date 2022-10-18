@@ -1,0 +1,31 @@
+<table class="table">
+    <tr class="table-header">
+        <th>S.NO</th>
+        <th>NAME</th>
+        <th>PHONE NUMBER</th>
+        <th>EMAIL</th>
+        <th>DELETE</th>
+        <th>EDIT</th>
+    </tr>
+    <tbody>
+        <tr *ngFor="let i of detailsData  | paginate:{ itemsPerPage:limit, currentPage:page }" class="body-tr">
+            <td>{{i.user_id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.phone_number}}</td>
+            <td>{{i.email}}</td>
+            <td>
+                <button class="btn delete-button" (click)="delete(i.user_id)">Delete</button>
+            </td>
+            <td>
+                <button class="btn edit-button" (click)="editUser(i.user_id,i.name,i.phone_number,i.email)">Edit</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="pagination">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</div>
+<!-- <mat-icon>home</mat-icon> -->
+<button class="btn add-button" routerLink="form">Add User</button>
+

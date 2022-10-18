@@ -1,0 +1,49 @@
+.form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin-left: 20%;
+    margin-top: 5%;
+    // position: fixed;
+  }
+  
+  .input-field {
+    width: 70%;
+  }
+
+  mat-label {
+    font-size: 15px;
+  }
+
+  .btn {
+    background-color:#16a085;
+    color: white;
+    width: 70px;
+    text-align: center !important;
+    font-size: 13px;
+    margin-left: 25%;
+  }
+
+  .btn:hover {
+    background-color: white;
+    color: #16a085;
+    border: 1px solid #16a085;
+  }
+
+  div {
+    padding: 15px;
+  }
+
+  .main-div {
+    background-color: #16a085;
+    height: 100%;
+  }
+
+  .sub-container {
+    width: 600px;
+    background-color: white;
+    margin-left: 27%;
+    margin-top: 7%;
+    border-radius: 15px;
+    // text-align: center;
+  }

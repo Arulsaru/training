@@ -3,7 +3,8 @@
     max-width: 500px;
     width: 100%;
     margin-left: 20%;
-    margin-top: 7%;
+    margin-top: 5%;
+    // position: fixed;
   }
   
   .input-field {
@@ -15,16 +16,28 @@
   }
 
   .btn {
-    background-color:rgb(75, 73, 73);
+    background-color:#16a085;
     color: white;
-    width: 80px;
+    width: 70px;
     text-align: center !important;
+    font-size: 13px;
     margin-left: 25%;
   }
 
   .btn:hover {
     background-color: white;
-    color: rgb(75, 73, 73);
+    color: #16a085;
+    border: 1px solid #16a085;
+  }
+
+  .add-button {
+    margin-left: 35%;
+  }
+
+  .previous-button {
+    margin-top: -15%;
+    margin-left: 35%;
+    width: 80px;
   }
 
   div {
@@ -32,15 +45,15 @@
   }
 
   .main-div {
-    background-color: rgb(30, 29, 31);
+    background-color: #16a085;
     height: 100%;
   }
 
   .sub-container {
     width: 600px;
     background-color: white;
-    margin-left: 30%;
-    margin-top: 10%;
+    margin-left: 27%;
+    margin-top: 7%;
     border-radius: 15px;
     // text-align: center;
   }

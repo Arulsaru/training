@@ -11,16 +11,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { EditUserComponentComponent } from './edit-user-component/edit-user-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayMainPageComponentComponent,
     FormComponentComponent,
+    EditUserComponentComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatIconModule,
     HttpClientModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
