@@ -20,7 +20,7 @@
                     <td>{{user.last_name}}</td>
                     <td>{{user.phone_number}}</td>
                     <td><button id="edit-user" mat-raised-button color="primary" class="edit-user-button" (click)="navigateEditUser(user.user_id, user.first_name, user.last_name, user.phone_number)">EDIT</button></td>
-                    <td><button id="delete-user" mat-raised-button color="warn"  class="edit-user-button" (click)="deleteUser(user.user_id)">DELETE</button></td>
+                    <td><button id="delete-user" mat-raised-button color="warn"  class="edit-user-button" (click)="deleteUser(user.user_id, user.first_name, user.last_name, user.phone_number)">DELETE</button></td>
                 </tr>
             </tbody>
         </table>

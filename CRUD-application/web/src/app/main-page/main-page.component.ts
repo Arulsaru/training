@@ -21,9 +21,16 @@ export class MainPageComponent implements OnInit {
   lastName: string = '';
   phoneNumber: number | null = null;
 
-  deleteUser(userId: number) {
+  deleteUser(userId: number, firstName: string, lastName: string, phoneNumber: number) {
 
     const tempRouter = this.router;
+
+    const newData = {
+      'user_id' : userId,
+      'first_name': firstName,
+      'last_name': lastName,
+      'phone_number': phoneNumber
+    }
 
     Swal.fire({
       title: 'Are you sure?',
@@ -35,7 +42,7 @@ export class MainPageComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.deleteUser(userId).subscribe();
+        this.service.deleteUser(newData, userId).subscribe();
         Swal.fire(
           'Deleted!',
           'The employee has been deleted.',

@@ -23,15 +23,18 @@ export class FetchDataService {
     return this._http.post('http://localhost:8000/create', newUserData);
   }
 
-  updateUser(datas: object, userId: number, firstName: string, lastName: string, phoneNumber: number) {
-    console.log(typeof datas, datas);
-    console.log(userId) ;
-    return this._http.put<object>('http://localhost:8000/update?user_id=' + userId + '&first_name=' + firstName + '&last_name=' + lastName + '&phone_number=' + phoneNumber, datas);
-    // return this._http.put<object>('http://localhost:8000/update/user', datas);
+  // updateUser(datas: object, userId: number, firstName: string, lastName: string, phoneNumber: number) {
+  updateUser(datas: object, userId: number) {
+        
+    // console.log(userId) ;
+    // return this._http.put<object>('http://localhost:8000/update?user_id=' + userId + '&first_name=' + firstName + '&last_name=' + lastName + '&phone_number=' + phoneNumber, datas);
+
+    return this._http.put<object>('http://localhost:8000/employees/' + userId + '/update/', datas);
   }
 
-  deleteUser(userId: number){
-    return this._http.delete<object>('http://localhost:8000/delete?user_id=' + userId);
+  deleteUser(data: object, userId: number){
+    // return this._http.delete<object>('http://localhost:8000/delete?user_id=' + userId);
+    return this._http.delete<object>('http://localhost:8000/employees/' + userId + '/delete', data);
   }
 
   getOne(userId: number) {

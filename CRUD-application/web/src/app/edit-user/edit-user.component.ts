@@ -22,7 +22,9 @@ export class EditUserComponent implements OnInit {
   phoneNumber = new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}')]);
 
   datas: Array<any> = [];
-  isUpdated: boolean = false;
+  // isUpdated: boolean = false;
+  successMsg: string = '';
+  errorMsg: string = '';
 
   editUser() {
     if (this.firstName.valid && this.lastName.valid && this.phoneNumber.valid) {
@@ -30,20 +32,32 @@ export class EditUserComponent implements OnInit {
       this.datas[id].first_name = this.firstName.value;
       this.datas[id].last_name = this.lastName.value;
       this.datas[id].phone_number = this.phoneNumber.value;
-      this.service.updateUser(this.datas[id], this.datas[id].user_id, this.datas[id].first_name, this.datas[id].last_name, this.datas[id].phone_number).subscribe();
-      this.isUpdated = true;
+      // this.service.updateUser(this.datas[id], this.datas[id].user_id, this.datas[id].first_name, this.datas[id].last_name, this.datas[id].phone_number).subscribe();
 
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Employee has been updated',
-        showConfirmButton: true,
-      }).then(result => {
-        if (result.value) {
-          const tempRouter = this.router;
-          tempRouter.navigate(['employees']);
+      this.service.updateUser(this.datas[id], this.datas[id].user_id).subscribe(
+        result => {
+          this.successMsg = Object.values(result)[0];
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: this.successMsg,
+            showConfirmButton: true,
+          }).then(result => {
+            if (result.value) {
+              const tempRouter = this.router;
+              tempRouter.navigate(['employees']);
+            }
+          })
+        },
+        errorMsg => {
+          errorMsg = errorMsg.error.err;
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorMsg,
+          })
         }
-      })
+      );
     }
   }
 

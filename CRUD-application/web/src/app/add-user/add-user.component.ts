@@ -19,12 +19,14 @@ export class AddUserComponent implements OnInit {
   // firstName = new FormControl('', [Validators.required, Validators.nullValidator]);
   // lastName = new FormControl('', [Validators.required, Validators.nullValidator]);
   // phoneNumber = new FormControl('', [Validators.required, Validators.nullValidator]);
+  
   firstName = new FormControl('', [Validators.required, Validators.pattern('^[A-Z][a-z]+$')]);
   lastName = new FormControl('', [Validators.required, Validators.pattern('^[A-Z][a-z]+$')]);
   phoneNumber = new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}')]);
 
   datas: Array<any> = [];
   isCreated: boolean = false;
+  successMsg: string = '';
 
   getErrorMessage() {
     if (this.firstName.hasError('required')) {
@@ -43,30 +45,39 @@ export class AddUserComponent implements OnInit {
     }
 
     if (!this.firstName.invalid && !this.lastName.invalid && !this.phoneNumber.invalid) {
-      this.create.createData(newUserData).subscribe();
+      this.create.createData(newUserData).subscribe(
+        result => {
+          this.successMsg = Object.values(result)[0];
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: this.successMsg,
+            showConfirmButton: true,
+          }).then(result => {
+            if(result.value) {
+              tempRouter.navigate(['employees']);
+            }
+          })
+        },
+        errorMsg => {
+          errorMsg = errorMsg.error.err;
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorMsg,
+          })
+        }
+      );
       
       const tempRouter = this.route;
 
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'New employee has been created',
-        showConfirmButton: true,
-      }).then(result => {
-        if(result.value) {
-          tempRouter.navigate(['employees']);
-        }
-      })
-
+      
     }
   }
 
   constructor(private create: FetchDataService, private route: Router) {
-    this.create.fetchData().subscribe(response => {
+    this.create.fetchData().subscribe((response) => {
       this.datas = response;
-    })
+    });
   }
-
 }
-
-

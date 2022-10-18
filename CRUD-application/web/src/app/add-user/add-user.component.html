@@ -3,21 +3,21 @@
         <div class="first-name-div">
             <mat-form-field>
                 <mat-label>Enter your First Name</mat-label>
-                <input matInput placeholder="Arulmozhi" [formControl]="firstName" required>
+                <input matInput [formControl]="firstName" required>
                 <mat-error *ngIf="firstName.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
         </div>
         <div class="last-name-div">
             <mat-form-field>
                 <mat-label>Enter your Last Name</mat-label>
-                <input matInput placeholder="Karunagaran" [formControl]="lastName" required>
+                <input matInput [formControl]="lastName" required>
                 <mat-error *ngIf="lastName.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
         </div>
         <div class="phone-number-div">
             <mat-form-field>
                 <mat-label>Enter your Phone Number</mat-label>
-                <input matInput placeholder="6374553281" [formControl]="phoneNumber" required>
+                <input matInput [formControl]="phoneNumber" required>
                 <mat-error *ngIf="phoneNumber.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
         </div>

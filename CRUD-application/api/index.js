@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
     return false;
 })
 
-app.get('/employee', (req, res) => {
+app.get('/employees', (req, res) => {
     const employees = parseJSON();
     let pageNumber = parseInt(req.query.page);
     let limit = parseInt(req.query.limit);
@@ -52,13 +52,10 @@ app.get('/employee', (req, res) => {
 
 app.post('/create', (req, res) => {
     const employees = parseJSON();
-    const employee = _.find(employees, {phone_number: req.body.phone_number});
-
-    // console.log(employees, employee);
-    // return false;
+    const employee = _.find(employees, {'phone_number': parseInt(req.body.phone_number)});
 
     if (employee) {
-        res.status(400).json({error: 'This phone number is already in use'});
+        res.status(400).json({err: 'This phone number is already in use'});
         return false;
     }
 
@@ -74,15 +71,17 @@ app.post('/create', (req, res) => {
     return false;
 })
 
-app.put('/update', (req, res) => {
+app.put('/employees/:user_id/update', (req, res) => {
+
+// app.put('/update', (req, res) => {
     const employees = parseJSON();
     let flag = 1;
-    // let employee = _.find(employees, { user_id: parseInt(req.query.user_id) });
+    const idx = _.findIndex(employees, {'user_id': parseInt(req.params['user_id'])});
 
-    let idx = _.findIndex(employees, {'user_id': parseInt(req.query.user_id)});
+    // const idx = _.findIndex(employees, {'user_id': parseInt(req.body.user_id)});
 
     if (idx === -1) {
-        res.status(400).json({error: 'No user id found'});
+        res.status(400).json({err: 'No user id found'});
         return false;
     }
 
@@ -94,30 +93,30 @@ app.put('/update', (req, res) => {
 
     });
 
-    if (req.query.first_name) {
-        employees[idx].first_name = req.query.first_name;
+    if (req.body.first_name) {
+        employees[idx].first_name = req.body.first_name;
         flag = 0;
     }
 
-    if (req.query.last_name) {
-        employees[idx].last_name = req.query.last_name;
+    if (req.body.last_name) {
+        employees[idx].last_name = req.body.last_name;
         flag = 0;
     }
 
-    if (req.query.phone_number) {
+    if (req.body.phone_number) {
         flag = 0;
-        const numberCheck = _.find(tempEmployees, {phone_number: req.query.phone_number});
+        const numberCheck = _.find(tempEmployees, {'phone_number': parseInt(req.body.phone_number)});
 
         if (numberCheck) {
-            res.status(400).json({error: 'This phone number is already in use'});
+            res.status(400).json({err: 'This phone number is already in use'});
             return false;
         }
 
-        employees[idx].phone_number = parseInt(req.query.phone_number);
+        employees[idx].phone_number = parseInt(req.body.phone_number);
     }
 
     if (flag) {
-        res.status(400).json({error: 'No operations donee'});
+        res.status(400).json({err: 'No operations donee'});
         return false;
     }
 
@@ -126,14 +125,14 @@ app.put('/update', (req, res) => {
     return false;
 })
 
-app.delete('/delete', (req, res) => {
+app.delete('/employees/:user_id/delete', (req, res) => {
     const employees = parseJSON();
-    let employee = _.find(employees, {user_id: parseInt(req.query.user_id)});
-
-    let idx = _.findIndex(employees, {'user_id': parseInt(req.query.user_id)});
-
+    const employee = _.find(employees, {user_id: parseInt(req.params['user_id'])});
+    console.log(req.body.user_id);
+    const idx = _.findIndex(employees, {'user_id': parseInt(req.params['user_id'])});
+    // console.log(idx);
     if (idx === -1) {
-        res.status(400).json({error: 'No user id found'});
+        res.status(400).json({err: 'No user id found'});
         return false;
     }
 
@@ -144,12 +143,12 @@ app.delete('/delete', (req, res) => {
     return false;
 });
 
-app.get('/getone', (req, res) => {
+app.get('/employees/getone', (req, res) => {
     const employees = parseJSON();
-    let idx = _.findIndex(employees, {'user_id': parseInt(req.query.user_id)});
+    const idx = _.findIndex(employees, {'user_id': parseInt(req.query.user_id)});
 
     if (idx === -1) {
-        res.status(400).json({error: 'No user id found'});
+        res.status(400).json({err: 'No user id found'});
         return false;
     }
 
