@@ -28,6 +28,6 @@ export class RedirectService {
   }
 
   updateEmployee(employee: any, id: any) {
-    return this._http.post<object>(`http://localhost:8000/employees/${id}`, employee);
+    return this._http.put<object>(`http://localhost:8000/employees/${id}`, employee);
   }
 }

@@ -40,11 +40,17 @@ export class EditUserComponentComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          this.api.updateEmployee(this.employee, this.userId).subscribe(response => {
-            console.log(response, 'rrrrrrr')
-          });
+          this.api.updateEmployee(this.employee, this.userId)
+            .subscribe(
+              (response: any) => {
 
-          // Swal.fire('Saved!', '', 'success')
+                console.log(response)
+                Swal.fire(response.message, '', 'success')
+              },
+              (error: any) => {
+                Swal.fire(error.error.message, '', 'error')
+              },
+            );
 
         } else if (result.isDenied) {
           Swal.fire('Changes are not saved', '', 'info')

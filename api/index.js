@@ -129,7 +129,7 @@ app.post('/create', (req, res) => {
     return false;
 })
 
-app.post('employees/:id', (req, res) => {
+app.put('/employees/:id', (req, res) => {
     const employees = parseJson();
     const employee = _.find(employees, {user_id: req.params.id});
     const index = _.findIndex(employees, {'user_id': req.params.id});
@@ -211,11 +211,11 @@ app.get('/employees/:id', (req, res) => {
 });
 
 
-// app.use((req, res) => {
-//     res.status(404)
-//     res.send('Page Not Found')
-//     return false;
-// })
+app.use((req, res) => {
+    res.status(404)
+    res.send('Page Not Found')
+    return false;
+})
 
 app.listen(8000, () => {
     console.log('8000');
