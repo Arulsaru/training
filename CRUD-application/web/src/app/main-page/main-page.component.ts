@@ -20,6 +20,7 @@ export class MainPageComponent implements OnInit {
   firstName: string = '';
   lastName: string = '';
   phoneNumber: number | null = null;
+  msg: string = '';
 
   deleteUser(userId: number, firstName: string, lastName: string, phoneNumber: number) {
 
@@ -42,20 +43,26 @@ export class MainPageComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.deleteUser(newData, userId).subscribe();
-        Swal.fire(
-          'Deleted!',
-          'The employee has been deleted.',
-          'success'
-        ).then((result) => {
+        this.service.deleteUser(newData, userId).subscribe(
+          result => {
+            console.log(result);
+            this.msg = Object.values(result)[0];
+            console.log(Object.values(result)[0]);
+            console.log(this.msg);
+          }
+        );
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: this.msg,
+          showConfirmButton: true,
+        }).then((result) => {
           if(result.isConfirmed) {
             window.location.reload();
           }
         })
       }
     })
-
-    
   }
 
   getOne() {
