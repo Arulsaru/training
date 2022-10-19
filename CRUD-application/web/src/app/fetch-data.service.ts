@@ -15,30 +15,29 @@ export class FetchDataService {
   lastName: string = '';
   phoneNumber: number = 0;
 
+  baseURL: string = 'http://localhost:8000/';
+
   fetchData():Observable <any> {
-    return this._http.get('http://localhost:8000/');
+    return this._http.get(this.baseURL);
   }
 
   createData(newUserData: object) {
-    return this._http.post('http://localhost:8000/create', newUserData);
+    return this._http.post(this.baseURL + 'create', newUserData);
   }
 
-  // updateUser(datas: object, userId: number, firstName: string, lastName: string, phoneNumber: number) {
   updateUser(datas: object, userId: number) {
-        
-    // console.log(userId) ;
-    // return this._http.put<object>('http://localhost:8000/update?user_id=' + userId + '&first_name=' + firstName + '&last_name=' + lastName + '&phone_number=' + phoneNumber, datas);
-
-    return this._http.put<object>('http://localhost:8000/employees/' + userId + '/update/', datas);
+    console.log(datas);
+    return this._http.put<object>(this.baseURL + 'employees/' + userId + '/update/', datas);
   }
 
   deleteUser(data: object, userId: number){
     // return this._http.delete<object>('http://localhost:8000/delete?user_id=' + userId);
-    return this._http.delete<object>('http://localhost:8000/employees/' + userId + '/delete', data);
+    return this._http.delete<object>(this.baseURL + 'employees/' + userId + '/delete', data);
   }
 
   getOne(userId: number) {
-    return this._http.get('http://localhost:8000/getone?user_id=' + userId);
+    console.log(userId);
+    return this._http.get(this.baseURL + 'employees/getone/' + userId );
   }
 
   setId(userId: number) {

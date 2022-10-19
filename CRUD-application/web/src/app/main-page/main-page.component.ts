@@ -71,8 +71,8 @@ export class MainPageComponent implements OnInit {
   }
 
   navigateEditUser(userId: number, firstName: string, lastName: string, phoneNumber: number) {
-    this.service.setId(userId);
-    this.service.setDetails(firstName, lastName, phoneNumber);
+    // this.service.setId(userId);
+    // this.service.setDetails(firstName, lastName, phoneNumber);
     this.router.navigateByUrl('employees/update/' + userId);
     // this.router.navigate(['employees/update/', userId]);
   }

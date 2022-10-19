@@ -73,12 +73,9 @@ app.post('/create', (req, res) => {
 
 app.put('/employees/:user_id/update', (req, res) => {
 
-// app.put('/update', (req, res) => {
     const employees = parseJSON();
     let flag = 1;
     const idx = _.findIndex(employees, {'user_id': parseInt(req.params['user_id'])});
-
-    // const idx = _.findIndex(employees, {'user_id': parseInt(req.body.user_id)});
 
     if (idx === -1) {
         res.status(400).json({err: 'No user id found'});
@@ -113,6 +110,7 @@ app.put('/employees/:user_id/update', (req, res) => {
         }
 
         employees[idx].phone_number = parseInt(req.body.phone_number);
+        console.log( typeof employees[idx].phone_number);
     }
 
     if (flag) {
@@ -143,16 +141,14 @@ app.delete('/employees/:user_id/delete', (req, res) => {
     return false;
 });
 
-app.get('/employees/getone', (req, res) => {
+app.get('/employees/getone/:user_id', (req, res) => {
     const employees = parseJSON();
-    const idx = _.findIndex(employees, {'user_id': parseInt(req.query.user_id)});
-
-    if (idx === -1) {
+    const employee = _.find(employees, {'user_id': parseInt(req.params['user_id'])});
+    if (!employee) {
         res.status(400).json({err: 'No user id found'});
         return false;
     }
-
-    res.json(employees[idx]);
+    res.json(employee);
 })
 
 app.listen(port, () => {

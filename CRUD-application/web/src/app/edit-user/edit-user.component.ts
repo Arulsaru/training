@@ -12,10 +12,12 @@ import { FetchDataService } from '../fetch-data.service';
 
 export class EditUserComponent implements OnInit { 
 
-  tempUserId: number = this.service.getId();
-  tempFirstName: string = this.service.getFirstName();
-  tempLastName: string = this.service.getLastName();
-  tempPhoneNumber: number = this.service.getPhoneNumber();
+  public newData: any = {
+    user_id : 0,
+    first_name: '',
+    last_name: '',
+    phone_number: 0
+  }
 
   firstName = new FormControl('', [Validators.required, Validators.pattern('^[A-Z][a-z]+$')]);
   lastName = new FormControl('', [Validators.required, Validators.pattern('^[A-Z][a-z]+$')]);
@@ -29,12 +31,7 @@ export class EditUserComponent implements OnInit {
   editUser() {
     if (this.firstName.valid && this.lastName.valid && this.phoneNumber.valid) {
       const id = this.service.getId() - 101;
-      this.datas[id].first_name = this.firstName.value;
-      this.datas[id].last_name = this.lastName.value;
-      this.datas[id].phone_number = this.phoneNumber.value;
-      // this.service.updateUser(this.datas[id], this.datas[id].user_id, this.datas[id].first_name, this.datas[id].last_name, this.datas[id].phone_number).subscribe();
-
-      this.service.updateUser(this.datas[id], this.datas[id].user_id).subscribe(
+      this.service.updateUser(this.newData, this.newData.user_id).subscribe(
         result => {
           this.successMsg = Object.values(result)[0];
           Swal.fire({
@@ -70,12 +67,19 @@ export class EditUserComponent implements OnInit {
     this.service.fetchData().subscribe(response => {
       this.datas = response;
     })
+    
+    this.activatedRoute.params.subscribe((params) => {
+      this.newData.user_id = parseInt(params['id']);
+    });
   }
 
   // userId: number = this.service.getId();
 
   ngOnInit() {
-    // this.activatedRoute.params.subscribe((params: Params) => this.userId = params['caller']);
-   }
+    this.service.getOne(this.newData.user_id).subscribe((response) => {
+      this.newData = response;
+      console.log(this.newData);
+    })
+  }
 
 }

@@ -19,10 +19,10 @@ export class GetOneComponent implements OnInit {
   getOne() {
     console.log(typeof this.userId.value); 
 
-    this.service.getOne(112).subscribe( response => {
-      const getOneData = response;
-      console.log(getOneData);
-    });
+    // this.service.getOne(112).subscribe( response => {
+    //   const getOneData = response;
+    //   console.log(getOneData);
+    // });
   } 
 
   constructor(private service: FetchDataService) {
