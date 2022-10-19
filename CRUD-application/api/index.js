@@ -22,13 +22,13 @@ function parseJSON() {
     return JSON.parse(data);
 }
 
-app.get('/', (req, res) => {
+app.get('/employees', (req, res) => {
     const employees = parseJSON();
     res.json(employees)
     return false;
 })
 
-app.get('/employees', (req, res) => {
+app.get('/employees/pagination', (req, res) => {
     const employees = parseJSON();
     let pageNumber = parseInt(req.query.page);
     let limit = parseInt(req.query.limit);
@@ -40,20 +40,25 @@ app.get('/employees', (req, res) => {
     const startIdx = (pageNumber - 1) * limit;
     const endIdx = pageNumber * limit;
     const result = employees.slice(startIdx, endIdx);
+    const perPage = employees.length / limit;
 
     const data = {
-        details: result,
-        count: employees.length
+        page: pageNumber,
+        per_page: limit,
+        total: employees.length,
+        total_pages: Math.ceil(perPage),
+        details: result
     }
 
     res.send(data);
     return false;
 })
 
-app.post('/create', (req, res) => {
+app.post('/employees/create', (req, res) => {
     const employees = parseJSON();
     const employee = _.find(employees, {'phone_number': parseInt(req.body.phone_number)});
 
+    console.log(employee);
     if (employee) {
         res.status(400).json({err: 'This phone number is already in use'});
         return false;
@@ -110,7 +115,6 @@ app.put('/employees/:user_id/update', (req, res) => {
         }
 
         employees[idx].phone_number = parseInt(req.body.phone_number);
-        console.log( typeof employees[idx].phone_number);
     }
 
     if (flag) {
@@ -126,9 +130,8 @@ app.put('/employees/:user_id/update', (req, res) => {
 app.delete('/employees/:user_id/delete', (req, res) => {
     const employees = parseJSON();
     const employee = _.find(employees, {user_id: parseInt(req.params['user_id'])});
-    console.log(req.body.user_id);
     const idx = _.findIndex(employees, {'user_id': parseInt(req.params['user_id'])});
-    // console.log(idx);
+    
     if (idx === -1) {
         res.status(400).json({err: 'No user id found'});
         return false;
@@ -144,10 +147,12 @@ app.delete('/employees/:user_id/delete', (req, res) => {
 app.get('/employees/getone/:user_id', (req, res) => {
     const employees = parseJSON();
     const employee = _.find(employees, {'user_id': parseInt(req.params['user_id'])});
+
     if (!employee) {
         res.status(400).json({err: 'No user id found'});
         return false;
     }
+
     res.json(employee);
 })
 

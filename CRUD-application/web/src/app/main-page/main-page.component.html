@@ -19,15 +19,19 @@
                     <td>{{user.first_name}}</td>
                     <td>{{user.last_name}}</td>
                     <td>{{user.phone_number}}</td>
-                    <td><button id="edit-user" mat-raised-button color="primary" class="edit-user-button" (click)="navigateEditUser(user.user_id, user.first_name, user.last_name, user.phone_number)">EDIT</button></td>
+                    <td><button id="edit-user" mat-raised-button color="primary" class="edit-user-button" (click)="navigateEditUser(user.user_id)">EDIT</button></td>
                     <td><button id="delete-user" mat-raised-button color="warn"  class="edit-user-button" (click)="deleteUser(user.user_id, user.first_name, user.last_name, user.phone_number)">DELETE</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <!-- <button class="btn btn-secondary get-one-div" (click)="getOne()">Get One</button> -->
-    <!-- <input type="text" class="form-control" id="delete-user-id"> --> 
     <div class="pagination">
-        <pagination-controls (pageChange)="page=$event"></pagination-controls>
-    </div>
+        <pagination-controls (pageChange)="page=$event"></pagination-controls> 
+        <!-- <form>
+            <mat-form-field>
+                <mat-label>Items per page</mat-label>
+                <input matInput name="count" [formControl]="itemsPerPage" required>
+            </mat-form-field>
+        </form> -->
+    </div> 
 </div>

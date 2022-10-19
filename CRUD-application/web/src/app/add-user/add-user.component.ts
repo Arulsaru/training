@@ -70,8 +70,6 @@ export class AddUserComponent implements OnInit {
       );
       
       const tempRouter = this.route;
-
-      
     }
   }
 

@@ -78,7 +78,6 @@ export class EditUserComponent implements OnInit {
   ngOnInit() {
     this.service.getOne(this.newData.user_id).subscribe((response) => {
       this.newData = response;
-      console.log(this.newData);
     })
   }
 

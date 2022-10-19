@@ -15,7 +15,7 @@ export class FetchDataService {
   lastName: string = '';
   phoneNumber: number = 0;
 
-  baseURL: string = 'http://localhost:8000/';
+  baseURL: string = 'http://localhost:8000/employees/';
 
   fetchData():Observable <any> {
     return this._http.get(this.baseURL);
@@ -26,18 +26,16 @@ export class FetchDataService {
   }
 
   updateUser(datas: object, userId: number) {
-    console.log(datas);
-    return this._http.put<object>(this.baseURL + 'employees/' + userId + '/update/', datas);
+    return this._http.put<object>(this.baseURL + userId + '/update/', datas);
   }
 
   deleteUser(data: object, userId: number){
     // return this._http.delete<object>('http://localhost:8000/delete?user_id=' + userId);
-    return this._http.delete<object>(this.baseURL + 'employees/' + userId + '/delete', data);
+    return this._http.delete<object>(this.baseURL + userId + '/delete', data);
   }
 
   getOne(userId: number) {
-    console.log(userId);
-    return this._http.get(this.baseURL + 'employees/getone/' + userId );
+    return this._http.get(this.baseURL + 'getone/' + userId );
   }
 
   setId(userId: number) {

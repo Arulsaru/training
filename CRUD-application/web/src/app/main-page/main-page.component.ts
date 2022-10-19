@@ -2,16 +2,20 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FetchDataService } from '../fetch-data.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
+
 export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  // itemsPerPage = new FormControl();
 
   page: number = 1;
   count: number = 6;
@@ -23,8 +27,6 @@ export class MainPageComponent implements OnInit {
   msg: string = '';
 
   deleteUser(userId: number, firstName: string, lastName: string, phoneNumber: number) {
-
-    const tempRouter = this.router;
 
     const newData = {
       'user_id' : userId,
@@ -70,11 +72,8 @@ export class MainPageComponent implements OnInit {
     tempRouter.navigate(['employees/get-one']);
   }
 
-  navigateEditUser(userId: number, firstName: string, lastName: string, phoneNumber: number) {
-    // this.service.setId(userId);
-    // this.service.setDetails(firstName, lastName, phoneNumber);
+  navigateEditUser(userId: number) {
     this.router.navigateByUrl('employees/update/' + userId);
-    // this.router.navigate(['employees/update/', userId]);
   }
   
   constructor(private service: FetchDataService, private router: Router) {

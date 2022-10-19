@@ -10,11 +10,12 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainPageComponent } from './main-page/main-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { GetOneComponent } from './get-one/get-one.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,11 @@ import { GetOneComponent } from './get-one/get-one.component';
     ReactiveFormsModule,
     NgxPaginationModule,
     HttpClientModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
