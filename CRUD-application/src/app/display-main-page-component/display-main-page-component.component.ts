@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
-import { RedirectService } from '../services/redirect.service';
-import { Router } from '@angular/router';
-import { result } from 'lodash';
+import {RedirectService} from '../services/redirect.service';
+import {Router} from '@angular/router';
+import {result} from 'lodash';
 
 @Component({
   selector: 'app-display-main-page-component',
@@ -20,8 +20,8 @@ export class DisplayMainPageComponentComponent implements OnInit {
 
   constructor(private allDetails: RedirectService, private router: Router) {
     this.allDetails.getAllDetails().subscribe((response) => {
-      this.detailsData = response;
-    }
+        this.detailsData = response;
+      }
     )
   }
 
@@ -41,7 +41,7 @@ export class DisplayMainPageComponentComponent implements OnInit {
           'User Data has been deleted.',
           'success'
         ).then((result) => {
-          if(result.isConfirmed) {
+          if (result.isConfirmed) {
             window.location.reload();
           }
         })
@@ -49,17 +49,16 @@ export class DisplayMainPageComponentComponent implements OnInit {
     })
   }
 
-editUser(userId: number, name: string, phoneNumber: string, email: string) {
-  this.userId = userId;
-  this.navigation();
-  return this.allDetails.setUser(userId, name, phoneNumber, email);
-}
+  editUser(userId: number, name: string, phoneNumber: string, email: string) {
+    this.userId = userId;
+    this.navigation();
+  }
 
-navigation() {
-  this.router.navigateByUrl('employees/edit/' + this.userId);
-}
+  navigation() {
+    this.router.navigateByUrl('employees/edit/' + this.userId);
+  }
 
-ngOnInit(): void {
-  // throw new Error('Method not implemented.');
-}
+  ngOnInit(): void {
+    // throw new Error('Method not implemented.');
+  }
 }
