@@ -5,9 +5,10 @@ import { EditUserComponentComponent } from './edit-user-component/edit-user-comp
 import { FormComponentComponent } from './form-component/form-component.component'
 
 const routes: Routes = [
-  {path: '',component:DisplayMainPageComponentComponent},
-  {path: 'form',component:FormComponentComponent},
-  {path: 'edit/:id',component:EditUserComponentComponent},
+  {path: '',   redirectTo: 'employees', pathMatch: 'full'},
+  {path: 'employees', component: DisplayMainPageComponentComponent},
+  {path: 'employees/create', component: FormComponentComponent},
+  {path: 'employees/edit/:id', component: EditUserComponentComponent},
 ];
 
 @NgModule({

@@ -30,11 +30,11 @@ export class RedirectService {
   }
 
   deleteDataSend(userId: number) {
-    return this._http.delete<object>('http://localhost:8000/delete?user_id=' + userId);
+    return this._http.delete<object>('http://localhost:8000/delete/' + userId);
   }
 
-  updateDataSend(data: any) {
-    return this._http.put('http://localhost:8000/update?user_id=' + this.userId + '&name=' + data.name + '&phone_number=' + data.phone_number + '&email=' + data.email, null )
+  updateDataSend(datas: object) {
+    return this._http.put<object>('http://localhost:8000/' + this.userId + '/edit', datas);
   }
 
   setUser(userId: number, name: string, phoneNumber: string, email: string) {

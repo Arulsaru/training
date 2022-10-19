@@ -5,6 +5,7 @@ const _ = require('lodash');
 const { MAX_LIMIT } = require('./constant-var');
 const app = express()
 const cors = require('cors');
+const { name } = require('ejs');
 app.use(cors());
 
 app.use(function (req, res, next) {
@@ -126,13 +127,13 @@ app.post('/create', (req, res) => {
   return false;
 })
 
-app.put('/update', (req, res) => {
+app.put('/:user_id/edit', (req, res) => {
 
   const employees = parseJson();
-  const employee = _.find(employees, { user_id: parseInt(req.query.user_id) });
-  const index = _.findIndex(employees, { 'user_id': parseInt(req.query.user_id) });
+  const employee = _.find(employees, { user_id: req.params['user_id']});
+  const index = _.findIndex(employees, { 'user_id': req.params['user_id'] });
   let flag = false;
-
+  
   if (index === -1) {
     res.status(400).json({ message: 'Invalid User ID' });
     return false;
@@ -145,30 +146,29 @@ app.put('/update', (req, res) => {
     }
   })
 
-  if (req.query.name) {
-    employee.name = req.query.name;
+  if (req.body.name) {
+    employee.name = req.body.name;
     flag = true;
   }
 
-  if(req.query.phone_number) {
-    const employeeNumber = _.find(employeesTemp, { phone_number: req.query.phone_number });
-
+  if(req.body.phone_number) {
+    const employeeNumber = _.find(employeesTemp, { 'phone_number': req.body.phone_number });
     if(employeeNumber) {
-      res.json({ message: 'This Phone Number is already taken'});
+      res.status(400).json({ message: 'This Phone Number is already taken'});
       return false;
     }
-    employees[index].phone_number = req.query.phone_number;
+    employees[index].phone_number = req.body.phone_number;
     flag = true;
   }
 
-  if (req.query.email) {
-    const employeeEmail = _.find(employeesTemp, { email: req.query.email });
+  if (req.body.email) {
+    const employeeEmail = _.find(employeesTemp, { email: req.body.email });
 
     if(employeeEmail) {
       res.json({ message: 'This Email is already taken'});
       return false;
     }
-    employees[index].email = req.query.email;
+    employees[index].email = req.body.email;
     flag = true;
   }
 
@@ -180,10 +180,10 @@ app.put('/update', (req, res) => {
 
 })
 
-app.delete('/delete', (req, res) => {
+app.delete('/delete/:user_id',(req, res) => {
 
   const employees = parseJson();
-  const employee = _.find(employees, { user_id: parseInt(req.query.user_id) });
+  const employee = _.find(employees, { user_id: req.params['user_id']});
 
   if(!employee) {
     res.json({message: 'Invalid User ID'});
@@ -196,7 +196,7 @@ app.delete('/delete', (req, res) => {
   return false;
 })
 
-app.get('/getOne', (req, res) => {
+app.get('/getOne}', (req, res) => {
   const employees = parseJson();
   const employee = _.find(employees, { user_id: parseInt(req.query.user_id) });
 

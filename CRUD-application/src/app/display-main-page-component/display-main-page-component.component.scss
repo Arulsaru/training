@@ -22,23 +22,11 @@
     border: 1px solid #16a085;
   }
 
-// .delete-button,.edit-button {
-//     margin-left: -3%;
-// }
-
 .add-button:hover {
     color: #16a085;
     background-color: white;
     border: 1px solid #16a085;  
 }
-
-// .p-add-data {
-//     margin-left: 68%;
-//     margin-top: -30%;   
-//     font-weight: bold;
-//     font-size: 20px;
-//     color: rgb(75, 73, 73);
-// }
 
 .pagination{
     position: absolute;
@@ -59,7 +47,6 @@
     transform: translate(-50%,-50%);
     border-collapse: collapse;
     width: 750px;
-    // height: 400px !important;
     border: 1px solid #bdc3c7;
     border-radius: 10px;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
@@ -73,10 +60,8 @@ tr {
 
 td {
     padding: 7px;
-    // text-align: left;
     border-bottom: 1px solid #ddd;
     margin-top: 5px;
-    // margin-right: 10px;
     background-color: white;
 }
 
