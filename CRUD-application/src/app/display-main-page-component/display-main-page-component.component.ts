@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
-import { RedirectService } from '../services/redirect.service';
-import { Router } from '@angular/router';
-import { result } from 'lodash';
+import {RedirectService} from '../services/redirect.service';
+import {Router} from '@angular/router';
+import {result} from 'lodash';
 
 @Component({
   selector: 'app-display-main-page-component',
