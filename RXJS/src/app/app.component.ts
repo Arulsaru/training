@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RedirectService } from './services/redirect.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +6,5 @@ import { RedirectService } from './services/redirect.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'CRUD-operation';
-  
+  title = 'RXJS';
 }

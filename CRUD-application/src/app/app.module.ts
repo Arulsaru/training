@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'
 import { MatIconModule } from '@angular/material/icon';
 import { EditUserComponentComponent } from './edit-user-component/edit-user-component.component';
 
@@ -28,6 +29,7 @@ import { EditUserComponentComponent } from './edit-user-component/edit-user-comp
     HttpClientModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,

@@ -9,20 +9,17 @@ import { result } from 'lodash';
   templateUrl: './display-main-page-component.component.html',
   styleUrls: ['./display-main-page-component.component.scss']
 })
-export class DisplayMainPageComponentComponent implements OnInit {
+export class DisplayMainPageComponentComponent {
 
   detailsData: Array<any> = [];
 
   page: number = 1;
   limit: number = 10;
 
-  userId: number = 0;
-
   constructor(private allDetails: RedirectService, private router: Router) {
     this.allDetails.getAllDetails().subscribe((response) => {
       this.detailsData = response;
-    }
-    )
+    });
   }
 
   delete(data: number) {
@@ -35,31 +32,19 @@ export class DisplayMainPageComponentComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.allDetails.deleteDataSend(data).subscribe()
-        Swal.fire(
-          'Deleted!',
-          'User Data has been deleted.',
-          'success'
-        ).then((result) => {
-          if(result.isConfirmed) {
-            window.location.reload();
-          }
-        })
-      }
-    })
+        this.allDetails.deleteDataSend(data).subscribe(
+          (response: any) => {
+            Swal.fire('Deleted!', response.message, 'success').then((result) => {
+              if (result.isConfirmed) {
+                window.location.reload();
+              }
+            })
+          })
+        }
+      })
   }
 
-editUser(userId: number, name: string, phoneNumber: string, email: string) {
-  this.userId = userId;
-  this.navigation();
-  return this.allDetails.setUser(userId, name, phoneNumber, email);
-}
-
-navigation() {
-  this.router.navigateByUrl('employees/edit/' + this.userId);
-}
-
-ngOnInit(): void {
-  // throw new Error('Method not implemented.');
-}
+  editUser(userId: number) {
+    this.router.navigateByUrl(`employees/edit/${userId}`);
+  }
 }

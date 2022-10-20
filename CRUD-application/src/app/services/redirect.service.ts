@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -8,60 +8,28 @@ import { Observable } from 'rxjs';
 })
 export class RedirectService {
 
-  userData:object = {};
+  baseURL:string = `http://localhost:8000/`;
 
-  userId:number = 0;
-  name:string = '';
-  email:string = '';
-  phoneNumber:string = '';
-
-  details:object = {};
-  
-  constructor(private _http:HttpClient) { 
-    
+  constructor(private _http: HttpClient) {
   }
 
-  getAllDetails() :Observable<any> {
-    return this._http.get('http://localhost:8000/list');
+  getAllDetails(): Observable<any> {
+    return this._http.get(this.baseURL+`employees`);
+  }
+
+  getOneEmployee(id: number): Observable<any> {
+    return this._http.get(this.baseURL+`employee/${id}`);
   }
 
   createDataSend(data: object) {
-    return this._http.post('http://localhost:8000/create', data);
+    return this._http.post(this.baseURL+`create`, data);
   }
 
-  deleteDataSend(userId: number) {
-    return this._http.delete<object>('http://localhost:8000/delete/' + userId);
+  deleteDataSend(id: number) {
+    return this._http.delete<object>(this.baseURL + `delete/${id}`);
   }
 
-  updateDataSend(datas: object) {
-    return this._http.put<object>('http://localhost:8000/' + this.userId + '/edit', datas);
+  updateEmployee(employee: any, id: any) {
+    return this._http.put<object>(this.baseURL + `employees/${id}`, employee);
   }
-
-  setUser(userId: number, name: string, phoneNumber: string, email: string) {
-    this.userId = userId;
-    this.name = name;
-    this.email = email;
-    this.phoneNumber = phoneNumber;
-  }
-
-  getUserId() {
-    return this.userId;
-  }
-
-  getUserName() {
-    return this.name;
-  }
-
-  getUserEmail() {
-    return this.email;
-  }
-
-  getUserPhoneNumber() {
-    return this.phoneNumber;
-  }
-
-  
-
-
-
 }

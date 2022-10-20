@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { RedirectService } from '../services/redirect.service';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, FormBuilder, Validator, Validators} from '@angular/forms' 
 
 @Component({
   selector: 'app-form-component',
@@ -10,6 +11,12 @@ import { Router } from '@angular/router';
 })
 
 export class FormComponentComponent implements OnInit {
+  
+  addUserForm = this.formBulider.group( {
+    name: ['', Validators.required],
+    phone_number: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+    email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" )]]
+  })
 
   name:string = '';
   phoneNumber:string= '';
@@ -17,7 +24,7 @@ export class FormComponentComponent implements OnInit {
 
   editUserData:object = {};
 
-  constructor(private service: RedirectService, private router: Router) {
+  constructor(private service: RedirectService, private router: Router, private formBulider: FormBuilder) {
     
   }
 
@@ -25,17 +32,30 @@ export class FormComponentComponent implements OnInit {
   
   }
 
-  onSubmit(data:  object) {
-    if(this.name && this.email && this.phoneNumber) {
+  onSubmit() {
       Swal.fire({
-        icon: 'success',
-        text: 'Successfully Added !!',
-      })
-      this.service.createDataSend(data).subscribe((response) => {
-        console.log(response);
-      });
-    } 
-  }
+        title: 'Do you want to save the changes?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+        denyButtonText: `Don't save`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.service.createDataSend(this.addUserForm.value)
+          .subscribe(
+              (response: any) => {
+                Swal.fire(response.message, '', 'success')
+              },
+              (error: any) => {
+                Swal.fire(error.error.message, '', 'error')
+              },
+            );
+
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+      })       
+    }
 
   previousPage() {
     this.router.navigateByUrl('/');
