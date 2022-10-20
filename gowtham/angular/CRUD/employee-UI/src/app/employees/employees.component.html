@@ -1,0 +1,53 @@
+<!-- <div class="button">
+  <button mat-raised-button color="primary" id="editPrev" (click)="editPrev('employee')">Previous</button>
+</div>
+<div class="form">
+  <form #employee="ngForm" class="example-form" autocomplete="off">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput name="first_name" ngModel>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput name="last_name" ngModel>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Phone Number</mat-label>
+      <input matInput name="phone_number" ngModel>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput name="email" ngModel>
+    </mat-form-field>
+    <div class="button">
+      <button mat-raised-button color="primary" id="addEmployee" (click)="addData(employee.value)">Create</button>
+    </div>
+  </form>
+</div> -->
+
+<div class="button">
+  <button mat-raised-button color="primary" id="editPrev" (click)="editPrev('employee')">Previous</button>
+</div>
+<div class="form">
+  <form [formGroup]="createForm" class="example-form" autocomplete="off" (ngSubmit)="addNewData(createForm.value)">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input type="text" matInput id="firstName" formControlName="first_name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input type="text" matInput id="firstName" formControlName="last_name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Phone Number</mat-label>
+      <input type="text" matInput formControlName="phone_number">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email">
+    </mat-form-field>
+    <div class="button">
+      <button mat-raised-button color="primary" id="addEmployee" [disabled]="!createForm.valid">Create</button>
+    </div>
+  </form>
+</div>
