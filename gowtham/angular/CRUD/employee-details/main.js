@@ -126,11 +126,16 @@ app.post('/employees/:create', (req, res) => {
     const employees = JSON.parse(data);
 
     const info = _.find(employees, { phone_number: req.body.phone_number });
-
+    const infoEmail =  _.find(employees, { email: req.body.email });
     if (info) {
         res.status(400).json({ error: 'This Phone Number is already taken' });
         return false;
     }
+    if (infoEmail) {
+        res.status(400).json({ error: 'This Email is already taken' });
+        return false;
+    }
+
 
     const ids = employees.map(object => {
         return object.id;
@@ -160,6 +165,7 @@ app.put('/employees/update/:id', (req, res) => {
 
     const index = _.findIndex(employees, { id: parseInt(req.body.id) });
     const info = _.find(employees, { id: parseInt(req.body.id) });
+
     const tempEmployees = employees.map((employeeTemp, indexTemp) => {
 
         if (index !== indexTemp) {
@@ -169,13 +175,15 @@ app.put('/employees/update/:id', (req, res) => {
 
     const employee = _.find(tempEmployees, { phone_number: req.body.phone_number });
     const emailEmployee = _.find(tempEmployees, { email: req.body.email });
-    if (info) {
 
+    if (info) {
         if (employee) {
             res.status(400).json({ error: 'This Phone Number is already taken' });
+            return false;
         }
-        else if(emailEmployee) {
+        if(emailEmployee) {
             res.status(400).json({ error: 'This Email is already taken' });
+            return false;
         }
 
         if (!employee && req.body.phone_number) {
