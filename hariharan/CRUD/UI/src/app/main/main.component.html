@@ -1,0 +1,59 @@
+<div class="container">
+
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <h1>Employee Details</h1>
+            </td>
+        </tr>
+    </table>
+    
+    <div class="diag">
+        <button class="btn" mat-raised-button routerLink="create">Add-User</button>
+        <p></p>
+    </div>
+   
+    <table class="table table-hover table-dark">
+    
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr *ngFor="let person of employee | paginate :{itemsPerPage: limit, currentPage: page};" >
+                <td>
+                    {{person.id}}
+                </td>
+                <td>
+                    {{person.name}}
+    
+                </td>
+                <td>
+                    {{person.phone}}
+                </td>
+                <td>
+                    {{person.email}}
+                </td>
+                <td>
+                    <button mat-raised-button class="cdn"   routerLink="edit/{{person.id}}"  (click)=transfer(person.name,person.email,person.phone,person.id)>Update</button>
+                </td>
+                <td>
+                    <button mat-raised-button (click)=delete(person.id)>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        <router-outlet></router-outlet>
+        </table>
+</div>

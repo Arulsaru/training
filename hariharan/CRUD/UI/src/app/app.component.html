@@ -1,0 +1,148 @@
+<!-- <mat-toolbar>
+    <span>
+        Let's Make Resume
+    </span>
+    <div class="spacer"></div>
+    <a mat-button>Profile</a>
+    <a mat-button>Education</a>
+    <a mat-button>Skills</a>
+    <a mat-button>Experience</a>
+    <a mat-button>Summary</a>
+</mat-toolbar>
+<mat-stepper>
+    <mat-step>
+        <form #profile="ngForm" ngSubmit="validate(#profile)">
+            <ng-template matStepLabel>Fill out your Profile</ng-template>
+            <mat-grid-list cols="2" rowHeight="400px" colHeight=" ">
+                <mat-grid-tile>
+                    <div class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Name" class="form-control" [(ngModel)]="name" name="nameField"
+                                ngModel required #nameField="ngModel">
+                        </mat-form-field>
+                        <span *ngIf="nameField.touched && !nameField.valid">Enter Name</span>
+
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Email" class="form-control" name="emailField" ngModel required
+                                #emailField="ngModel">
+                        </mat-form-field>
+                        <span *ngIf="emailField.touched && !emailField.valid">Enter email</span>
+
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Country" class="form-control" name="CountryField" ngModel
+                                required #CountryField="ngModel">
+                        </mat-form-field>
+                        <span *ngIf="CountryField.touched && !CountryField.valid">Enter Country Name</span>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Phone" class="form-control" name="PhoneField" ngModel required
+                                #PhoneField="ngModel">
+                        </mat-form-field>
+                        <span *ngIf="PhoneField.touched && !PhoneField.valid">Enter Phone number</span>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Dateofbirth" class="form-control" name="DateofbirthField"
+                                ngModel required #DateofbirthField="ngModel">
+                        </mat-form-field>
+                        <span *ngIf="DateofbirthField.touched && !DateofbirthField.valid">Enter Dob</span>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="City" class="form-control" name="CityField" ngModel required
+                                #CityField="ngModel">
+                        </mat-form-field>
+                        <span *ngIf="CityField.touched && !CityField.valid">Enter City Name</span>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <button type="submit" mat-raised-button matStepperNext>Next</button>
+        </form>
+        <h2>{{name}}</h2>
+    </mat-step>
+    <mat-step>
+        <form>
+            <ng-template matStepLabel>Education</ng-template>
+            <mat-grid-list cols="2" rowHeight="300px">
+                <mat-grid-tile>
+                    <div class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Hsc-Mark" required>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Sslc-Mark" required>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Passed-out" required>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="University" required>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Degree" required>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Cgpa" required>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <button mat-raised-button matStepperNext>Next</button>
+        </form>
+    </mat-step>
+    <mat-step>
+        <form>
+            <ng-template matStepLabel>Skills</ng-template>
+            <mat-grid-list cols="2" rowHeight="300px">
+                <mat-grid-tile>
+                    <div class="example-form">
+                        <h1>Skills</h1>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <h1>Skills</h1>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <button mat-raised-button matStepperNext>Next</button>
+        </form>
+    </mat-step>
+    <mat-step>
+        <form>
+            <ng-template matStepLabel>Experience</ng-template>
+            <mat-grid-list cols="2" rowHeight="300px">
+                <mat-grid-tile>
+                    <div class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="CompanyName" required>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Job-position" required>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="location" required>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Years-worked" required>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+    </mat-step>
+</mat-stepper> -->
+<!-- <img *ngFor="let item of images; index as i;" src={{item}} appDirectory>
+ <h1 *appSeconds ="time;"> app running from {{time}} seconds </h1> -->
+
+
+<span routerLink="employees"></span>
+<router-outlet></router-outlet>
+   

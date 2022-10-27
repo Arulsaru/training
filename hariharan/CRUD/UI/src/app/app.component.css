@@ -1,0 +1,52 @@
+mat-toolbar
+{
+background-color:tomato;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    margin-left: 100px;
+    margin-right: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  
+  .example-full-width {
+    width: 80%;
+    font-size: 20px;
+  }
+.spacer
+{
+    flex:3 3 auto;
+}
+/* table{
+    width:100%;
+    border: none;
+  
+}
+th,td{
+    border:none;
+} */
+
+/* .mat-stepper-horizontal {
+    margin-top: 8px;
+    background-color: rgb(137, 236, 205);
+    padding-right: 150px;
+  } */
+  button[type=submit]{
+    float:right; 
+  }
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+  /* img:hover {
+    transform: scale(1.5);
+
+  } */
+

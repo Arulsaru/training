@@ -1,0 +1,22 @@
+<h1>Create User</h1>
+
+<form [formGroup]="createForm" class="example-form" (ngSubmit)="create(createForm.value)">
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" formControlName="name" name="name" required>
+        <mat-error>Name is required</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Phone" formControlName="phone" name="phone" required>
+        <mat-error>Phone is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" formControlName="email" name="email" required>
+        <mat-error>Email is required</mat-error>
+    </mat-form-field>
+    <button mat-raised-button  [disabled]="!createForm.valid">Add</button>
+    <p></p>
+    <button mat-raised-button routerLink="" >Go Back</button>
+</form>
