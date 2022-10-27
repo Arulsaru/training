@@ -1,0 +1,41 @@
+.left-div {
+    margin-left: 33%;
+    margin-top: 5%;
+    position: absolute;
+    user-select: none;
+}
+
+mat-form-field {
+    width: 300px !important;
+    margin-top: 50px;
+}
+
+.right-div {
+    margin-left: 65%;
+    margin-top: 5%;
+    position: absolute;
+    user-select: none;
+}
+
+.next-button:disabled {
+    cursor: not-allowed;
+    background-color: rgb(133, 130, 130);
+}
+
+.next-button {
+    width: 70px;
+    background-color: aliceblue;
+    margin-left: 85%;
+    margin-top: 40%;
+    background-color: black;
+    color: white;
+}
+
+.next-button:hover:not([disabled]) {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+
+

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import {RedirectService} from '../services/redirect.service';
-import {Router} from '@angular/router';
-import {result} from 'lodash';
+import { RedirectService } from '../services/redirect.service';
+import { Router } from '@angular/router';
+import { result } from 'lodash';
 
 @Component({
   selector: 'app-display-main-page-component',
@@ -17,9 +17,13 @@ export class DisplayMainPageComponentComponent {
   limit: number = 10;
 
   constructor(private allDetails: RedirectService, private router: Router) {
-    this.allDetails.getAllDetails().subscribe((response) => {
-      this.detailsData = response;
-    });
+    this.allDetails.getAllDetails()
+      .subscribe(
+        response => {
+          console.log(response);
+          this.detailsData = response;
+        }
+      );
   }
 
   delete(data: number) {
@@ -40,8 +44,8 @@ export class DisplayMainPageComponentComponent {
               }
             })
           })
-        }
-      })
+      }
+    })
   }
 
   editUser(userId: number) {

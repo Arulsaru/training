@@ -18,6 +18,7 @@ app.use(body.json());
 
 app.get('/employees', (req, res) => {
     res.json(parseJson());
+    // res.status(400).json({message: 'This Phone Number is already taken'});
     return false;
 })
 
