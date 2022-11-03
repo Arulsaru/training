@@ -19,9 +19,9 @@ app.get('/details', (req, res) => {
     return false;
 })
 
-app.post('/create', (req, res) => {     
+app.post('/create', (req, res) => {
     fs.writeFileSync('details.json', JSON.stringify(req.body));
-    res.status(200).json({message: 'User Detail is successfully added'});
+    res.status(200).json({message: 'User Detail is successfully added', data: req.body});
     return false;
 })
 

@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
+import {Component, ViewChild} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
+import {MatChipInputEvent} from '@angular/material/chips';
 import jsPDF from 'jspdf';
-import { ResumeApiService } from './service/resume-api.service';
+import {ResumeApiService} from './service/resume-api.service';
 import details from './types';
 
 @Component({
@@ -105,15 +105,15 @@ export class AppComponent {
     git_hub: new FormControl('https://github.com/KeerthickS'),
   })
 
-  constructor(private formBulider: FormBuilder, private resumeApiService: ResumeApiService) { }
+  constructor(private formBulider: FormBuilder, private resumeApiService: ResumeApiService) {
+  }
 
   addSkillInput(event: MatChipInputEvent) {
 
     if (event.value && !this.skillsArray.includes(event.value)) {
       this.skillsArray.push(event.value);
       this.skillsList.errorState = false;
-    }
-    else {
+    } else {
       this.skillsList.errorState = true;
     }
     event.chipInput!.clear();
@@ -124,8 +124,7 @@ export class AppComponent {
     if (event.value && !this.hobbies.includes(event.value)) {
       this.hobbies.push(event.value);
       this.hobbiesList.errorState = false;
-    }
-    else {
+    } else {
       this.hobbiesList.errorState = true;
     }
     event.chipInput!.clear();
@@ -160,40 +159,43 @@ export class AppComponent {
   }
 
   formAllInputs() {
-    this.detail.first_name = this.personalDetailsForm.value.first_name,
-      this.detail.last_name = this.personalDetailsForm.value.last_name,
-      this.detail.phone_number = this.personalDetailsForm.value.phone_number,
-      this.detail.date_of_birth = this.personalDetailsForm.value.date_of_birth,
-      this.detail.email = this.personalDetailsForm.value.email,
-      this.detail.state = this.personalDetailsForm.value.state,
-      this.detail.city = this.personalDetailsForm.value.city,
-      this.detail.pin_code = this.personalDetailsForm.value.pin_code,
-      this.detail.qualification = this.education.value.qualification,
-      this.detail.college_name = this.education.value.college_name,
-      this.detail.year_of_passed = this.education.value.year_of_passed,
-      this.detail.field_of_study = this.education.value.field_of_study,
-      this.detail.cgpa = this.education.value.cgpa,
-      this.detail.hsc_percentage = this.education.value.hsc_percentage,
-      this.detail.hsc_year_of_passed = this.education.value.hsc_year_of_passed,
-      this.detail.sslc_percentage = this.education.value.sslc_percentage,
-      this.detail.sslc_year_of_passed = this.education.value.sslc_year_of_passed,
-      this.detail.school_name = this.education.value.school_name,
-      this.detail.company_name = this.experience.value.company_name,
-      this.detail.position = this.experience.value.position,
-      this.detail.experience_start_date = this.experience.value.experience_start_date,
-      this.detail.experience_end_date = this.experience.value.experience_end_date,
-      this.detail.job_experience = this.experience.value.job_experience,
-      this.detail.skills = this.skillsArray,
-      this.detail.summary = this.summary.value.text_area,
-      this.detail.languages = this.additionalDetails.value.languagesKnown,
-      this.detail.git_hub = this.additionalDetails.value.git_hub,
-      this.detail.linked_in = this.additionalDetails.value.linked_in
-    this.detail.hobbies = this.hobbies,
+    this.detail.first_name = this.personalDetailsForm.value.first_name;
+    this.detail.last_name = this.personalDetailsForm.value.last_name;
+    this.detail.phone_number = this.personalDetailsForm.value.phone_number;
+    this.detail.date_of_birth = this.personalDetailsForm.value.date_of_birth;
+    this.detail.email = this.personalDetailsForm.value.email;
+    this.detail.state = this.personalDetailsForm.value.state;
+    this.detail.city = this.personalDetailsForm.value.city;
+    this.detail.pin_code = this.personalDetailsForm.value.pin_code;
+    this.detail.qualification = this.education.value.qualification;
+    this.detail.college_name = this.education.value.college_name;
+    this.detail.year_of_passed = this.education.value.year_of_passed;
+    this.detail.field_of_study = this.education.value.field_of_study;
+    this.detail.cgpa = this.education.value.cgpa;
+    this.detail.hsc_percentage = this.education.value.hsc_percentage;
+    this.detail.hsc_year_of_passed = this.education.value.hsc_year_of_passed;
+    this.detail.sslc_percentage = this.education.value.sslc_percentage;
+    this.detail.sslc_year_of_passed = this.education.value.sslc_year_of_passed;
+    this.detail.school_name = this.education.value.school_name;
+    this.detail.company_name = this.experience.value.company_name;
+    this.detail.position = this.experience.value.position;
+    this.detail.experience_start_date = this.experience.value.experience_start_date;
+    this.detail.experience_end_date = this.experience.value.experience_end_date;
+    this.detail.job_experience = this.experience.value.job_experience;
+    this.detail.skills = this.skillsArray;
+    this.detail.summary = this.summary.value.text_area;
+    this.detail.languages = this.additionalDetails.value.languagesKnown;
+    this.detail.git_hub = this.additionalDetails.value.git_hub;
+    this.detail.linked_in = this.additionalDetails.value.linked_in;
+    this.detail.hobbies = this.hobbies;
 
-      this.resumeApiService.createUser(this.detail).subscribe();
-    this.resumeApiService.getUserDetails().subscribe(response => {
-      this.detail = response;
+    this.resumeApiService.createUser(this.detail).subscribe(response => {
+      this.detail = response.data;
     });
+
+    // this.resumeApiService.getUserDetails().subscribe(response => {
+    //   this.detail = response;
+    // });
   }
 
   generatePDF() {
@@ -225,7 +227,7 @@ export class AppComponent {
       doc.text('Git Hub', 13, this.sideNavY += 10);
       doc.setFontSize(11);
       summary = doc.splitTextToSize(this.detail.git_hub, 55);
-      doc.text(summary, 13, this.sideNavY += 5); 
+      doc.text(summary, 13, this.sideNavY += 5);
       doc.setFontSize(13);
       doc.setFont('Helvetica', 'bold');
       doc.text('Address', 13, this.sideNavY += 10);
@@ -330,12 +332,11 @@ export class AppComponent {
       doc.setFont('Helvetica', 'bold');
       doc.text(this.detail.position, 85, this.mainContentY += 5);
 
-      doc.setTextColor(38, 41, 40).setFont('Time-Italic','normal').setFontSize(11);
+      doc.setTextColor(38, 41, 40).setFont('Time-Italic', 'normal').setFontSize(11);
       summary = doc.splitTextToSize(this.detail.job_experience, 120);
       doc.text(summary, 85, this.mainContentY += 7);
 
     }
-
 
     doc.save(`resume`);
   }

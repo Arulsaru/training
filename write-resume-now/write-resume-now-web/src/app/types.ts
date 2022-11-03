@@ -1,4 +1,4 @@
-export type details = {
+export type Resume = {
     first_name: string | null |undefined,
     last_name: string | null | undefined,
     phone_number: string | null | undefined,
@@ -30,4 +30,10 @@ export type details = {
     hobbies: Array<string> | null | undefined
 }
 
-export default details;
+export type ResumeCreateResponse = {
+  message: string,
+  data: Resume
+}
+
+
+export default Resume;
