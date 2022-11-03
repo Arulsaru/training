@@ -20,7 +20,7 @@ export class DisplayMainPageComponentComponent {
     this.allDetails.getAllDetails()
       .subscribe(
         response => {
-          console.log(response);
+          console.log(typeof response);
           this.detailsData = response;
         }
       );

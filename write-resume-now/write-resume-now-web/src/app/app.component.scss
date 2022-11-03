@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,700&display=swap');
+
+.main-container {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 50px;
+}
+
+.title {
+    font-size: 20px;
+    // font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Roboto Slab', serif;
+    color: #087c63;
+}
+
+.left-div {
+    margin-left: 15%;
+}
+
+.right-field {
+    margin-left: 80px;
+}
+
+mat-form-field {
+    margin-top: 25px;
+}
+
+.previous-button {
+    height: 30px;
+    width: 30px;
+    margin-left: 10% !important;
+    margin-top: 3%;
+    color: white !important;
+    font-family: 'Roboto Slab', serif;
+}
+
+.next-button{
+    height: 30px;
+    width: 40px;
+    margin-left: 70% !important;
+    margin-top: 3%;
+    color: white !important;
+    font-family: 'Roboto Slab', serif;
+}
+
+.fa-arrow-right, .fa-arrow-left{
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 5.5px;
+    font-size: 15px;
+}
+
+.fa-arrow-left {
+    margin-left: -20px !important;
+}
+
+.next-button:not([disabled]), .previous-button:not([disabled]) {
+    height: 30px;
+    width: 40px;
+    margin-left: 85%;
+    margin-top: 3%;
+    color: #087c63 !important;
+    font-family: 'Roboto Slab', serif;
+    border: 0px !important;
+}
+
+.btn:focus {
+    border-color: none;
+    box-shadow: none;
+}
+
+.next-button:disabled, .previous-button:disabled {
+    color: #087c63 !important;
+    border: 0px !important;
+}
+
+.next-button:hover:disabled, .previous-button:hover:disabled {
+    cursor: not-allowed;
+    border: 0px !important;
+}
+
+i {
+    font-size: 20px;
+    color: #087c63;
+}
+
+.text-area {
+    width: 400px;
+}
+
+.final-button {
+    background-color: #087c63;
+    color: white;
+    margin-left: 45%;
+}
+
+.final-button:hover {
+    background-color: white;
+    border: 1px solid #087c63 !important;
+    color: #087c63;
+}
+
+.skill-input {
+    width: 300px !important;
+    margin-left: 60px !important;
+}
+
+.hobbies, .languages {
+    width: 250px !important;
+}
+
+.experience-input {
+    width: 200px;
+}
+
+.experience-description {
+    width: 485px;
+}

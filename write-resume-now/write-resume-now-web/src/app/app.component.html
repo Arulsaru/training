@@ -1,0 +1,335 @@
+<div class="main-container">
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">
+          Personal data
+        </mat-panel-title>
+        <i class="fa-solid fa-user"></i>
+      </mat-expansion-panel-header>
+      <form [formGroup]="personalDetailsForm" autocomplete="off">
+        <div class="left-div">
+          <mat-form-field>
+            <mat-label class="label">First Name</mat-label>
+            <input matInput formControlName="first_name" required class="input" value="Keerthick">
+            <mat-error>Enter Valid Email</mat-error>
+          </mat-form-field>
+          <mat-form-field class="right-field">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="last_name" required value="S">
+            <mat-error>Last Name is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Phone Number</mat-label>
+            <input matInput formControlName="phone_number" required>
+            <mat-error>Phone Number is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="right-field">
+            <mat-label>Date Of Birth</mat-label>
+            <input matInput formControlName="date_of_birth" type="date" value="12/12/2002">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-error>Date of birth is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required value="keerthick@gmail.com">
+            <mat-error>Email is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="right-field">
+            <mat-label>State</mat-label>
+            <input matInput formControlName="state" required value="TamilNadu">
+            <mat-error>State is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city" required value="Tirupur">
+            <mat-error>City is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="right-field">
+            <mat-label>Pin Code</mat-label>
+            <input matInput formControlName="pin_code" required value="641602">
+            <mat-error>Pin Code is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="button row g-2">
+          <div class="col-md">
+            <button class="btn previous-button" [disabled]=true><span
+                class="fa-solid fa-arrow-left"></span>Previous</button>
+          </div>
+          <div class="col-md">
+            <button class="btn next-button" [disabled]="!personalDetailsForm.valid" (click)="nextStep()"><span
+                class="fa-solid fa-arrow-right"></span>Next</button>
+          </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle id="education-panel"
+      appDisabledDirective [disabled]="!personalDetailsForm.valid" EXPANSION_PANEL_ANIMATION_TIMING='10000ms'>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">
+          Education
+        </mat-panel-title>
+        <i class="fa-solid fa-graduation-cap"></i>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="education" autocomplete="off">
+        <div class="left-div">
+          <mat-form-field>
+            <mat-label class="label">Qualification</mat-label>
+            <input matInput formControlName="qualification" required class="input">
+            <mat-error>Qualification is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="right-field">
+            <mat-label>Field of Study</mat-label>
+            <input matInput formControlName="field_of_study" required>
+            <mat-error>Field of Study is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>College Name</mat-label>
+            <input matInput formControlName="college_name" required>
+            <mat-error>College Name is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="right-field">
+            <mat-label>CGPA</mat-label>
+            <input matInput formControlName="cgpa">
+            <mat-error>CGPA is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Year of passed</mat-label>
+            <input matInput formControlName="year_of_passed" required>
+            <mat-error>Year of passed is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="right-field">
+            <mat-label>School Name</mat-label>
+            <input matInput formControlName="school_name" required>
+            <mat-error>School Name is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>HSC Percentage</mat-label>
+            <input matInput formControlName="hsc_percentage" required>
+            <mat-error>HSC Percentage is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="right-field">
+            <mat-label>HSC Year of passed</mat-label>
+            <input matInput formControlName="hsc_year_of_passed" required>
+            <mat-error>HSC Year of passed is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>SSLC Percentage</mat-label>
+            <input matInput formControlName="sslc_percentage" required>
+            <mat-error>SSLC Percentage is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="right-field">
+            <mat-label>SSLC Year of passed</mat-label>
+            <input matInput formControlName="sslc_year_of_passed" required>
+            <mat-error>SSLC Year of passed is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="button row g-2">
+          <div class="col-md">
+            <button class="btn previous-button" (click)="prevStep()"><span
+                class="fa-solid fa-arrow-left"></span>Previous</button>
+          </div>
+          <div class="col-md">
+            <button mat-button class="btn next-button" [disabled]="!education.valid" (click)="nextStep()"><span
+                class="fa-solid fa-arrow-right"></span>Next</button>
+          </div>
+        </div>
+      </form>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle id="experience-panel"
+      [disabled]="!education.valid">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">
+          Experience
+        </mat-panel-title>
+        <i class="fa-solid fa-medal"></i>
+      </mat-expansion-panel-header>
+      <form [formGroup]="experience" autocomplete="off">
+        <div class="left-div">
+          <mat-form-field class="experience-input">
+            <mat-label class="label">Company Name</mat-label>
+            <input matInput formControlName="company_name" required class="input">
+            <mat-error>Company Name is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="right-field experience-input">
+            <mat-label>Position</mat-label>
+            <input matInput formControlName="position" required>
+            <mat-error>Position is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="experience-input">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="start_date" formControlName="experience_start_date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="start_date"></mat-datepicker-toggle>
+            <mat-datepicker #start_date></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="right-field experience-input">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="end_date" formControlName="experience_end_date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="end_date"></mat-datepicker-toggle>
+            <mat-datepicker #end_date></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="experience-description">
+            <!-- <mat-label>Job Experience</mat-label> -->
+            <textarea matInput placeholder="Job Experience" formControlName="job_experience"></textarea>
+            <mat-error>Experience Description is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="button row g-2">
+          <div class="col-md">
+            <button class="btn previous-button" (click)="prevStep()"><span
+                class="fa-solid fa-arrow-left"></span>Previous</button>
+          </div>
+          <div class="col-md">
+            <button mat-button class="btn next-button" [disabled]="!experience.valid" (click)="nextStep()"><span
+                class="fa-solid fa-arrow-right"></span>Next</button>
+          </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle id="skills-panel"
+      [disabled]="!experience.valid">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">
+          Skills
+        </mat-panel-title>
+        <i class="fa-solid fa-puzzle-piece"></i>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="skills" autocomplete="off">
+        <mat-form-field class="skill-input">
+          <mat-label>Add Skills</mat-label>
+          <mat-chip-list #skillsList multiple>
+            <mat-chip *ngFor="let skill of skillsArray" [selected]="skill" [value]="skill"
+              (removed)="removeSkill(skill)">
+              {{skill}}
+            </mat-chip>
+            <input [matChipInputFor]="skillsList" (matChipInputTokenEnd)="addSkillInput($event)"
+              formControlName="skill">
+          </mat-chip-list>
+          <mat-error *ngIf="skillsList.errorState">This Skill is already added</mat-error>
+        </mat-form-field>
+      </form>
+      <div class="button row g-2">
+        <div class="col-md">
+          <button class="btn previous-button" (click)="prevStep()"><span
+              class="fa-solid fa-arrow-left"></span>Previous</button>
+        </div>
+        <div class="col-md">
+          <button class="btn next-button" [disabled]="!skills.valid" (click)="nextStep()"><span
+              class="fa-solid fa-arrow-right"></span>Next</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle id="summary-panel"
+      [disabled]="!skills.valid">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">
+          Summary
+        </mat-panel-title>
+        <i class="fa-solid fa-clipboard"></i>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="summary" autocomplete="off">
+        <div class="left-div">
+          <mat-form-field class="text-area">
+            <mat-label>Summary</mat-label>
+            <textarea matInput rows="3" cols="200" formControlName="text_area"></textarea>
+            <mat-error>Your Summary is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="button row g-2">
+          <div class="col-md">
+            <button class="btn previous-button" (click)="prevStep()"><span
+                class="fa-solid fa-arrow-left"></span>Previous</button>
+          </div>
+          <div class="col-md">
+            <button mat-button class="btn next-button" [disabled]="!summary.valid" (click)="nextStep()"><span
+                class="fa-solid fa-arrow-right"></span>Next</button>
+          </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)" hideToggle id="additional-panel"
+      [disabled]="!summary.valid">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">
+          Additional Details
+        </mat-panel-title>
+        <i class="fa-solid fa-circle-plus"></i>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="additionalDetails" autocomplete="off">
+        <mat-form-field class="languages">
+          <mat-label>Languages Known</mat-label>
+          <mat-select formControlName="languagesKnown" required multiple>
+            <mat-option *ngFor="let language of LanguagesKnownList" [value]="language">{{language}}</mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field class="languages">
+          <mat-label class="label">LinkedIn Profile</mat-label>
+          <input matInput required formControlName="linked_in" class="input">
+          <mat-error>LinkedIn Profile is required</mat-error>
+        </mat-form-field><br>
+        <mat-form-field class="languages">
+          <mat-label class="label">GitHub Profile</mat-label>
+          <input matInput required formControlName="git_hub" class="input">
+          <mat-error>GitHub Profile is required</mat-error>
+        </mat-form-field><br>
+
+        <mat-form-field class="hobbies">
+          <mat-label>Hobbies</mat-label>
+          <mat-chip-list #hobbiesList multiple>
+            <mat-chip *ngFor="let hobbie of hobbies" [selected]="hobbie" [value]="hobbie"
+              (removed)="removeHobbie(hobbie)">
+              {{hobbie}}
+            </mat-chip>
+            <input [matChipInputFor]="hobbiesList" required (matChipInputTokenEnd)="addHobbieInput($event)"
+              formControlName="hobbie">
+          </mat-chip-list>
+          <mat-error *ngIf="hobbiesList.errorState">This Hobbie is already added</mat-error>
+        </mat-form-field><br>
+
+        <div class="button row g-2">
+          <div class="col-md">
+            <button class="btn previous-button" (click)="prevStep()"><span
+                class="fa-solid fa-arrow-left"></span>Previous</button>
+          </div>
+          <div class="col-md">
+            <button mat-button class="btn next-button" [disabled]="additionalDetails.valid" (click)="nextStep()"
+              (click)="formAllInputs()"><span class="fa-solid fa-arrow-right"></span>Next</button>
+          </div>
+        </div>
+      </form>
+
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)" hideToggle id="finalise-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">
+          Finalise
+        </mat-panel-title>
+        <i class="fa-solid fa-square-check"></i>
+      </mat-expansion-panel-header>
+      <div class="button">
+        <button mat-button class="btn final-button" (click)="generatePDF()">Download</button>
+      </div>
+      <div class="button row g-2">
+        <div class="col-md">
+          <button class="btn previous-button" (click)="prevStep()"><span
+              class="fa-solid fa-arrow-left"></span>Previous</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

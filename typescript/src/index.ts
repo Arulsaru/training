@@ -41,8 +41,9 @@ function calckg(weight: number | string): number {
     else
         return parseInt(weight) * 3;
 }
+console.log(calckg(10));
 
-type sum = {
+type Sum = {
     sum1: () => void
 }
 
@@ -50,9 +51,22 @@ type sub = {
     sub1: () => void
 }
 
-type math = sum & sub;
+type Mat = Sum & sub;
 
-const calc: math = {
+const calc: Mat = {
     sum1: () => {},
     sub1: () => {}
 }
+
+type A = 50 | 100;
+const b: A = 50;
+
+type Maths = {
+    a: Date
+}
+
+function getValue(num: number): number | null | undefined {
+    return num === 0 ? null : { a : new Date()};
+}
+
+getValue(1);

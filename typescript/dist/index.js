@@ -18,3 +18,24 @@ function calcValue(var1, var2 = 20) {
     return var1 - var2;
 }
 console.log(calcValue(30));
+let employee1 = {
+    name: 'hari',
+    emp_id: 11,
+    email: 'hari@gmail.com'
+};
+const employee2 = {
+    name: 'Arul',
+    emp_id: 21,
+    email: 'arul@gmail.com'
+};
+function calckg(weight) {
+    if (typeof weight === 'number')
+        return weight * 2;
+    else
+        return parseInt(weight) * 3;
+}
+console.log(calckg(10));
+const calc = {
+    sum1: () => { },
+    sub1: () => { }
+};
