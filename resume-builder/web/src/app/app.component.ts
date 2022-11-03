@@ -1,13 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { ApiService } from 'src/service/api.service';
+import {Component, ViewChild} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {ApiService} from 'src/service/api.service';
 import ts from 'src/app/type/types';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
-import { identifierName } from '@angular/compiler';
+import {identifierName} from '@angular/compiler';
+
 // import { FileInput } from 'ngx-material-file-input';
 
 @Component({
@@ -17,7 +18,7 @@ import { identifierName } from '@angular/compiler';
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true },
+      useValue: {showError: true},
     }
   ]
 })
@@ -29,7 +30,8 @@ export class AppComponent {
   @ViewChild("nonTechSkillList") nonTechSkillList: any;
   @ViewChild("hobbyList") hobbyList: any;
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   get personalDetailsControl() {
     return this.personalDetails.controls;
@@ -393,7 +395,7 @@ export class AppComponent {
     // doc.setDrawColor(255, 255, 255).line(75, 1, 296.5, 1);
     doc.line(0.6, 75, 0.6, 296.5);
     doc.line(209.5, 75, 209.5, 296.5);
-    
+
     doc.setLineWidth(1);
     doc.line(125, 75, 125, 296.5);  // center vertical line
 
@@ -421,12 +423,12 @@ export class AppComponent {
     doc.setFontSize(12);
     doc.setFont('times', 'normal');
     doc.text(`${'\u2022'}   ${this.apiDetails.college_name} (${this.apiDetails.college_start_period} - ${this.apiDetails.college_end_period} batch)`, this.xAxisDown += 5, this.yAxisDown += 10);
-    doc.text( `${this.apiDetails.field_of_study} - ${this.apiDetails.college_cgpa} - CGPA`, this.xAxisDown += 5, this.yAxisDown += 8);
+    doc.text(`${this.apiDetails.field_of_study} - ${this.apiDetails.college_cgpa} - CGPA`, this.xAxisDown += 5, this.yAxisDown += 8);
     this.apiDetails.college_location ? doc.text(this.apiDetails.college_location, this.xAxisDown, this.yAxisDown += 8) : null;
 
     doc.text(`${'\u2022'}   ${this.apiDetails.school_name}, ${this.apiDetails.school_location}`, this.xAxisDown -= 5, this.yAxisDown += 10);
-    doc.text( `HSC Percentage - ${this.apiDetails.hsc_percentage}`, this.xAxisDown += 5, this.yAxisDown += 8);
-    doc.text( `SSLC Percentage - ${this.apiDetails.sslc_percentage}`, this.xAxisDown, this.yAxisDown += 8);
+    doc.text(`HSC Percentage - ${this.apiDetails.hsc_percentage}`, this.xAxisDown += 5, this.yAxisDown += 8);
+    doc.text(`SSLC Percentage - ${this.apiDetails.sslc_percentage}`, this.xAxisDown, this.yAxisDown += 8);
 
 
     doc.setFontSize(13).setFont('Times', 'bold');
@@ -440,7 +442,9 @@ export class AppComponent {
     doc.text(`Front End Developer`, this.xAxisDown += 5, this.yAxisDown += 10);
     doc.text(`${this.apiDetails.company_location}`, this.xAxisDown, this.yAxisDown += 10);
 
-    doc.addImage(this.tempUrl, 'JPEG', 7, 10, 40, 45, 'profile-picture');
+    if (this.imageUrl && typeof this.imageUrl === 'string') {
+      doc.addImage(this.imageUrl, 'JPEG', 7, 10, 40, 45, 'profile-picture');
+    }
     doc.save(`${this.apiDetails.first_name} ${this.apiDetails.last_name}`);
   }
 
@@ -449,13 +453,13 @@ export class AppComponent {
     let xAxis = 16;
     let yAxis = 85;
 
-    if(this.apiDetails.technical_skills) {
+    if (this.apiDetails.technical_skills) {
 
       doc.text('TECHNICAL SKILLS', xAxis, yAxis)
 
       doc.setFontSize(12);
       xAxis += 10;
-      yAxis += 10;  
+      yAxis += 10;
       let maxLength = 2;
       let nextTime = 0;
       let ctr = 0;
@@ -508,8 +512,7 @@ export class AppComponent {
           previousSkillLength = skill.length + 9;
 
           console.log('current length', currentLength);
-        }
-        else {
+        } else {
           currentLength = 0;
           this.yAxisDown += 10;
           this.xAxisDown = 5;
@@ -539,6 +542,7 @@ export class AppComponent {
     }
   }
 
-  constructor(private _formBuilder: FormBuilder, private apiService: ApiService) { }
+  constructor(private _formBuilder: FormBuilder, private apiService: ApiService) {
+  }
 
 }
