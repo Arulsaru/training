@@ -1,0 +1,66 @@
+
+.navbar {
+    font-family: Copperplate, Papyrus, fantasy;
+    font-size: 30px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.icons {
+    margin-right: 20px;
+}
+
+#gap {
+    height: 40px;
+}
+
+.border {
+    margin: auto;
+    width: 600px;
+    margin-top: auto;
+    border-radius: 15px !important;
+}
+
+mat-form-field {
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+input.mat-input-element {
+    margin-top: 0.3em;
+}
+
+#date-input {
+    width: 100px !important;
+}
+
+.previous-button {
+    margin-top: 30px;
+    margin-left: 330px;
+}
+
+.next-button {
+    margin-left: 30px;
+}
+
+.gender {
+    margin-top: 25px;
+    margin-left: 30px;
+}
+
+.width {
+    width: 120px;
+}
+
+.example-chip-list {
+    margin-right: 100px !important;
+    width: 400px;
+}
+
+.description {
+    width: 400px;
+}
+
+#profile-picture-form-field {
+    width: 400px !important;
+}
