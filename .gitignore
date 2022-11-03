@@ -1,3 +1,6 @@
 CRUD-application/api/node_modules
 CRUD-application/web/node_modules
 .idea/
+
+resume-builder/api/node_modules/
+resume-builder/api/.angular
