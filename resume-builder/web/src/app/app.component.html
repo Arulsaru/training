@@ -193,45 +193,57 @@
       </form>
     </mat-step>
     <mat-step [stepControl]="experienceDetails" label="Experience" errorMessage="Some Fields are still empty">
-      <form [formGroup]="experienceDetails">
-        <!-- <div formArrayName="experience"> -->
-          <mat-form-field>
-            <mat-label>Company Name</mat-label>
-            <input matInput formControlName="companyName" required>
-            <mat-error>Company Name is required</mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Company Location</mat-label>
-            <input matInput formControlName="companyLocation" required>
-            <mat-error>Company Location is required</mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Start Year</mat-label>
-            <input matInput formControlName="startYear" required>
-            <mat-error>Start Year is required</mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>End Year</mat-label>
-            <input matInput formControlName="endYear" required>
-            <mat-error>End Year is required</mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Project Name</mat-label>
-            <input matInput formControlName="projectName" required>
-            <mat-error>Project Name is required</mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Project Domain</mat-label>
-            <input matInput formControlName="projectDomain" required>
-            <mat-error>Project Domain is required</mat-error>
-          </mat-form-field>
-          <mat-form-field class="description">
-            <mat-label>Description of that project in less than 300 words</mat-label>
-            <textarea maxlength="300" formControlName="projectDescription" autosize matInput></textarea>
-            <mat-error>Project Description is required</mat-error>
-          </mat-form-field>
-        <!-- </div>    -->
-      </form>
+      <div [formGroup]="experienceDetails">
+        <ng-container formArrayName="experiences">
+          <ng-container *ngFor="let experienceForm of experiences.controls; let idx=index">
+            <div class="experience-form-row" [formGroup]="experienceForm">
+              <mat-form-field>
+                <mat-label>Company Name</mat-label>
+                <input matInput formControlName="companyName" required>
+                <mat-error>Company Name is required</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Company Location</mat-label>
+                <input matInput formControlName="companyLocation" required>
+                <mat-error>Company Location is required</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Start Year</mat-label>
+                <input matInput formControlName="startYear" required>
+                <mat-error>Start Year is required</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>End Year</mat-label>
+                <input matInput formControlName="endYear" required>
+                <mat-error>End Year is required</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Project Name</mat-label>
+                <input matInput formControlName="projectName" required>
+                <mat-error>Project Name is required</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Project Domain</mat-label>
+                <input matInput formControlName="projectDomain" required>
+                <mat-error>Project Domain is required</mat-error>
+              </mat-form-field>
+              <mat-form-field class="description">
+                <mat-label>Description of that project in less than 300 words</mat-label>
+                <textarea maxlength="300" formControlName="projectDescription" autosize matInput></textarea>
+                <mat-error>Project Description is required</mat-error>
+              </mat-form-field>
+              <br>
+              <mat-icon class="delete-experience-btn" color="primary" (click)="deleteExperience(idx)">delete_forever</mat-icon>
+            </div>
+          </ng-container>
+        </ng-container>
+        <div class="add-experience-btn">
+          <button mat-mini-fab color="primary" (click)="addExperience()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <span>&emsp;Click here to add a Experience</span>
+        </div>
+      </div>
       <div>
         <button mat-mini-fab color="primary" class="previous-button" matStepperPrevious>
           <mat-icon>keyboard_arrow_up</mat-icon>
@@ -295,7 +307,8 @@
         <mat-form-field class="description">
           <mat-label>Short description about yourself</mat-label>
           <textarea maxlength="300" formControlName="description" autosize matInput></textarea>
-          <mat-error *ngIf="additionalDetailsControl.description.errors?.['required']">Description is required</mat-error>
+          <mat-error *ngIf="additionalDetailsControl.description.errors?.['required']">Description is required
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="example-chip-list">
           <mat-label>Hobbies</mat-label>
@@ -347,7 +360,8 @@
         <button mat-mini-fab color="primary" class="previous-button" matStepperPrevious>
           <mat-icon>keyboard_arrow_up</mat-icon>
         </button>
-        <button mat-button color="primary" class="next-button" (click)="showSwalFire()" [disabled]="!additionalDetails.valid">Finish</button>
+        <button mat-button color="primary" class="next-button" (click)="showSwalFire()"
+          [disabled]="!additionalDetails.valid">Finish</button>
       </div>
 
     </mat-step>

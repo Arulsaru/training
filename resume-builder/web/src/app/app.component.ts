@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { ApiService } from 'src/service/api.service';
 import ts from 'src/type/types';
 import Swal from 'sweetalert2';
@@ -55,6 +55,10 @@ export class AppComponent {
 
   get additionalDetailsControl() {
     return this.additionalDetails.controls;
+  }
+
+  get experiences() {
+    return this.experienceDetails.controls["experiences"] as FormArray;
   }
 
   userDetails: ts = {
@@ -120,15 +124,26 @@ export class AppComponent {
   })
 
   experienceDetails = this._formBuilder.group({
+    experiences: this._formBuilder.array([])
+  })
 
+  addExperience() {
+    const experienceForm = this._formBuilder.group({
       companyName: ['TrusTrace', Validators.required],
       companyLocation: ['Coimbatore', Validators.required],
-      startYear: ['Coimbatore', Validators.required],
-      endYear: ['Coimbatore', Validators.required],
-      projectName: ['Fake News Detection', Validators.required],
-      projectDomain: ['Full Stack Development', Validators.required],
-      projectDescription: ['Projects can be listed on a resume below a job description as accomplishments. You can also list them in a separate section titled Projects, Personal Projects, and Academic Projects. Academic projects can be included in the education resume section. You can also create a project-oriented resume.', Validators.required]
-  })
+      startYear: ['2222', Validators.required],
+      endYear: ['', Validators.required],
+      projectName: ['', Validators.required],
+      projectDomain: ['', Validators.required],
+      projectDescription: ['', Validators.required],
+    })
+
+    this.experiences.push(experienceForm);
+  }
+
+  deleteExperience(experienceIdx: number) {
+    this.experiences.removeAt(experienceIdx)
+  }
 
   skillDetails = this._formBuilder.group({
     technicalSkill: [null, Validators.required],
@@ -157,7 +172,7 @@ export class AppComponent {
 
   addTechSkills(event: MatChipInputEvent): boolean {
 
-    if(this.technicalSkills.length === 6) {
+    if (this.technicalSkills.length === 6) {
       return false;
     }
 
@@ -192,7 +207,7 @@ export class AppComponent {
 
   addNonTechSkills(event: MatChipInputEvent): boolean {
 
-    if(this.nonTechnicalSkills.length === 6) {
+    if (this.nonTechnicalSkills.length === 6) {
       return false;
     }
 
@@ -225,7 +240,7 @@ export class AppComponent {
 
   addHobbies(event: MatChipInputEvent) {
 
-    if(this.hobbies.length === 6) {
+    if (this.hobbies.length === 6) {
       return false;
     }
 
@@ -288,11 +303,11 @@ export class AppComponent {
     this.userDetails.sslc_percentage = this.academicDetails.value.sslcPercentage
     this.userDetails.hsc_percentage = this.academicDetails.value.hscPercentage;
 
-    this.userDetails.company_name = this.experienceDetails.value.companyName;
-    this.userDetails.company_location = this.experienceDetails.value.companyLocation;
-    this.userDetails.project_name = this.experienceDetails.value.projectName;
-    this.userDetails.project_domain = this.experienceDetails.value.projectDomain;
-    this.userDetails.project_description = this.experienceDetails.value.projectDescription;
+    // this.userDetails.company_name = this.experienceDetails.value.companyName;
+    // this.userDetails.company_location = this.experienceDetails.value.companyLocation;
+    // this.userDetails.project_name = this.experienceDetails.value.projectName;
+    // this.userDetails.project_domain = this.experienceDetails.value.projectDomain;
+    // this.userDetails.project_description = this.experienceDetails.value.projectDescription;
 
     this.userDetails.technical_skills = this.technicalSkills;
     this.userDetails.non_technical_skills = this.nonTechnicalSkills;
@@ -406,7 +421,7 @@ export class AppComponent {
       splittedText = doc.splitTextToSize(this.userDetails.linikedIn_url, 50);
       doc.text(splittedText, xAxisTop += 40, yAxisTop -= 5);
     }
-    
+
     doc.setFontSize(13).setFont('Times', 'bold');
     doc.setTextColor(24, 24, 24).text('ACADEMIC DETAILS', this.xAxisDownLeft += 5, this.yAxisDownLeft += 85);
     // doc.setLineWidth(0.5).setDrawColor( 24, 24, 24);
@@ -425,7 +440,7 @@ export class AppComponent {
     // doc.setLineWidth(0.5).setDrawColor( 24, 24, 24);
     // doc.line(this.xAxisDownLeft += 10, this.yAxisDownLeft + 3, this.xAxisDownLeft + 10, this.yAxisDownLeft += 3);
 
-    doc.setFontSize(13).setFont ('Times', 'bold');
+    doc.setFontSize(13).setFont('Times', 'bold');
     doc.text('EXPERIENCE', this.xAxisDownRight += 130, this.yAxisDownRight += 85);
     doc.setFontSize(12);
     doc.setFont('times', 'normal');
@@ -486,13 +501,13 @@ export class AppComponent {
       doc.text('TECHNICAL SKILLS', this.xAxisDownRight -= 10, this.yAxisDownRight += 15);
 
       this.yAxisDownRight += 10;
-      this.xAxisDownRight += 5;      
+      this.xAxisDownRight += 5;
 
       doc.setFontSize(13).setFont('Times', 'normal');
-      
+
       while (idx < this.technicalSkills.length) {
 
-        if(idx === maxLength) {
+        if (idx === maxLength) {
           this.xAxisDownRight += 30;
           this.yAxisDownRight -= 30;
         }
@@ -524,12 +539,12 @@ export class AppComponent {
       doc.setFontSize(13).setFont('Times', 'bold');
       doc.text('NON TECHNICAL SKILLS', this.xAxisDownRight -= 10, this.yAxisDownRight += 5);
       this.yAxisDownRight += 10;
-      this.xAxisDownRight += 5;      
+      this.xAxisDownRight += 5;
       doc.setFontSize(13).setFont('Times', 'normal');
 
       while (idx < this.nonTechnicalSkills.length) {
 
-        if(idx === maxLength) {
+        if (idx === maxLength) {
           this.xAxisDownRight += 30;
           this.yAxisDownRight -= 30;
         }
@@ -544,7 +559,7 @@ export class AppComponent {
   }
 
   addHobbiesInsidePDF(doc: jsPDF) {
-    
+
     if (this.userDetails.hobbies && this.userDetails.hobbies.length !== 0) {
       doc.setFont('times', 'normal');
       let idx = 0;
@@ -553,12 +568,12 @@ export class AppComponent {
       doc.setFontSize(13).setFont('Times', 'bold');
       doc.text('HOBBIES', this.xAxisDownRight -= 10, this.yAxisDownRight += 5);
       this.yAxisDownRight += 10;
-      this.xAxisDownRight += 5;      
+      this.xAxisDownRight += 5;
       doc.setFontSize(13).setFont('Times', 'normal');
 
       while (idx < this.hobbies.length) {
 
-        if(idx === maxLength) {
+        if (idx === maxLength) {
           this.xAxisDownRight += 30;
           this.yAxisDownRight -= 30;
         }

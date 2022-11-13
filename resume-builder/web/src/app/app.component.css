@@ -88,3 +88,17 @@ input.mat-input-element {
     font-size: 20px;
     font-family: "Lucida Console", "Courier New";
 }
+
+.add-experience-btn {
+    margin-top: 30px;
+    /* margin-left: 230px;  */
+    margin-bottom: 40px;
+    font-size: 15px;
+    font-family: Georgia, serif;
+    font-style: italic;
+}
+
+.delete-experience-btn {
+    margin-top: 30px;
+    margin-left: 400px; 
+}
