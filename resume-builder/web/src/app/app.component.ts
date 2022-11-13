@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
@@ -59,6 +59,10 @@ export class AppComponent {
 
   get experiences() {
     return this.experienceDetails.controls["experiences"] as FormArray;
+  }
+
+  get projects() {
+    return this.projectDetails.controls["projects"] as FormArray;
   }
 
   userDetails: ts = {
@@ -149,6 +153,26 @@ export class AppComponent {
     technicalSkill: [null, Validators.required],
     nonTechnicalSkill: [null, Validators.required]
   })
+
+  projectDetails = this._formBuilder.group({
+    projects: this._formBuilder.array([])
+  })
+
+  addProjects() {
+
+    const projectForm = this._formBuilder.group({
+      projectName: ['TrusTrace', Validators.required],
+      projectDomain: ['Coimbatore', Validators.required],
+      projectDescription: ['2222', Validators.required],
+    })
+
+    this.projects.push(projectForm);
+    console.log(this.projectDetails.controls.projects.at(0).value);
+  }
+
+  deleteProjects(experienceIdx: number) {
+    this.projects.removeAt(experienceIdx)
+  }
 
   additionalDetails = this._formBuilder.group({
     description: [`I am an enthusiastic, self-motivated, reliable, responsible and hard working person. I am a mature team worker and adaptable to all challenging situations. I am able to work well both in a team environment as well as using own initiative. I am able to work well under pressure and adhere to strict deadlines.`,

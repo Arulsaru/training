@@ -90,15 +90,28 @@ input.mat-input-element {
 }
 
 .add-experience-btn {
-    margin-top: 30px;
     /* margin-left: 230px;  */
-    margin-bottom: 40px;
+    margin: 20px;
     font-size: 15px;
     font-family: Georgia, serif;
     font-style: italic;
 }
 
-.delete-experience-btn {
-    margin-top: 30px;
-    margin-left: 400px; 
+.delete-btn {
+    position: relative;
+    left: 40px;
+    top: 60px;
+    height: 35px;
+    width: 35px;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.spacing {
+    height: 30px;
+}
+
+::ng-deep .delete-tool-tip {
+    background: red!important;
+    font-size: 12px !important;
 }

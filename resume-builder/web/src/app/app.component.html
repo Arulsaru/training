@@ -207,6 +207,9 @@
                 <input matInput formControlName="companyLocation" required>
                 <mat-error>Company Location is required</mat-error>
               </mat-form-field>
+
+              <mat-icon class="delete-btn" matTooltip="Delete Experience" matTooltipClass="delete-tool-tip" matTooltipPosition="above" color="warn" (click)="deleteExperience(idx)">remove_circle</mat-icon>
+
               <mat-form-field>
                 <mat-label>Start Year</mat-label>
                 <input matInput formControlName="startYear" required>
@@ -217,23 +220,7 @@
                 <input matInput formControlName="endYear" required>
                 <mat-error>End Year is required</mat-error>
               </mat-form-field>
-              <mat-form-field>
-                <mat-label>Project Name</mat-label>
-                <input matInput formControlName="projectName" required>
-                <mat-error>Project Name is required</mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Project Domain</mat-label>
-                <input matInput formControlName="projectDomain" required>
-                <mat-error>Project Domain is required</mat-error>
-              </mat-form-field>
-              <mat-form-field class="description">
-                <mat-label>Description of that project in less than 300 words</mat-label>
-                <textarea maxlength="300" formControlName="projectDescription" autosize matInput></textarea>
-                <mat-error>Project Description is required</mat-error>
-              </mat-form-field>
-              <br>
-              <mat-icon class="delete-experience-btn" color="primary" (click)="deleteExperience(idx)">delete_forever</mat-icon>
+              <div class="spacing"></div>     
             </div>
           </ng-container>
         </ng-container>
@@ -253,6 +240,49 @@
         </button>
       </div>
     </mat-step>
+
+    <mat-step [stepControl]="projectDetails" label="Projects" errorMessage="Some Fields are still empty">
+      <div class="add-experience-btn">
+        <button mat-mini-fab color="primary" (click)="addProjects()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <span>&emsp;Click here to add a Projects</span>
+      </div>
+      <form [formGroup]="projectDetails">
+        <ng-container formArrayName="projects">
+          <ng-container *ngFor="let projectForm of projects.controls; let idx=index">
+            <div class="project-form-row" [formGroup]="projectForm">
+              <mat-form-field>
+                <mat-label>Project Name</mat-label>
+                <input matInput formControlName="projectName" required>
+                <mat-error>Project Name is required</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Project Domain</mat-label>
+                <input matInput formControlName="projectDomain" required>
+                <mat-error>Project Domain is required</mat-error>
+              </mat-form-field>
+              <mat-icon class="delete-btn" matTooltip="Delete Project" matTooltipClass="delete-tool-tip" matTooltipPosition="above" color="warn" (click)="deleteProjects(idx)">remove_circle</mat-icon>
+              <mat-form-field class="description">
+                <mat-label>Description of that project in less than 300 words</mat-label>
+                <textarea maxlength="300" formControlName="projectDescription" autosize matInput></textarea>
+                <mat-error>Project Description is required</mat-error>
+              </mat-form-field>
+              <div class="spacing"></div>
+            </div>
+          </ng-container>
+        </ng-container>
+        <div>
+          <button mat-mini-fab color="primary" class="previous-button" matStepperPrevious>
+            <mat-icon>keyboard_arrow_up</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" class="next-button" matStepperNext>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
     <mat-step [stepControl]="skillDetails" label="Skills" errorMessage="Some Fields are still empty">
       <form [formGroup]="skillDetails">
         <mat-hint>Maximum six skills allowed in both section</mat-hint>
