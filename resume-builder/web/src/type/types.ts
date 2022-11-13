@@ -15,12 +15,16 @@ type ts = {
     college_start_period: number | null | undefined;
     college_end_period: number | null | undefined;
     college_cgpa: number | null | undefined;
-    school_name: string| null | undefined;
-    school_location: string| null | undefined;
+    school_name: string | null | undefined;
+    school_location: string | null | undefined;
     hsc_percentage: number | null | undefined;
     sslc_percentage: number | null | undefined;
     company_name: string | null | undefined;
     company_location: string | null | undefined;
+    project_name: string | null | undefined;
+    project_domain: string | null | undefined;
+    project_description: string | null | undefined;
+
 
     // school: [
     //     {
@@ -43,7 +47,7 @@ type ts = {
     //         ];
     //     }
     // ] = [];
-    
+
     technical_skills: string[] | null | undefined;
     non_technical_skills: string[] | null | undefined;
     hobbies: string[] | null | undefined;
@@ -52,6 +56,12 @@ type ts = {
     linikedIn_url: string | null | undefined;
     description: string | null | undefined;
     profile_picture: File | null;
+}
+
+
+export type ResumeCreateResponse = {
+    message: string,
+    data: ts
 }
 
 export default ts;

@@ -25,7 +25,7 @@
 <div id="gap"></div>
 <div class="border">
   <mat-stepper orientation="vertical" animationDuration="0" #stepper>
-    <mat-step [stepControl]="personalDetails"  label="Personal Details" errorMessage="Some Fields are still empty">
+    <mat-step [stepControl]="personalDetails" label="Personal Details" errorMessage="Some Fields are still empty">
       <mat-hint>NOTE: First letter of the every input should be capital</mat-hint>
       <form [formGroup]="personalDetails">
         <ng-template matStepperIcon="edit">
@@ -61,7 +61,7 @@
           <mat-label>Date Of Birth</mat-label>
           <input matInput formControlName="birthday" [matDatepicker]="picker" id="date-input">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker startView="multi-year" #picker></mat-datepicker>
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-error>Date of birthday is required</mat-error>
         </mat-form-field>
@@ -111,7 +111,7 @@
     </mat-step>
     <mat-step [stepControl]="academicDetails" label="Education Details" errorMessage="Some Fields are still empty">
       <mat-hint>NOTE: First letter of the every input should be capital</mat-hint>
-      <form [formGroup]="academicDetails" linear>
+      <form [formGroup]="academicDetails">
         <ng-template matStepperIcon="edit">
           <mat-icon>check_circle_outline</mat-icon>
         </ng-template>
@@ -194,16 +194,43 @@
     </mat-step>
     <mat-step [stepControl]="experienceDetails" label="Experience" errorMessage="Some Fields are still empty">
       <form [formGroup]="experienceDetails">
-        <mat-form-field>
-          <mat-label>Company Name</mat-label>
-          <input matInput formControlName="companyName" required>
-          <mat-error>Company Name is required</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Company Location</mat-label>
-          <input matInput formControlName="companyLocation" required>
-          <mat-error>Company Location is required</mat-error>
-        </mat-form-field>
+        <!-- <div formArrayName="experience"> -->
+          <mat-form-field>
+            <mat-label>Company Name</mat-label>
+            <input matInput formControlName="companyName" required>
+            <mat-error>Company Name is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Company Location</mat-label>
+            <input matInput formControlName="companyLocation" required>
+            <mat-error>Company Location is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Start Year</mat-label>
+            <input matInput formControlName="startYear" required>
+            <mat-error>Start Year is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>End Year</mat-label>
+            <input matInput formControlName="endYear" required>
+            <mat-error>End Year is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Project Name</mat-label>
+            <input matInput formControlName="projectName" required>
+            <mat-error>Project Name is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Project Domain</mat-label>
+            <input matInput formControlName="projectDomain" required>
+            <mat-error>Project Domain is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="description">
+            <mat-label>Description of that project in less than 300 words</mat-label>
+            <textarea maxlength="300" formControlName="projectDescription" autosize matInput></textarea>
+            <mat-error>Project Description is required</mat-error>
+          </mat-form-field>
+        <!-- </div>    -->
       </form>
       <div>
         <button mat-mini-fab color="primary" class="previous-button" matStepperPrevious>
@@ -213,10 +240,10 @@
           <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
       </div>
-      <!-- </div> -->
     </mat-step>
-    <mat-step [stepControl]="skillDetails" label="Skills" errorMessage="Some Fields are still empty" >
+    <mat-step [stepControl]="skillDetails" label="Skills" errorMessage="Some Fields are still empty">
       <form [formGroup]="skillDetails">
+        <mat-hint>Maximum six skills allowed in both section</mat-hint>
         <mat-form-field class="example-chip-list">
           <mat-label>Technical Skills</mat-label>
           <mat-chip-list #techSkillList>
@@ -230,7 +257,8 @@
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
               (matChipInputTokenEnd)="addTechSkills($event)">
           </mat-chip-list>
-          <!-- <mat-error *ngIf="skillDetailsControl.technicalSkill.errors?.['required']">Required</mat-error> -->
+          <mat-error *ngIf="isTechSkillEmpty">Technical Skills are required</mat-error>
+          <!-- <mat-error *ngIf="skillDetailsControl.technicalSkill.touched && skillDetailsControl.technicalSkill.errors?.['required']">Required</mat-error> -->
           <mat-error *ngIf="techSkillList.errorState">Duplicate values are not allowed</mat-error>
         </mat-form-field>
         <mat-form-field class="example-chip-list">
@@ -246,13 +274,14 @@
               formControlName="nonTechnicalSkill" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addNonTechSkills($event)">
           </mat-chip-list>
+          <!-- <mat-error *ngIf="chipList.errorState">Too many chips</mat-error> -->
           <mat-error *ngIf="nonTechSkillList.errorState">Duplicate values are not allowed</mat-error>
         </mat-form-field>
         <div>
           <button mat-mini-fab color="primary" class="previous-button" matStepperPrevious>
             <mat-icon>keyboard_arrow_up</mat-icon>
           </button>
-          <button mat-mini-fab color="primary" (click)="generatePDF()" class="next-button" matStepperNext>
+          <button mat-mini-fab color="primary" class="next-button" matStepperNext>
             <mat-icon>keyboard_arrow_down</mat-icon>
           </button>
         </div>
@@ -266,6 +295,7 @@
         <mat-form-field class="description">
           <mat-label>Short description about yourself</mat-label>
           <textarea maxlength="300" formControlName="description" autosize matInput></textarea>
+          <mat-error *ngIf="additionalDetailsControl.description.errors?.['required']">Description is required</mat-error>
         </mat-form-field>
         <mat-form-field class="example-chip-list">
           <mat-label>Hobbies</mat-label>
@@ -283,7 +313,6 @@
           <!-- <mat-error *ngIf="skillDetailsControl.technicalSkill.errors?.['required']">Required</mat-error> -->
           <mat-error *ngIf="hobbyList.errorState">Duplicate values are not allowed</mat-error>
         </mat-form-field>
-
         <mat-form-field>
           <mat-label>Github Profile</mat-label>
           <input matInput formControlName="githubURL" required>
@@ -293,26 +322,35 @@
         <mat-form-field>
           <mat-label>LinkedIn Profile</mat-label>
           <input matInput formControlName="linkedInURL" required>
-          <mat-error *ngIf="additionalDetailsControl.linkedInURL.errors?.['required']">linkedIn URL is required</mat-error>
+          <mat-error *ngIf="additionalDetailsControl.linkedInURL.errors?.['required']">linkedIn URL is required
+          </mat-error>
           <!-- <mat-error *ngIf="additionalDetailsControl.githubURL.errors?.['minlength']">Must be 4 characters long</mat-error> -->
-        </mat-form-field>
+        </mat-form-field> <br>
         <mat-form-field appearance="fill" id="profile-picture-form-field">
           <mat-label>Profile Picture</mat-label>
-          <ngx-mat-file-input formControlName="profilePicture" type="file" (change)="load($event)" #removableInput required></ngx-mat-file-input>
-          <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)"><mat-icon matSuffix>clear</mat-icon></button>
+          <ngx-mat-file-input formControlName="profilePicture" type="file" (change)="load($event)" #removableInput
+            required></ngx-mat-file-input>
+          <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="setImageCondition()"
+            (click)="removableInput.clear($event)">
+            <mat-icon matSuffix>clear</mat-icon>
+          </button>
           <mat-icon *ngIf="removableInput.empty" matSuffix>folder</mat-icon>
-          <mat-error *ngIf="removableInput.empty || additionalDetailsControl.profilePicture.errors?.['required']">Profile Picture is required</mat-error>
+          <mat-error *ngIf="removableInput.empty || additionalDetailsControl.profilePicture.errors?.['required']">
+            Profile Picture is required</mat-error>
         </mat-form-field>
-        <img [src]="imageUrl" height="200">
+        <img *ngIf="isImageUploaded" id="image-preview" [src]="imageUrl" height="200">
+        <p id="image-preview-text" *ngIf="isImageUploaded">&emsp;UPLOADED IMAGE</p>
+        <mat-icon class="image-preview-icon">arrow_back</mat-icon>
       </form>
 
       <div>
-        <button mat-mini-fab color="primary" class="previous-button" (click)="setDetails()" matStepperPrevious>
+        <button mat-mini-fab color="primary" class="previous-button" matStepperPrevious>
           <mat-icon>keyboard_arrow_up</mat-icon>
         </button>
-        <button mat-button color="primary" class="next-button" (click)="showSwalFire()" matStepperNext>Finish</button>
+        <button mat-button color="primary" class="next-button" (click)="showSwalFire()" [disabled]="!additionalDetails.valid">Finish</button>
       </div>
 
     </mat-step>
   </mat-stepper>
+  <!-- <button id="jspdf-button" class="btn btn-primary">asdfasfd</button> -->
 </div>
