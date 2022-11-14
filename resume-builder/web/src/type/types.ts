@@ -1,4 +1,4 @@
-type ts = {
+type ts = {    
     first_name: string | null | undefined;
     last_name: string | null | undefined;
     phone_number: number | null | undefined;
@@ -19,34 +19,30 @@ type ts = {
     school_location: string | null | undefined;
     hsc_percentage: number | null | undefined;
     sslc_percentage: number | null | undefined;
-    company_name: string | null | undefined;
-    company_location: string | null | undefined;
-    project_name: string | null | undefined;
-    project_domain: string | null | undefined;
-    project_description: string | null | undefined;
 
+    companies: [
+        {
+            company_name: string | null | undefined;
+            company_location: string | null | undefined;
+            company_start_year: string | null | undefined;
+            company_end_year: string | null | undefined;
+        }
+    ]
 
-    // school: [
-    //     {
-    //         school_name: string,
-    //         school_location: string,
-    //         school_exam_type: string,
-    //         school_percentage: number
-    //     }
-    // ],
-    // experience: [
-    //     {
-    //         company_name: string;
-    //         start_year: number;
-    //         end_year: number;
-    //         projects: [
-    //             {
-    //                 project_name: string;
-    //                 project_description: string;
-    //             }
-    //         ];
-    //     }
-    // ] = [];
+    projects: [
+        {
+            project_name: string | null | undefined;
+            project_domain: string | null | undefined;
+            project_description: string | null | undefined;
+        }
+    ]
+
+    // company_name: string | null | undefined;
+    // company_location: string | null | undefined;
+    // project_name: string | null | undefined;
+    // project_domain: string | null | undefined;
+    // project_description: string | null | undefined;
+
 
     technical_skills: string[] | null | undefined;
     non_technical_skills: string[] | null | undefined;

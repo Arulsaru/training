@@ -194,6 +194,9 @@
     </mat-step>
     <mat-step [stepControl]="experienceDetails" label="Experience" errorMessage="Some Fields are still empty">
       <div [formGroup]="experienceDetails">
+        <button mat-raised-button color="primary" class="add-btn exp-btn" (click)="addExperience()">
+          ADD EXPERIENCE &emsp; &emsp;<mat-icon>add_circle</mat-icon>
+        </button>
         <ng-container formArrayName="experiences">
           <ng-container *ngFor="let experienceForm of experiences.controls; let idx=index">
             <div class="experience-form-row" [formGroup]="experienceForm">
@@ -208,7 +211,8 @@
                 <mat-error>Company Location is required</mat-error>
               </mat-form-field>
 
-              <mat-icon class="delete-btn" matTooltip="Delete Experience" matTooltipClass="delete-tool-tip" matTooltipPosition="above" color="warn" (click)="deleteExperience(idx)">remove_circle</mat-icon>
+              <mat-icon class="delete-btn" matTooltip="Delete Experience" matTooltipClass="delete-tool-tip"
+                matTooltipPosition="above" color="warn" (click)="deleteExperience(idx)">remove_circle</mat-icon>
 
               <mat-form-field>
                 <mat-label>Start Year</mat-label>
@@ -220,16 +224,10 @@
                 <input matInput formControlName="endYear" required>
                 <mat-error>End Year is required</mat-error>
               </mat-form-field>
-              <div class="spacing"></div>     
+              <div class="spacing"></div>
             </div>
           </ng-container>
         </ng-container>
-        <div class="add-experience-btn">
-          <button mat-mini-fab color="primary" (click)="addExperience()">
-            <mat-icon>add</mat-icon>
-          </button>
-          <span>&emsp;Click here to add a Experience</span>
-        </div>
       </div>
       <div>
         <button mat-mini-fab color="primary" class="previous-button" matStepperPrevious>
@@ -242,12 +240,9 @@
     </mat-step>
 
     <mat-step [stepControl]="projectDetails" label="Projects" errorMessage="Some Fields are still empty">
-      <div class="add-experience-btn">
-        <button mat-mini-fab color="primary" (click)="addProjects()">
-          <mat-icon>add</mat-icon>
-        </button>
-        <span>&emsp;Click here to add a Projects</span>
-      </div>
+      <button mat-raised-button color="primary" class="add-btn" (click)="addProjects()">
+        ADD PROJECT &emsp; &emsp;<mat-icon>add_circle</mat-icon>
+      </button>
       <form [formGroup]="projectDetails">
         <ng-container formArrayName="projects">
           <ng-container *ngFor="let projectForm of projects.controls; let idx=index">
@@ -262,7 +257,8 @@
                 <input matInput formControlName="projectDomain" required>
                 <mat-error>Project Domain is required</mat-error>
               </mat-form-field>
-              <mat-icon class="delete-btn" matTooltip="Delete Project" matTooltipClass="delete-tool-tip" matTooltipPosition="above" color="warn" (click)="deleteProjects(idx)">remove_circle</mat-icon>
+              <mat-icon class="delete-btn" matTooltip="Delete Project" matTooltipClass="delete-tool-tip"
+                matTooltipPosition="above" color="warn" (click)="deleteProjects(idx)">remove_circle</mat-icon>
               <mat-form-field class="description">
                 <mat-label>Description of that project in less than 300 words</mat-label>
                 <textarea maxlength="300" formControlName="projectDescription" autosize matInput></textarea>
@@ -390,8 +386,7 @@
         <button mat-mini-fab color="primary" class="previous-button" matStepperPrevious>
           <mat-icon>keyboard_arrow_up</mat-icon>
         </button>
-        <button mat-button color="primary" class="next-button" (click)="showSwalFire()"
-          [disabled]="!additionalDetails.valid">Finish</button>
+        <button mat-button color="primary" class="next-button" (click)="showSwalFire()">Finish</button>
       </div>
 
     </mat-step>

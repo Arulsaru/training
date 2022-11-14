@@ -12,6 +12,10 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import * as moment from 'moment/moment.js';
 import { Moment } from 'moment/moment.js';
 import { IfStmt, ThisReceiver } from '@angular/compiler';
+import * as _ from 'lodash';
+import { isPlainObject } from 'jquery';
+import { getLocaleMonthNames } from '@angular/common';
+
 
 // import { FileInput } from 'ngx-material-file-input';
 
@@ -85,8 +89,6 @@ export class AppComponent {
     school_location: '',
     hsc_percentage: null,
     sslc_percentage: null,
-    company_name: '',
-    company_location: '',
     technical_skills: null,
     non_technical_skills: null,
     hobbies: null,
@@ -96,9 +98,21 @@ export class AppComponent {
     description: '',
     profile_picture: null,
     field_of_study: '',
-    project_name: '',
-    project_domain: '',
-    project_description: ''
+    companies: [
+      {
+        company_name: '',
+        company_location: '',
+        company_start_year: '',
+        company_end_year: ''
+      }
+    ],
+    projects: [
+      {
+        project_name: '',
+        project_domain: '',
+        project_description: ''
+      }
+    ]
   }
 
   personalDetails = this._formBuilder.group({
@@ -134,8 +148,8 @@ export class AppComponent {
   addExperience() {
     const experienceForm = this._formBuilder.group({
       companyName: ['TrusTrace', Validators.required],
-      companyLocation: ['Coimbatore', Validators.required],
-      startYear: ['2222', Validators.required],
+      companyLocation: ['', Validators.required],
+      startYear: ['', Validators.required],
       endYear: ['', Validators.required],
       projectName: ['', Validators.required],
       projectDomain: ['', Validators.required],
@@ -143,6 +157,7 @@ export class AppComponent {
     })
 
     this.experiences.push(experienceForm);
+    // console.log(this.experienceDetails.controls.experiences.value[0]);    
   }
 
   deleteExperience(experienceIdx: number) {
@@ -167,7 +182,6 @@ export class AppComponent {
     })
 
     this.projects.push(projectForm);
-    console.log(this.projectDetails.controls.projects.at(0).value);
   }
 
   deleteProjects(experienceIdx: number) {
@@ -327,11 +341,10 @@ export class AppComponent {
     this.userDetails.sslc_percentage = this.academicDetails.value.sslcPercentage
     this.userDetails.hsc_percentage = this.academicDetails.value.hscPercentage;
 
-    // this.userDetails.company_name = this.experienceDetails.value.companyName;
-    // this.userDetails.company_location = this.experienceDetails.value.companyLocation;
-    // this.userDetails.project_name = this.experienceDetails.value.projectName;
-    // this.userDetails.project_domain = this.experienceDetails.value.projectDomain;
-    // this.userDetails.project_description = this.experienceDetails.value.projectDescription;
+    // this.userDetails.companies = _.cloneDeep(this.experiences.value);
+
+    this.userDetails.companies = this.experiences.value;
+    this.userDetails.projects = this.projects.value;
 
     this.userDetails.technical_skills = this.technicalSkills;
     this.userDetails.non_technical_skills = this.nonTechnicalSkills;
@@ -339,6 +352,7 @@ export class AppComponent {
     this.userDetails.github_url = this.additionalDetails.value.githubURL;
     this.userDetails.linikedIn_url = this.additionalDetails.value.linkedInURL;
     this.userDetails.description = this.additionalDetails.value.description;
+
   }
 
   showSwalFire() {
@@ -453,6 +467,8 @@ export class AppComponent {
 
     doc.setFontSize(12);
     doc.setFont('times', 'normal');
+    console.log(this.xAxisDownLeft, this.yAxisDownLeft);
+
     doc.text(`${'\u2022'}   ${this.userDetails.college_name} (${this.userDetails.college_start_period} - ${this.userDetails.college_end_period} batch)`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 10);
     doc.text(`${this.userDetails.field_of_study} - ${this.userDetails.college_cgpa} - CGPA`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 8);
     this.userDetails.college_location ? doc.text(this.userDetails.college_location, this.xAxisDownLeft, this.yAxisDownLeft += 8) : null;
@@ -461,34 +477,18 @@ export class AppComponent {
     doc.text(`HSC Percentage - ${this.userDetails.hsc_percentage}`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 8);
     doc.text(`SSLC Percentage - ${this.userDetails.sslc_percentage}`, this.xAxisDownLeft, this.yAxisDownLeft += 8);
 
-    // doc.setLineWidth(0.5).setDrawColor( 24, 24, 24);
-    // doc.line(this.xAxisDownLeft += 10, this.yAxisDownLeft + 3, this.xAxisDownLeft + 10, this.yAxisDownLeft += 3);
+    doc.setLineWidth(0.5).setDrawColor(24, 24, 24);
+    doc.line(this.xAxisDownLeft += 10, this.yAxisDownLeft + 3, this.xAxisDownLeft + 10, this.yAxisDownLeft += 3);
 
-    doc.setFontSize(13).setFont('Times', 'bold');
-    doc.text('EXPERIENCE', this.xAxisDownRight += 130, this.yAxisDownRight += 85);
-    doc.setFontSize(12);
-    doc.setFont('times', 'normal');
-    doc.text(`${'\u2022'}   ${this.userDetails.company_name} - (Jan 2020 - May 2023)`, this.xAxisDownRight += 5, this.yAxisDownRight += 10);
-    doc.text(`Front End Developer`, this.xAxisDownRight += 5, this.yAxisDownRight += 10);
-    doc.text(`${this.userDetails.company_location}`, this.xAxisDownRight, this.yAxisDownRight += 10);
+    console.log(this.experiences.value[0].companyName);
 
-    doc.setFontSize(13).setFont('Times', 'bold');
-
-    doc.setTextColor(24, 24, 24).text('PROJECTS', this.xAxisDownLeft -= 10, this.yAxisDownLeft += 15);
-    doc.setFontSize(12);
-    doc.setFont('times', 'bold').text(`${'\u2022'}   ${this.userDetails.project_name} - (Jan 2020 - May 2023)`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 10);
-
-    doc.setFont('timies', 'normal').text(`${this.userDetails.project_domain}`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 8);
-
-    if (this.userDetails.project_description) {
-      doc.setFont('times', 'normal');
-      splittedText = doc.splitTextToSize(this.userDetails.project_description, 110);
-      doc.setFontSize(12).setLineHeightFactor(1.5).setFont('default', 'normal').text(splittedText, this.xAxisDownLeft, this.yAxisDownLeft += 8);
-    }
+    this.addExperienceInsidePDF(doc);
+    this.addProjectsInsidePDF(doc);
 
     this.addTechnicalSkillsInsidePDF(doc);
     this.addNonTechnicalSkillsInsidePDF(doc);
     this.addHobbiesInsidePDF(doc);
+
     // const ele: HTMLElement | null = document.getElementById('jspdf-button');
     // if(ele) {
     //   doc.html(ele, {
@@ -507,14 +507,6 @@ export class AppComponent {
   }
 
   addTechnicalSkillsInsidePDF(doc: jsPDF) {
-
-    console.log(this.xAxisDownRight, this.yAxisDownRight);
-    // this.technicalSkills.push('Java');
-    // this.technicalSkills.push('JavaScript');
-    // this.technicalSkills.push('Python');
-    // this.technicalSkills.push('TypeScript');
-    // this.technicalSkills.push('C');
-    // this.technicalSkills.push('C++');
 
     if (this.userDetails.technical_skills && this.userDetails.technical_skills.length !== 0) {
       doc.setFont('times', 'normal');
@@ -547,7 +539,6 @@ export class AppComponent {
 
   addNonTechnicalSkillsInsidePDF(doc: jsPDF) {
 
-    console.log(this.xAxisDownRight, this.yAxisDownRight);
     // this.nonTechnicalSkills.push('Positivity');
     // this.nonTechnicalSkills.push('Communication');
     // this.nonTechnicalSkills.push('Co-operation');
@@ -608,6 +599,46 @@ export class AppComponent {
       }
 
     }
+
+  }
+
+  addExperienceInsidePDF(doc: jsPDF) {
+    let idx = 0;
+    doc.setFontSize(13).setFont('Times', 'bold');
+    doc.text('EXPERIENCE', this.xAxisDownRight += 130, this.yAxisDownRight += 85);
+
+    while (idx < this.experiences.length) {
+      doc.setFontSize(12);
+      doc.setFont('times', 'normal');
+      doc.text(`${'\u2022'}   ${this.experiences.value[idx].companyName} - (Jan 2020 - May 2023)`, this.xAxisDownRight += 5, this.yAxisDownRight += 10);
+      doc.text(`Front End Developer`, this.xAxisDownRight += 5, this.yAxisDownRight += 10);
+      doc.text(`${this.experiences.value[idx].companyLocation}`, this.xAxisDownRight, this.yAxisDownRight += 10);
+
+      console.log(this.xAxisDownRight, this.yAxisDownRight);
+
+      idx += 1;
+      this.xAxisDownRight -= 10;
+      // this.yAxisDownRight += 15;
+    }
+
+  }
+
+  addProjectsInsidePDF(doc: jsPDF) {
+    let idx = 0;
+    doc.setFontSize(13).setFont('Times', 'bold');
+    doc.setTextColor(24, 24, 24).text('PROJECTS', this.xAxisDownLeft -= 20, this.yAxisDownLeft += 15);
+
+    while (idx < this.projects.length) {
+      doc.setFontSize(12);
+      doc.setFont('times', 'bold').text(`${'\u2022'}   ${this.projects.value[0].projectName} - (Jan 2020 - May 2023)`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 10);
+      doc.setFont('timies', 'normal').text(`${this.projects.value[0].projectDomain}`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 8);
+      doc.setFont('times', 'normal');
+      const splittedText = doc.splitTextToSize(this.projects.value[0].projectDescription, 110);
+      doc.setFontSize(12).setLineHeightFactor(1.5).setFont('default', 'normal').text(splittedText, this.xAxisDownLeft, this.yAxisDownLeft += 8);
+      idx += 1;
+      this.xAxisDownLeft -= 10;
+    }
+
 
   }
 
