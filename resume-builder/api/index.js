@@ -1,9 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-
 const jsonParser = bodyParser.json()
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
-
 const fs = require('fs');
 const port = 3000
 
@@ -19,7 +16,7 @@ function parseJSON() {
 
 app.get('/', (req, res) => {
   const details = parseJSON();
-  res.json(details)
+  res.json(details);
   return false;
 })
 
@@ -28,18 +25,7 @@ app.listen(port, () => {
 })
 
 app.post('/create', jsonParser, (req, res) => {
-
-  let number = 10;
-  console.log(number);
-  number = 'Arulmozhi';
-  console.log(number);
-
   fs.writeFileSync('user-details.json', JSON.stringify(req.body));
-  res.json({ msg: 'User created', data: req.body });
+  res.json({ msg: 'Your pdf file has been downloaded. Kindly check your downloads', data: req.body });
   return false;
 })
-
-// function parseJSON() {
-//   const data = fs.readFileSync('employee-details.json');
-//   return JSON.parse(data);
-// }

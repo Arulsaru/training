@@ -36,14 +36,7 @@ type ts = {
             project_description: string | null | undefined;
         }
     ]
-
-    // company_name: string | null | undefined;
-    // company_location: string | null | undefined;
-    // project_name: string | null | undefined;
-    // project_domain: string | null | undefined;
-    // project_description: string | null | undefined;
-
-
+    
     technical_skills: string[] | null | undefined;
     non_technical_skills: string[] | null | undefined;
     hobbies: string[] | null | undefined;

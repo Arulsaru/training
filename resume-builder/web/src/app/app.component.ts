@@ -7,17 +7,7 @@ import { ApiService } from 'src/service/api.service';
 import ts from 'src/type/types';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
-import * as $ from "jquery";// import { identifierName, r3JitTypeSourceSpan } from '@angular/compiler';
-import { MatDatepicker } from '@angular/material/datepicker';
-import * as moment from 'moment/moment.js';
-import { Moment } from 'moment/moment.js';
-import { IfStmt, ThisReceiver } from '@angular/compiler';
 import * as _ from 'lodash';
-import { isPlainObject } from 'jquery';
-import { getLocaleMonthNames } from '@angular/common';
-
-
-// import { FileInput } from 'ngx-material-file-input';
 
 @Component({
   selector: 'app-root',
@@ -32,14 +22,120 @@ import { getLocaleMonthNames } from '@angular/common';
 })
 
 export class AppComponent {
-  title = 'resume-builder';
+
+  ngOnInit(): void {
+  }
 
   @ViewChild("techSkillList") techSkillList: any;
   @ViewChild("nonTechSkillList") nonTechSkillList: any;
   @ViewChild("hobbyList") hobbyList: any;
 
-  ngOnInit(): void {
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  technicalSkills: string[] = [];
+  nonTechnicalSkills: string[] = [];
+  hobbies: string[] = [];
+  isImageUploaded: boolean = false;
+  isTechSkillEmpty: boolean = false;
+  languages: string[] = ['Tamil', 'English', 'Hindi', 'Telungu', 'Malayalam'];
+  imageUrl: string | null | ArrayBuffer = '';
+  xAxisDownLeft = 0;
+  yAxisDownLeft = 0;
+  xAxisDownRight = 0;
+  yAxisDownRight = 0;
+
+  userDetails: ts = {
+    first_name: '',
+    last_name: '',
+    phone_number: null,
+    email: '',
+    birthday: '',
+    field_of_study: '',
+    gender: '',
+    languages_known: null,
+    state: '',
+    city: '',
+    pin_code: null,
+    college_name: '',
+    college_location: '',
+    college_start_period: null,
+    college_end_period: null,
+    college_cgpa: null,
+    school_name: '',
+    school_location: '',
+    hsc_percentage: null,
+    sslc_percentage: null,
+    companies: [
+      {
+        company_name: '',
+        company_location: '',
+        company_start_year: null,
+        company_end_year: null
+      }
+    ],
+    projects: [
+      {
+        project_name: '',
+        project_domain: '',
+        project_description: ''
+      }
+    ],
+    technical_skills: null,
+    non_technical_skills: null,
+    hobbies: null,
+    user_profiles: null,
+    github_url: '',
+    linikedIn_url: '',
+    description: '',
+    profile_picture: null
   }
+
+  personalDetails = this._formBuilder.group({
+    firstName: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    lastName: ['', [Validators.required, Validators.pattern(/[A-Za-z]/)]],
+    phoneNumber: [null, (Validators.required, Validators.min(10000000000), Validators.max(999999999999), Validators.pattern(/[0-9]/))],
+    birthday: ['', Validators.required],
+    gender: '1',
+    email: ['', [Validators.required, Validators.email]],
+    state: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    city: ['', Validators.required],
+    pinCode: [null, (Validators.required, Validators.pattern(/[0-9]{6}/))],
+    languagesKnown: [null, Validators.required]
+  })
+
+  academicDetails = this._formBuilder.group({
+    collegeName: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    collegeStudy: ['', [Validators.required, Validators.pattern(/[A-Za-z]/)]],
+    collegeLocation: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    collegeStartYear: [null, [Validators.required, Validators.pattern(/[0-9]{4}/)]],
+    collegeEndYear: [null, [Validators.required, Validators.pattern(/[0-9]{4}/)]],
+    collegeCGPA: [null, Validators.required],
+    schoolName: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    schoolLocation: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    sslcPercentage: [null, [Validators.required]],
+    hscPercentage: [null, [Validators.required]]
+  })
+
+  experienceDetails = this._formBuilder.group({
+    experiences: this._formBuilder.array([])
+  })
+
+  skillDetails = this._formBuilder.group({
+    technicalSkill: [null, Validators.required],
+    nonTechnicalSkill: [null, Validators.required]
+  })
+
+  projectDetails = this._formBuilder.group({
+    projects: this._formBuilder.array([])
+  })
+
+  additionalDetails = this._formBuilder.group({
+    description: [`I am an enthusiastic, self-motivated, reliable, responsible and hard working person. I am a mature team worker and adaptable to all challenging situations. I am able to work well both in a team environment as well as using own initiative. I am able to work well under pressure and adhere to strict deadlines.`, Validators.required],
+    hobbies: [null, Validators.required],
+    githubURL: ['https://github.com/Arulmozhi-Karunagaran/TrusTrace-Training', Validators.required],
+    linkedInURL: ['https://www.linkedin.com/in/preethiuthayakumar/', Validators.required],
+    profilePicture: [null, Validators.required]
+  })
 
   get personalDetailsControl() {
     return this.personalDetails.controls;
@@ -62,101 +158,25 @@ export class AppComponent {
   }
 
   get experiences() {
-    return this.experienceDetails.controls["experiences"] as FormArray;
+    return this.experienceDetails.controls['experiences'] as FormArray;
   }
 
   get projects() {
-    return this.projectDetails.controls["projects"] as FormArray;
+    return this.projectDetails.controls['projects'] as FormArray;
   }
 
-  userDetails: ts = {
-    first_name: '',
-    last_name: '',
-    phone_number: null,
-    email: '',
-    birthday: '',
-    gender: '',
-    languages_known: null,
-    state: '',
-    city: '',
-    pin_code: null,
-    college_name: '',
-    college_location: '',
-    college_start_period: null,
-    college_end_period: null,
-    college_cgpa: null,
-    school_name: '',
-    school_location: '',
-    hsc_percentage: null,
-    sslc_percentage: null,
-    technical_skills: null,
-    non_technical_skills: null,
-    hobbies: null,
-    user_profiles: null,
-    github_url: '',
-    linikedIn_url: '',
-    description: '',
-    profile_picture: null,
-    field_of_study: '',
-    companies: [
-      {
-        company_name: '',
-        company_location: '',
-        company_start_year: '',
-        company_end_year: ''
-      }
-    ],
-    projects: [
-      {
-        project_name: '',
-        project_domain: '',
-        project_description: ''
-      }
-    ]
-  }
-
-  personalDetails = this._formBuilder.group({
-    firstName: ['Arulmozhi', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    lastName: ['Karunagaran', [Validators.required, Validators.pattern(/[A-Za-z]/)]],
-    phoneNumber: [1234567890, (Validators.required, Validators.min(10000000000), Validators.max(999999999999), Validators.pattern(/[0-9]/))],
-    birthday: ['15/12/2002', Validators.required],
-    gender: '1',
-    email: ['arulmozhi.ec19@bitsathy.ac.in', [Validators.required, Validators.email]],
-    state: ['Dharmapuri', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    city: ['Tamil Nadu', Validators.required],
-    pinCode: [636701, (Validators.required, Validators.pattern(/[0-9]{6}/))],
-    languagesKnown: [null, Validators.required]
-  })
-
-  academicDetails = this._formBuilder.group({
-    collegeName: ['Bannari Amman Institute Of Technology', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    collegeStudy: ['B.E ECE', [Validators.required, Validators.pattern(/[A-Za-z]/)]],
-    collegeLocation: ['Sathyamangalam', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    collegeStartYear: [2019, [Validators.required, Validators.pattern(/[0-9]{4}/)]],
-    collegeEndYear: [2023, [Validators.required, Validators.pattern(/[0-9]{4}/)]],
-    collegeCGPA: [8.84, Validators.required],
-    schoolName: ['Kamalam International School', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    schoolLocation: ['Dharmapuri', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    sslcPercentage: [90, [Validators.required]],
-    hscPercentage: [90, [Validators.required]]
-  })
-
-  experienceDetails = this._formBuilder.group({
-    experiences: this._formBuilder.array([])
-  })
-
-  addExperience() {
+  addNewExperience() {
     const experienceForm = this._formBuilder.group({
       companyName: ['TrusTrace', Validators.required],
-      companyLocation: ['', Validators.required],
+      companyLocation: ['Coimbatore', Validators.required],
       startYear: ['', Validators.required],
       endYear: ['', Validators.required],
-      projectName: ['', Validators.required],
-      projectDomain: ['', Validators.required],
-      projectDescription: ['', Validators.required],
+      projectName: ['Fake News Detection', Validators.required],
+      projectDomain: ['Angular', Validators.required],
+      projectDescription: ['Begin each item by stating the name of the place, location, dates, and job title (e.g. manager, volunteer) List experiences in reverse chronological order (most current experience first).', Validators.required],
     })
 
-    this.experiences.push(experienceForm);
+    this.experiences.push(experienceForm); // experiences array kulla push pandree... each and every user gets new experience form
     // console.log(this.experienceDetails.controls.experiences.value[0]);    
   }
 
@@ -164,21 +184,11 @@ export class AppComponent {
     this.experiences.removeAt(experienceIdx)
   }
 
-  skillDetails = this._formBuilder.group({
-    technicalSkill: [null, Validators.required],
-    nonTechnicalSkill: [null, Validators.required]
-  })
-
-  projectDetails = this._formBuilder.group({
-    projects: this._formBuilder.array([])
-  })
-
-  addProjects() {
-
+  addNewProjects() {
     const projectForm = this._formBuilder.group({
       projectName: ['TrusTrace', Validators.required],
       projectDomain: ['Coimbatore', Validators.required],
-      projectDescription: ['2222', Validators.required],
+      projectDescription: ['Begin each item by stating the name of the place, location, dates, and job title (e.g. manager, volunteer) List experiences in reverse chronological order (most current experience first).', Validators.required],
     })
 
     this.projects.push(projectForm);
@@ -187,26 +197,6 @@ export class AppComponent {
   deleteProjects(experienceIdx: number) {
     this.projects.removeAt(experienceIdx)
   }
-
-  additionalDetails = this._formBuilder.group({
-    description: [`I am an enthusiastic, self-motivated, reliable, responsible and hard working person. I am a mature team worker and adaptable to all challenging situations. I am able to work well both in a team environment as well as using own initiative. I am able to work well under pressure and adhere to strict deadlines.`,
-      Validators.required],
-    hobbies: [null, Validators.required],
-    githubURL: ['https://github.com/Arulmozhi-Karunagaran/TrusTrace-Training', Validators.required],
-    linkedInURL: ['https://www.linkedin.com/in/preethiuthayakumar/', Validators.required],
-    profilePicture: [null, Validators.required]
-  })
-
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  technicalSkills: string[] = [];
-  nonTechnicalSkills: string[] = [];
-  hobbies: string[] = [];
-  flag: boolean = true;
-  isImageUploaded: boolean = false;
-  isTechSkillEmpty: boolean = false;
-  languages: string[] = ['Tamil', 'English', 'Hindi', 'Telungu', 'Malayalam'];
-  skillLength: number = 6;
 
   addTechSkills(event: MatChipInputEvent): boolean {
 
@@ -234,10 +224,10 @@ export class AppComponent {
   }
 
   removeTechSkill(skill: string): void {
-    const index = this.technicalSkills.indexOf(skill);
+    const idx = this.technicalSkills.indexOf(skill);
 
-    if (index >= 0) {
-      this.technicalSkills.splice(index, 1);
+    if (idx >= 0) {
+      this.technicalSkills.splice(idx, 1);
       return;
     }
 
@@ -269,11 +259,12 @@ export class AppComponent {
   }
 
   removeNonTechSkill(skill: string): void {
-    const index = this.nonTechnicalSkills.indexOf(skill);
+    const idx = this.nonTechnicalSkills.indexOf(skill);
 
-    if (index >= 0) {
-      this.nonTechnicalSkills.splice(index, 1);
+    if (idx >= 0) {
+      this.nonTechnicalSkills.splice(idx, 1);
     }
+
   }
 
   addHobbies(event: MatChipInputEvent) {
@@ -283,7 +274,6 @@ export class AppComponent {
     }
 
     const value = (event.value || '').trim();
-
     const duplicateIdx = this.hobbies.findIndex(
       hobby => value.toLowerCase() === hobby.toLowerCase()
     );
@@ -303,16 +293,15 @@ export class AppComponent {
   }
 
   removeHobbies(hobby: string): void {
-    const index = this.hobbies.indexOf(hobby);
+    const idx = this.hobbies.indexOf(hobby);
 
-    if (index >= 0) {
-      this.hobbies.splice(index, 1);
+    if (idx >= 0) {
+      this.hobbies.splice(idx, 1);
     }
 
   }
 
   setDetails() {
-
     this.userDetails.first_name = this.personalDetails.value.firstName;
     this.userDetails.last_name = this.personalDetails.value.lastName;
     this.userDetails.phone_number = this.personalDetails.value.phoneNumber;
@@ -323,12 +312,9 @@ export class AppComponent {
     // const bday: Date = new Date(this.personalDetails.value.birthday);
 
     this.personalDetails.value.gender === '1' ? this.userDetails.gender = 'Male' : this.userDetails.gender = 'Female';
-
-
     this.userDetails.languages_known = this.personalDetails.value.languagesKnown;
     this.userDetails.state = this.personalDetails.value.state;
     this.userDetails.city = this.personalDetails.value.city;
-
     this.userDetails.pin_code = this.personalDetails.value.pinCode;
     this.userDetails.college_name = this.academicDetails.value.collegeName;
     this.userDetails.college_location = this.academicDetails.value.collegeLocation;
@@ -340,29 +326,21 @@ export class AppComponent {
     this.userDetails.school_location = this.academicDetails.value.schoolLocation;
     this.userDetails.sslc_percentage = this.academicDetails.value.sslcPercentage
     this.userDetails.hsc_percentage = this.academicDetails.value.hscPercentage;
-
-    // this.userDetails.companies = _.cloneDeep(this.experiences.value);
-
     this.userDetails.companies = this.experiences.value;
     this.userDetails.projects = this.projects.value;
-
     this.userDetails.technical_skills = this.technicalSkills;
     this.userDetails.non_technical_skills = this.nonTechnicalSkills;
     this.userDetails.hobbies = this.hobbies;
     this.userDetails.github_url = this.additionalDetails.value.githubURL;
     this.userDetails.linikedIn_url = this.additionalDetails.value.linkedInURL;
     this.userDetails.description = this.additionalDetails.value.description;
-
   }
 
   showSwalFire() {
-
     this.setDetails();
 
     this.apiService.createUser(this.userDetails).subscribe(res => {
       this.userDetails = res.data;
-    }, err => {
-      console.log('');
     });
 
     const swalWithBootstrapButtons = Swal.mixin({
@@ -382,6 +360,7 @@ export class AppComponent {
       cancelButtonText: 'Go Back',
       reverseButtons: true
     }).then((result) => {
+
       if (result.isConfirmed) {
         this.generatePDF();
         swalWithBootstrapButtons.fire(
@@ -389,26 +368,17 @@ export class AppComponent {
           'Your pdf file has been downloaded, Check your downloads',
           'success'
         )
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
+      }
+      else if (result.dismiss === Swal.DismissReason.cancel) {
         swalWithBootstrapButtons.fire(
           'Are yeew sure',
           'This wont delete any of your details',
           'error'
         )
       }
+
     })
-
   }
-
-  imageUrl: string | null | ArrayBuffer = '';
-
-  xAxisDownLeft = 0;
-  yAxisDownLeft = 0;
-  xAxisDownRight = 0;
-  yAxisDownRight = 0;
 
   generatePDF() {
 
@@ -430,11 +400,11 @@ export class AppComponent {
     doc.setFont('Times', 'bold').setFontSize(15);
     doc.setTextColor(255, 255, 255).text(`${this.userDetails.first_name?.toUpperCase()} ${this.userDetails.last_name?.toUpperCase()}`, xAxisTop += 55, yAxisTop += 15);
 
-    doc.setFontSize(13).setFont('', 'bold').text('Front End Developer', xAxisTop, yAxisTop += 10);
+    doc.setFontSize(13).setFont('times', 'bold').text('Front End Developer', xAxisTop, yAxisTop += 10);
 
     if (this.userDetails.description) {
       splittedText = doc.splitTextToSize(this.userDetails.description, 170);
-      doc.setFontSize(12).setLineHeightFactor(1.5).setFont('default', 'normal').text(splittedText, xAxisTop, yAxisTop += 10);
+      doc.setFontSize(12).setLineHeightFactor(1.5).setFont('times', 'normal').text(splittedText, xAxisTop, yAxisTop += 10);
     }
 
     doc.setLineWidth(2).setDrawColor(24, 24, 24);
@@ -467,7 +437,6 @@ export class AppComponent {
 
     doc.setFontSize(12);
     doc.setFont('times', 'normal');
-    console.log(this.xAxisDownLeft, this.yAxisDownLeft);
 
     doc.text(`${'\u2022'}   ${this.userDetails.college_name} (${this.userDetails.college_start_period} - ${this.userDetails.college_end_period} batch)`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 10);
     doc.text(`${this.userDetails.field_of_study} - ${this.userDetails.college_cgpa} - CGPA`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 8);
@@ -477,17 +446,15 @@ export class AppComponent {
     doc.text(`HSC Percentage - ${this.userDetails.hsc_percentage}`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 8);
     doc.text(`SSLC Percentage - ${this.userDetails.sslc_percentage}`, this.xAxisDownLeft, this.yAxisDownLeft += 8);
 
-    doc.setLineWidth(0.5).setDrawColor(24, 24, 24);
-    doc.line(this.xAxisDownLeft += 10, this.yAxisDownLeft + 3, this.xAxisDownLeft + 10, this.yAxisDownLeft += 3);
-
-    console.log(this.experiences.value[0].companyName);
+    // doc.setLineWidth(0.5).setDrawColor(24, 24, 24);
+    // doc.line(this.xAxisDownLeft += 10, this.yAxisDownLeft + 3, this.xAxisDownLeft + 10, this.yAxisDownLeft += 3);
 
     this.addExperienceInsidePDF(doc);
-    this.addProjectsInsidePDF(doc);
-
     this.addTechnicalSkillsInsidePDF(doc);
     this.addNonTechnicalSkillsInsidePDF(doc);
     this.addHobbiesInsidePDF(doc);
+
+    this.addProjectsInsidePDF(doc);
 
     // const ele: HTMLElement | null = document.getElementById('jspdf-button');
     // if(ele) {
@@ -506,7 +473,35 @@ export class AppComponent {
 
   }
 
+  addExperienceInsidePDF(doc: jsPDF) {
+    let idx = 0;
+    doc.setFontSize(13).setFont('Times', 'bold');
+    doc.text('EXPERIENCE', this.xAxisDownRight += 130, this.yAxisDownRight += 85);
+
+    while (idx < this.experiences.length) {
+      doc.setFontSize(12);
+      doc.setFont('times', 'normal');
+      doc.text(`${'\u2022'}   ${this.experiences.value[idx].companyName} - (Jan 2020 - May 2023)`, this.xAxisDownRight += 5, this.yAxisDownRight += 10);
+      doc.text(`Front End Developer`, this.xAxisDownRight += 5, this.yAxisDownRight += 10);
+      doc.text(`${this.experiences.value[idx].companyLocation}`, this.xAxisDownRight, this.yAxisDownRight += 10);
+
+      idx += 1;
+      this.xAxisDownRight -= 10;
+      // this.yAxisDownRight += 15;
+    }
+
+    this.xAxisDownRight += 10; // last time ah ignore pandrathuku
+  }
+
   addTechnicalSkillsInsidePDF(doc: jsPDF) {
+
+    // this.technicalSkills.push('JavaScript');
+    // this.technicalSkills.push('Java');
+    // this.technicalSkills.push('TypeScript');
+    // this.technicalSkills.push('C++');
+    // this.technicalSkills.push('Ruby');
+    // this.technicalSkills.push('Front End');
+
 
     if (this.userDetails.technical_skills && this.userDetails.technical_skills.length !== 0) {
       doc.setFont('times', 'normal');
@@ -552,7 +547,7 @@ export class AppComponent {
       let maxLength = 3;
       this.xAxisDownRight = 140;
       doc.setFontSize(13).setFont('Times', 'bold');
-      doc.text('NON TECHNICAL SKILLS', this.xAxisDownRight -= 10, this.yAxisDownRight += 5);
+      doc.text('NON TECHNICAL SKILLS', this.xAxisDownRight -= 10, this.yAxisDownRight += 10);
       this.yAxisDownRight += 10;
       this.xAxisDownRight += 5;
       doc.setFontSize(13).setFont('Times', 'normal');
@@ -575,13 +570,20 @@ export class AppComponent {
 
   addHobbiesInsidePDF(doc: jsPDF) {
 
+    // this.hobbies.push('Cooking');
+    // this.hobbies.push('Playing');
+    // this.hobbies.push('Sports');
+    // this.hobbies.push('Pet care');
+    // this.hobbies.push('Sleeping');
+    // this.hobbies.push('Watching movie');
+
     if (this.userDetails.hobbies && this.userDetails.hobbies.length !== 0) {
       doc.setFont('times', 'normal');
       let idx = 0;
       let maxLength = 3;
       this.xAxisDownRight = 140;
       doc.setFontSize(13).setFont('Times', 'bold');
-      doc.text('HOBBIES', this.xAxisDownRight -= 10, this.yAxisDownRight += 5);
+      doc.text('HOBBIES', this.xAxisDownRight -= 10, this.yAxisDownRight += 10);
       this.yAxisDownRight += 10;
       this.xAxisDownRight += 5;
       doc.setFontSize(13).setFont('Times', 'normal');
@@ -602,43 +604,26 @@ export class AppComponent {
 
   }
 
-  addExperienceInsidePDF(doc: jsPDF) {
-    let idx = 0;
-    doc.setFontSize(13).setFont('Times', 'bold');
-    doc.text('EXPERIENCE', this.xAxisDownRight += 130, this.yAxisDownRight += 85);
-
-    while (idx < this.experiences.length) {
-      doc.setFontSize(12);
-      doc.setFont('times', 'normal');
-      doc.text(`${'\u2022'}   ${this.experiences.value[idx].companyName} - (Jan 2020 - May 2023)`, this.xAxisDownRight += 5, this.yAxisDownRight += 10);
-      doc.text(`Front End Developer`, this.xAxisDownRight += 5, this.yAxisDownRight += 10);
-      doc.text(`${this.experiences.value[idx].companyLocation}`, this.xAxisDownRight, this.yAxisDownRight += 10);
-
-      console.log(this.xAxisDownRight, this.yAxisDownRight);
-
-      idx += 1;
-      this.xAxisDownRight -= 10;
-      // this.yAxisDownRight += 15;
-    }
-
-  }
 
   addProjectsInsidePDF(doc: jsPDF) {
     let idx = 0;
     doc.setFontSize(13).setFont('Times', 'bold');
-    doc.setTextColor(24, 24, 24).text('PROJECTS', this.xAxisDownLeft -= 20, this.yAxisDownLeft += 15);
+    doc.setTextColor(24, 24, 24).text('PROJECTS', this.xAxisDownLeft -= 10, this.yAxisDownLeft += 15);
 
     while (idx < this.projects.length) {
       doc.setFontSize(12);
       doc.setFont('times', 'bold').text(`${'\u2022'}   ${this.projects.value[0].projectName} - (Jan 2020 - May 2023)`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 10);
-      doc.setFont('timies', 'normal').text(`${this.projects.value[0].projectDomain}`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 8);
+      doc.setFont('times', 'normal').text(`${this.projects.value[0].projectDomain}`, this.xAxisDownLeft += 5, this.yAxisDownLeft += 8);
       doc.setFont('times', 'normal');
-      const splittedText = doc.splitTextToSize(this.projects.value[0].projectDescription, 110);
-      doc.setFontSize(12).setLineHeightFactor(1.5).setFont('default', 'normal').text(splittedText, this.xAxisDownLeft, this.yAxisDownLeft += 8);
+      console.log(this.yAxisDownLeft);
+      const splittedText = doc.splitTextToSize(this.projects.value[0].projectDescription, 100);
+      doc.setFontSize(12).setLineHeightFactor(1.5).setFont('times', 'normal').text(splittedText, this.xAxisDownLeft, this.yAxisDownLeft += 8);
+      console.log(splittedText.length);
+      console.log(this.yAxisDownLeft);
       idx += 1;
       this.xAxisDownLeft -= 10;
+      this.yAxisDownLeft += splittedText.length * 5;
     }
-
 
   }
 

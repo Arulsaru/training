@@ -1,1 +1,54 @@
-{"first_name":"Arulmozhi","last_name":"Karunagaran","phone_number":1234567890,"email":"arulmozhi.ec19@bitsathy.ac.in","birthday":"15/12/2002","gender":"Male","languages_known":null,"state":"Dharmapuri","city":"Tamil Nadu","pin_code":636701,"college_name":"Bannari Amman Institute Of Technology","college_location":"Sathyamangalam","college_start_period":2019,"college_end_period":2023,"college_cgpa":8.84,"school_name":"Kamalam International School","school_location":"Dharmapuri","hsc_percentage":90,"sslc_percentage":90,"technical_skills":[],"non_technical_skills":[],"hobbies":[],"user_profiles":null,"github_url":"https://github.com/Arulmozhi-Karunagaran/TrusTrace-Training","linikedIn_url":"https://www.linkedin.com/in/preethiuthayakumar/","description":"I am an enthusiastic, self-motivated, reliable, responsible and hard working person. I am a mature team worker and adaptable to all challenging situations. I am able to work well both in a team environment as well as using own initiative. I am able to work well under pressure and adhere to strict deadlines.","profile_picture":null,"field_of_study":"B.E ECE","companies":[{"companyName":"TrusTrace","companyLocation":"Coimbatore","startYear":"","endYear":"","projectName":"","projectDomain":"","projectDescription":""},{"companyName":"Zozho","companyLocation":"adsf","startYear":"","endYear":"","projectName":"","projectDomain":"","projectDescription":""},{"companyName":"TrusTrace","companyLocation":"Aadsa","startYear":"","endYear":"","projectName":"","projectDomain":"","projectDescription":""}],"projects":[{"projectName":"TrusTrace","projectDomain":"Coimbatore","projectDescription":"I am an enthusiastic, self-motivated, reliable, responsible and hard working person. I am a mature team worker and adaptable to all challenging situations. I am able to\nwork well both in a team"},{"projectName":"Zoho","projectDomain":"Coimbatore","projectDescription":"I am an enthusiastic, self-motivated, reliable, responsible and hard working person. I am a mature team worker and adaptable to all challenging situations. I am able to\nwork well both in a team"},{"projectName":"TrusTrace","projectDomain":"Coimbatore","projectDescription":"I am an enthusiastic, self-motivated, reliable, responsible and hard working person. I am a mature team worker and adaptable to all challenging situations. I am able to\nwork well both in a team"}]}
+{
+    "first_name": "",
+    "last_name": "",
+    "phone_number": null,
+    "email": "",
+    "birthday": "",
+    "field_of_study": "",
+    "gender": "Male",
+    "languages_known": null,
+    "state": "",
+    "city": "",
+    "pin_code": null,
+    "college_name": "",
+    "college_location": "",
+    "college_start_period": null,
+    "college_end_period": null,
+    "college_cgpa": null,
+    "school_name": "",
+    "school_location": "",
+    "hsc_percentage": null,
+    "sslc_percentage": null,
+    "companies": [
+        {
+            "companyName": "TrusTrace",
+            "companyLocation": "Coimbatore",
+            "startYear": "",
+            "endYear": "",
+            "projectName": "Fake News Detection",
+            "projectDomain": "Angular",
+            "projectDescription": "Begin each item by stating the name of the place, location, dates, and job title (e.g. manager, volunteer) List experiences in reverse chronological order (most current experience first)."
+        }
+    ],
+    "projects": [
+        {
+            "projectName": "TrusTrace",
+            "projectDomain": "Coimbatore",
+            "projectDescription": "Begin each item by stating the name of the place, location, dates, and job title (e.g. manager, volunteer) List experiences in reverse chronological order (most current experience first)."
+        }
+    ],
+    "technical_skills": [
+        "adfs",
+        "afsd",
+        "asfd",
+        "safd",
+        "sfda"
+    ],
+    "non_technical_skills": [],
+    "hobbies": [],
+    "user_profiles": null,
+    "github_url": "https://github.com/Arulmozhi-Karunagaran/TrusTrace-Training",
+    "linikedIn_url": "https://www.linkedin.com/in/preethiuthayakumar/",
+    "description": "I am an enthusiastic, self-motivated, reliable, responsible and hard working person. I am a mature team worker and adaptable to all challenging situations. I am able to work well both in a team environment as well as using own initiative. I am able to work well under pressure and adhere to strict deadlines.",
+    "profile_picture": null
+}
