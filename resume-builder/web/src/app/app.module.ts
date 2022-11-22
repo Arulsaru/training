@@ -7,10 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/material/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AutosizeModule } from 'ngx-autosize';
+import { MainPageComponent } from './main-page/main-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainPageComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +22,7 @@ import { AutosizeModule } from 'ngx-autosize';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    AutosizeModule
+    AutosizeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

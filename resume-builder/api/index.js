@@ -24,8 +24,14 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-app.post('/create', jsonParser, (req, res) => {
+app.post('/create-user', jsonParser, (req, res) => {
   fs.writeFileSync('user-details.json', JSON.stringify(req.body));
   res.json({ msg: 'Your pdf file has been downloaded. Kindly check your downloads', data: req.body });
   return false;
 })
+
+app.get('/users', jsonParser, (req, res) => {
+  res.json({ data: req.body });
+  return false;
+})
+

@@ -12,7 +12,7 @@ export class ApiService {
   constructor(private _http:HttpClient) { }
   
   createUser(userData: ts) {
-    return this._http.post<ResumeCreateResponse>(`${BASE_URL}create`, userData); 
+    return this._http.post<ResumeCreateResponse>(`${BASE_URL}create-user`, userData); 
   }
   
 }

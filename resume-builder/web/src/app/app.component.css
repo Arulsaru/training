@@ -1,120 +1,28 @@
-.navbar {
-    font-family: Copperplate, Papyrus, fantasy;
-    font-size: 30px;
-    justify-content: space-between;
-    margin-top: 20px;
+body {
+    color: white;
+    background-color: black;
+    user-select: none !important;
 }
 
 .icons {
-    margin-right: 20px;
+    background-color: rgb(13, 110, 253);
+    margin-left: 20px;
 }
 
-#gap {
-    height: 40px;
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
 }
 
-.border {
-    margin: auto;
-    width: 600px;
-    margin-top: auto;
-    border-radius: 15px !important;
+.h-custom {
+    height: calc(100% - 73px);
 }
 
-mat-form-field {
-    margin-left: 30px;
-    margin-top: 10px;
-}
-
-input.mat-input-element {
-    margin-top: 0.3em;
-}
-
-#date-input {
-    width: 100px !important;
-}
-
-.previous-button {
-    margin-top: 30px;
-    margin-left: 330px;
-}
-
-.next-button {
-    margin-left: 30px;
-}
-
-.gender {
-    margin-top: 25px;
-    margin-left: 30px;
-}
-
-.width {
-    width: 120px;
-}
-
-.example-chip-list {
-    margin-right: 100px !important;
-    width: 400px;
-}
-
-.description {
-    width: 400px;
-}
-
-#profile-picture-form-field {
-    width: 400px !important;
-}
-
-#image-preview {
-    margin-left: 30px;
-    border-radius: 500px;
-    border: solid;
-    width: 130px;
-    height: 130px;
-}
-
-#image-preview-text {
-    position: relative;
-    bottom: 75px;
-    left: 220px;
-}
-
-.image-preview-icon {
-    position: relative;
-    bottom: 80px;
-    left: 180px;
-}
-
-#image-preview-text {
-    font-size: 20px;
-    font-family: "Lucida Console", "Courier New";
-}
-
-.add-btn {
-    margin-left: 280px;
-    margin-top: 10px; 
-    margin-bottom: 40px;
-    font-family: Georgia, serif;
-}
-
-.exp-btn {
-    margin-left: 260px !important;
-}
-
-.delete-btn {
-    position: relative;
-    left: 40px;
-    top: 60px;
-    height: 35px;
-    width: 35px;
-    font-size: 35px;
-    cursor: pointer;
-}
-
-.spacing {
-    height: 30px;
-}
-
-::ng-deep .delete-tool-tip {
-    background: red!important;
-    font-size: 12px !important;
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
 }
