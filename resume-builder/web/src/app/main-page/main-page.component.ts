@@ -86,29 +86,29 @@ export class MainPageComponent implements OnInit {
   }
 
   personalDetails = this._formBuilder.group({
-    firstName: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    lastName: ['', [Validators.required, Validators.pattern(/[A-Za-z]/)]],
-    phoneNumber: [null, (Validators.required, Validators.min(10000000000), Validators.max(999999999999), Validators.pattern(/[0-9]/))],
-    birthday: ['', Validators.required],
+    firstName: ['Arulmozhi', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    lastName: ['Karunagaran', [Validators.required, Validators.pattern(/[A-Za-z]/)]],
+    phoneNumber: [6374553281, (Validators.required, Validators.min(10000000000), Validators.max(999999999999), Validators.pattern(/[0-9]/))],
+    birthday: ['15/04/2002', Validators.required],
     gender: '1',
-    email: ['', [Validators.required, Validators.email]],
-    state: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    city: ['', Validators.required],
-    pinCode: [null, (Validators.required, Validators.pattern(/[0-9]{6}/))],
+    email: ['saruarul154@gmail.com', [Validators.required, Validators.email]],
+    state: ['Tamil Nadu', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    city: ['Dharmapuri', Validators.required],
+    pinCode: [636701, (Validators.required, Validators.pattern(/[0-9]{6}/))],
     languagesKnown: [null, Validators.required]
   })
 
   academicDetails = this._formBuilder.group({
-    collegeName: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    collegeStudy: ['', [Validators.required, Validators.pattern(/[A-Za-z]/)]],
-    collegeLocation: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    collegeStartYear: [null, [Validators.required, Validators.pattern(/[0-9]{4}/)]],
-    collegeEndYear: [null, [Validators.required, Validators.pattern(/[0-9]{4}/)]],
-    collegeCGPA: [null, Validators.required],
-    schoolName: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    schoolLocation: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
-    sslcPercentage: [null, [Validators.required]],
-    hscPercentage: [null, [Validators.required]]
+    collegeName: ['Bannari Amman Institute Of Technology', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    collegeStudy: ['B.E ECE', [Validators.required, Validators.pattern(/[A-Za-z]/)]],
+    collegeLocation: ['Sathyamangalam', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    collegeStartYear: [2019, [Validators.required, Validators.pattern(/[0-9]{4}/)]],
+    collegeEndYear: [2023, [Validators.required, Validators.pattern(/[0-9]{4}/)]],
+    collegeCGPA: [90, Validators.required],
+    schoolName: ['Kamalam International School', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    schoolLocation: ['Dharmapuri', [Validators.required, Validators.pattern(/[A-Z][a-z]/)]],
+    sslcPercentage: [90, [Validators.required]],
+    hscPercentage: [90, [Validators.required]]
   })
 
   experienceDetails = this._formBuilder.group({
@@ -166,9 +166,6 @@ export class MainPageComponent implements OnInit {
       companyLocation: ['Coimbatore', Validators.required],
       startYear: ['', Validators.required],
       endYear: ['', Validators.required],
-      projectName: ['Fake News Detection', Validators.required],
-      projectDomain: ['Angular', Validators.required],
-      projectDescription: ['Begin each item by stating the name of the place, location, dates, and job title (e.g. manager, volunteer) List experiences in reverse chronological order (most current experience first).', Validators.required],
     })
 
     if(this.experiences.length !== 3) {
@@ -191,7 +188,7 @@ export class MainPageComponent implements OnInit {
       projectDescription: ['Begin each item by stating the name of the place, location, dates, and job title (e.g. manager, volunteer) List experiences in reverse chronological order (most current experience first).', Validators.required],
     })
     
-    if(this.projects.length !== 3) {
+    if(this.projects.length !== 2) {
       this.projects.push(projectForm);
     }
 
@@ -309,7 +306,7 @@ export class MainPageComponent implements OnInit {
     this.userDetails.last_name = this.personalDetails.value.lastName;
     this.userDetails.phone_number = this.personalDetails.value.phoneNumber;
     this.userDetails.email = this.personalDetails.value.email;
-    this.userDetails.birthday = this.personalDetails.value.birthday;
+    // this.userDetails.birthday = this.personalDetails.value.birthday;
 
     // const temp = this.personalDetails.value.birthday;
     // const bday: Date = new Date(this.personalDetails.value.birthday);
@@ -322,8 +319,8 @@ export class MainPageComponent implements OnInit {
     this.userDetails.college_name = this.academicDetails.value.collegeName;
     this.userDetails.college_location = this.academicDetails.value.collegeLocation;
     this.userDetails.field_of_study = this.academicDetails.value.collegeStudy;
-    this.userDetails.college_start_period = this.academicDetails.value.collegeStartYear;
-    this.userDetails.college_end_period = this.academicDetails.value.collegeEndYear;
+    this.userDetails.college_start_period = 2019;
+    this.userDetails.college_end_period = 2023;
     this.userDetails.college_cgpa = this.academicDetails.value.collegeCGPA;
     this.userDetails.school_name = this.academicDetails.value.schoolName;
     this.userDetails.school_location = this.academicDetails.value.schoolLocation;

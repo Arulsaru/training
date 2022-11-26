@@ -9,7 +9,7 @@ import ts, {ResumeCreateResponse} from 'src/type/types';
 })
 export class ApiService {
 
-  constructor(private _http:HttpClient) { }
+  constructor(private _http:HttpClient) {}
   
   createUser(userData: ts) {
     return this._http.post<ResumeCreateResponse>(`${BASE_URL}create-user`, userData); 
