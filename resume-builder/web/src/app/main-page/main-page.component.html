@@ -42,7 +42,7 @@
 
     <div id="gap"></div>
     <div class="border">
-      <mat-stepper orientation="vertical" animationDuration="0" #stepper>
+      <mat-stepper orientation="vertical" animationDuration="1500" linear #stepper>
         <mat-step [stepControl]="personalDetails" label="Personal Details" errorMessage="Some Fields are still empty">
           <mat-hint>NOTE: First letter of the every input should be capital</mat-hint>
           <form [formGroup]="personalDetails">
