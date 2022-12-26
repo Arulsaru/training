@@ -1,0 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div formArrayName="items"
+    *ngFor="let item of form.controls['items'].controls; let i = index">
+    <div [formGroupName]="i">
+      <input formControlName='name'>
+      <input formControlName='surname'>
+    </div>
+  </div>
+
+  <button type="button" (click)="addNext()">Add Next</button>
+  <button type="submit">Submit (look at console)</button>
+</form>

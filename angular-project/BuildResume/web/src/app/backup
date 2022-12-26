@@ -1,0 +1,568 @@
+<div>
+  <h1>Resume Builder</h1>
+</div>
+<form #user="ngForm">
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="personalDetails" errorMessage="adsfdas">
+      <div style="text-align: center;background-color: rgb(243, 249, 249);">
+        <form [formGroup]="personalDetails">
+          <ng-template matStepLabel>Personal Details</ng-template>
+          <!-- <button (click)="onButtonClick()">click</button>
+        <p>{{count}}</p>
+        <app-child-component></app-child-component> -->
+          <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="Enter your First name" formControlName="firstNameCtrl"
+              [(ngModel)]="resume.first_name" required>
+          </mat-form-field>
+          <!-- <mdb-form-control>
+          <input mdbInput type="text" id="form1" class="form-control" />
+          <label mdbLabel class="form-label" for="form1">Example label</label>
+        </mdb-form-control> -->
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Enter your Last name" formControlName="lastNameCtrl"
+              [(ngModel)]="resume.last_name" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Enter your Email" formControlName="emailCtrl" [(ngModel)]="resume.email"
+              required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Phone Number</mat-label>
+            <input matInput placeholder="Enter your Phone Number" formControlName="phoneNumCtrl"
+              [(ngModel)]="resume.mobile_no" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Enter your Address" formControlName="addressCtrl" [(ngModel)]="resume.address"
+              required>
+          </mat-form-field>
+          <div>
+            <button mat-raised-button color="primary" class="my-class" matStepperNext (click)="onSubmit()">Next</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Academic Details">
+      <div style="text-align: center;background-color: rgb(243, 249, 249);">
+        <form [formGroup]="secondFormGroup">
+          <mat-form-field appearance="fill">
+            <mat-label>SSLC</mat-label>
+            <input matInput formControlName="tenthCtrl" placeholder="Enter SSLC school name"
+              [(ngModel)]="resume.tenth_school_name" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>SSLC Percentage</mat-label>
+            <input matInput formControlName="tenthMarkCtrl" placeholder="Enter SSLC Percentage"
+              [(ngModel)]="resume.sslc_percent" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>HSC</mat-label>
+            <input matInput formControlName="twelfthCtrl" placeholder="Enter HSC school name"
+              [(ngModel)]="resume.twelfth_school_name" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>HSC Percentage</mat-label>
+            <input matInput formControlName="twelfthMarkCtrl" placeholder="Enter HSC Percentage"
+              [(ngModel)]="resume.hsc_percent" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>College</mat-label>
+            <input matInput formControlName="collegeCtrl" placeholder="Enter College name" [(ngModel)]="resume.college"
+              required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>College Percentage</mat-label>
+            <input matInput formControlName="collegeMarkCtrl" placeholder="Enter College Percentage"
+              [(ngModel)]="resume.college_percent" required>
+          </mat-form-field>
+          <div>
+            <button mat-raised-button color="primary" class="my-class" matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" class="my-class" matStepperNext (click)="onSubmit()">Next</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="skillsDetails">
+      <div style="text-align: center;background-color: rgb(243, 249, 249);">
+        <form [formGroup]="skillsDetails">
+          <ng-template matStepLabel>Skill Details</ng-template>
+          <div *ngFor="let skill of resume.skills; let i = index;">
+            <mat-form-field appearance="fill">
+              <mat-label>Skill</mat-label>
+              <input matInput placeholder="Enter your Skill" class="showInputField skillPos" formControlName="skillCtrl"
+                [(ngModel)]="skill.name" name="skill_{{i}}" required>
+              <div mat-dialog-actions align="end">
+                <button mat-raised-button color="primary" class="my-class" (click)="removeSkill(i)">Remove</button>
+              </div>
+            </mat-form-field>
+          </div>
+          <br>
+          <div>
+            <button mat-raised-button color="primary" class="my-class" matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" class="my-class" matStepperNext (click)="onSubmit()">Next</button>
+            <div mat-dialog-actions align="end">
+              <button mat-raised-button color="primary" class="my-class" (click)="addSkill()" type="button">Add
+                more</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="projectDetails">
+      <div style="text-align: center;background-color: rgb(243, 249, 249);">
+        <form [formGroup]="projectDetails">
+          <ng-template matStepLabel>Project Details</ng-template>
+          <div *ngFor="let project of resume.projects; let i = index;">
+            <mat-form-field appearance="fill">
+              <mat-label>Project</mat-label>
+              <input matInput placeholder="Enter your Project" formControlName="projectCtrl" [(ngModel)]="project.name"
+                name="project_{{i}}" required>
+              <div mat-dialog-actions align="end">
+                <button mat-raised-button color="primary" class="my-class" (click)="removeProject(i)">Remove</button>
+              </div>
+            </mat-form-field>
+          </div>
+
+          <br>
+          <div>
+            <button mat-raised-button color="primary" class="my-class" matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" class="my-class" matStepperNext (click)="onSubmit()">Next</button>
+            <div mat-dialog-actions align="end">
+              <button mat-raised-button color="primary" class="my-class" (click)="addProject()">Add more</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="certificationDetails">
+      <div style="text-align: center;background-color: rgb(243, 249, 249);">
+        <form [formGroup]="certificationDetails">
+          <ng-template matStepLabel>Certification Details</ng-template>
+          <div *ngFor="let certification of resume.certifications let i = index;">
+            <mat-form-field appearance="fill">
+              <mat-label>Certification</mat-label>
+              <input matInput placeholder="Enter your Certification" formControlName="certificationCtrl"
+                [(ngModel)]="certification.name" required>
+              <div mat-dialog-actions align="end">
+                <button mat-raised-button color="primary" class="my-class"
+                  (click)="removeCertification(i)">Remove</button>
+              </div>
+            </mat-form-field>
+
+          </div>
+          <br>
+          <div>
+            <button mat-raised-button color="primary" class="my-class" matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" class="my-class" matStepperNext (click)="onSubmit()">Next</button>
+            <div mat-dialog-actions align="end">
+              <button mat-raised-button color="primary" class="my-class" (click)="addCertification()">Add more</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="profileDetails">
+      <div style="text-align: center;background-color: rgb(243, 249, 249);">
+        <form [formGroup]="profileDetails">
+          <ng-template matStepLabel>Profile Details</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>LinkedIn profile</mat-label>
+            <input matInput placeholder="Enter your LinkedIn profile" formControlName="profileCtrl1"
+              [(ngModel)]="resume.linkedIn_profile" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>HackerRank profile</mat-label>
+            <input matInput placeholder="Enter your HackerRank profile" formControlName="profileCtrl2"
+              [(ngModel)]="resume.hackerRank_profile" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>GitHub profile</mat-label>
+            <input matInput placeholder="Enter your GitHub profile" formControlName="profileCtrl3"
+              [(ngModel)]="resume.gitHub_profile" required>
+          </mat-form-field>
+          <br>
+          <div>
+            <button mat-raised-button color="primary" class="my-class" matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" class="my-class" matStepperNext (click)="onSubmit()">Next</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <div style="text-align: center;background-color: rgb(243, 249, 249);">
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-raised-button color="primary" class="my-class" matStepperPrevious>Back</button>
+          <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+        </div>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</form>
+
+<!-- 
+  import { jsPDF } from "jspdf";
+import { Component, OnInit } from '@angular/core';
+// import { FormBuilder, Validators } from '@angular/forms';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Resume } from "./resume.model";
+import { Subscription } from 'rxjs';
+import { CountService } from 'src/service/count-service';
+import { DetailsService } from './service.file';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { Skill } from "./skill.model";
+import { Project } from "./project.model";
+import { Certification } from "./certification.model";
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+  printArray: Array<any> = [];
+  candidates: Array<object> = [];
+  skills: Skill[] = [];
+  projects: Project[] = [];
+  certifications: Certification[] = [];
+  constructor(private _formBuilder: FormBuilder, private countService: CountService, private fetch: DetailsService, private route: Router) { }
+  ngOnInit() {
+    this.countService.currentValue.subscribe(value => {
+      this.count = value;
+    })
+  }
+  countItem: Subscription = new Subscription;
+  title = 'BuildResume';
+  personalDetails = this._formBuilder.group({
+    first_name: ['', Validators.required],
+    last_name: ['', Validators.required],
+    email: ['', Validators.required],
+    mobile_no: ['', Validators.required],
+    address: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    tenth_school_name: ['', Validators.required],
+    sslc_percent: ['', Validators.required],
+    twelfth_school_name: ['', Validators.required],
+    hsc_percent: ['', Validators.required],
+    college: ['', Validators.required],
+    college_percent: ['', Validators.required]
+  });
+
+  skillsDetails = this._formBuilder.group({
+    // skillsDetails: ['', Validators.required],
+    // skill: ['', Validators.required],
+    // skillCtrl: ['', Validators.required]
+
+  });
+
+  projectDetails = this._formBuilder.group({
+    // project: ['', Validators.required],
+  });
+  certificationDetails = this._formBuilder.group({
+    // certification: ['', Validators.required],
+  });
+  profileDetails = this._formBuilder.group({
+    linkedIn_profile: ['', Validators.required],
+    hackerRank_profile: ['', Validators.required],
+    gitHub_profile: ['', Validators.required]
+  });
+  isLinear = false;
+
+  count: number = 0;
+
+  resume: Resume = {
+    first_name: 'Kavi',
+    last_name: 'Mathi',
+    email: 'fboibbnvov@gmail.com',
+    mobile_no: 9874561230,
+    address: 'volhehnclbfr',
+    tenth_school_name: 'Nagini Vidyalaya',
+    sslc_percent: 96,
+    twelfth_school_name: 'Nagini Vidyalaya',
+    hsc_percent: 98,
+    college: 'BIT',
+    college_percent: 97,
+    skills: [
+      {
+        // id: 1,
+        name: 'oh'
+      }
+    ],
+    projects: [
+      {
+        name: ''
+      }
+    ],
+    certifications: [
+      {
+        name: ''
+      }
+    ],
+    linkedIn_profile: '1213',
+    hackerRank_profile: '7896',
+    gitHub_profile: '46532'
+  }
+  skills_length: number = this.resume.skills.length;
+  onSubmit() {
+    // console.log(this.resume);
+    console.log('hi');
+
+  }
+
+  send(data: any) {
+    // const tempRouter = this.route;
+    // this.resume.push(data);
+    this.candidates.push(data);
+    console.log(this.candidates);
+    // for(let i = 0; i < this.candidates.length; i++)
+    // this.printArray.push(data[i]);
+    // console.log(this.candidates.length);
+    
+    console.log("print array",this.printArray);
+    
+  }
+  onEnd() {
+    this.fetch.onCreate(this.candidates).subscribe();
+    console.log(this.candidates);
+
+  }
+
+  // addSkill() {
+  //   this.skills.push({
+  //     name: ''
+  //   });
+  //   console.log(this.skills);
+  //   console.log(this.candidates);
+  // }
+  onNextSkill() {
+    // this.candidates.push(this.skills);
+    console.log(this.skills);
+    this.candidates.push(this.skills);
+    // this.candidates.push(this.skills);
+    // this.candidates;
+    console.log(this.candidates);
+  }
+
+  onNextProject() {
+    console.log(this.projects);
+    this.candidates.push(this.projects);
+    console.log(this.candidates);
+
+  }
+
+  onNextCertifications() {
+    console.log(this.certifications);
+    this.candidates.push(this.certifications);
+    console.log(this.candidates);
+
+
+  }
+
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+
+  addSkill(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+
+      this.skills.push({ name: value });
+    }
+
+    event.chipInput!.clear();
+  }
+
+  removeSkill(skill: Skill): void {
+    const index = this.skills.indexOf(skill);
+
+    if (index >= 0) {
+      this.skills.splice(index, 1);
+    }
+  }
+
+  addProject(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.projects.push({ name: value });
+    }
+
+    event.chipInput!.clear();
+  }
+
+  removeProject(project: Project): void {
+    const index = this.projects.indexOf(project);
+
+    if (index >= 0) {
+      this.projects.splice(index, 1);
+    }
+  }
+
+  addCertification(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.certifications.push({ name: value });
+    }
+
+    event.chipInput!.clear();
+  }
+
+  removeCertification(certification: Certification): void {
+    const index = this.certifications.indexOf(certification);
+
+    if (index >= 0) {
+      this.certifications.splice(index, 1);
+    }
+  }
+
+  // addProject() {
+  //   this.projects.push({
+  //     name: ''
+  //   })
+  //   console.log(this.projects);
+  //   this.candidates.push(this.projects);
+  //   console.log(this.candidates);
+  // }
+
+  // addCertification() {
+  //   this.certifications.push({
+  //     name: ''
+  //   })
+  //   console.log(this.certifications);
+  //   this.candidates.push(this.certifications);
+  //   console.log(this.candidates);
+  // }
+
+  onButtonClick() {
+    console.log('clicked');
+    this.countService.changeValue(this.count + 1);
+  }
+
+  // removeSkill(uId: number) {
+  //   console.log(uId);
+  //   this.skills.splice(uId, 1);
+  //   console.log(this.skills);
+  // }
+
+  // removeProject(uId: number) {
+  //   console.log(uId);
+  //   this.projects.splice(uId, 1);
+  //   console.log(this.projects);
+  // }
+
+  // removeCertification(uId: number) {
+  //   console.log(uId);
+  //   this.certifications.splice(uId, 1);
+  //   console.log(this.certifications);
+  // }
+
+  printPDF() {
+    let doc = new jsPDF();
+    for (let i = 0; i < this.candidates.length; i++) {
+      // let value = this.candidates.values()
+      // doc.text(this.candidates[i].)
+      doc.text("hi", i + 50, i + 50);
+      doc.text('ff',100,96);
+    }
+    // doc.save('kavii.pdf');
+  }
+}
+
+ -->
+ <mat-step [stepControl]="projectDetails">
+  <div style="text-align: center;background-color: rgb(243, 249, 249);">
+    <form [formGroup]="projectDetails" #user3="ngForm">
+      <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Project</mat-label>
+        <mat-chip-list #chipList aria-label="project selection">
+          <mat-chip *ngFor="let project of projects" (removed)="removeProject(project)">
+            {{project.name}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input placeholder="New project..." [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addProject($event)">
+        </mat-chip-list>
+      </mat-form-field>
+      <ng-template matStepLabel>Project Details</ng-template>
+      <br>
+      <div>
+        <button mat-raised-button color="primary" class="my-class" matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" class="my-class" matStepperNext 
+          (click)="onNextProject()">Next</button>
+        <!-- <div mat-dialog-actions align="end">
+          <button mat-raised-button color="primary" class="my-class" (click)="addProject()">Add more</button>
+        </div> -->
+      </div>
+    </form>
+  </div>
+</mat-step>
+
+<mat-step [stepControl]="certificationDetails">
+  <div style="text-align: center;background-color: rgb(243, 249, 249);">
+    <form [formGroup]="certificationDetails" #user4="ngForm">
+      <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Certification</mat-label>
+        <mat-chip-list #chipList aria-label="Certification selection">
+          <mat-chip *ngFor="let certification of certifications" (removed)="removeCertification(certification)">
+            {{certification.name}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input placeholder="New certification..." [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addCertification($event)">
+        </mat-chip-list>
+      </mat-form-field>
+      <ng-template matStepLabel>Certification Details</ng-template>
+      <!-- <div *ngFor="let certification of certifications let i = index;">
+        <mat-form-field appearance="fill">
+          <mat-label>Certification</mat-label>
+          <input matInput placeholder="Enter your Certification" formControlName="certification"
+            name="certification" ngModel required>
+          <div mat-dialog-actions align="end">
+            <button mat-raised-button color="primary" class="my-class" style="width : 10em;"
+              (click)="removeCertification(i)">Remove</button>
+          </div>
+        </mat-form-field>
+
+      </div> -->
+      <br>
+      <div>
+        <button mat-raised-button color="primary" class="my-class" matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" class="my-class" matStepperNext
+          (click)="onSubmit()" (click)="onNextCertifications()">Next</button>
+        <!-- <div mat-dialog-actions align="end">
+          <button mat-raised-button color="primary" class="my-class" (click)="addCertification()">Add more</button>
+        </div> -->
+      </div>
+    </form>
+  </div>
+</mat-step>
