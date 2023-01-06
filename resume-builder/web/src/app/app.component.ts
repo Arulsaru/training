@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import * as _ from 'lodash';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +8,9 @@ import { Router } from '@angular/router';
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true },
+      useValue: { showError: true }, // stepper header error ku..
     }
   ]
 })
 
-export class AppComponent {
-
-  ngOnInit(): void {
-  }
-
-  constructor() {}
-
-
-}
+export class AppComponent {}

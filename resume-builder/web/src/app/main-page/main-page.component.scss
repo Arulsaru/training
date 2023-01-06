@@ -1,17 +1,14 @@
-body, .navbar {
-    background-color: #4e54c8 !important;
-}
-
 .navbar {
     font-family: Copperplate, Papyrus, fantasy;
     font-size: 30px;
     justify-content: space-between;
-    padding-top: 20px !important;
+    padding-top: 30px !important;
     padding-bottom: 60px !important;
     color: white;
+    background-color: #4e54c8;
 }
 
-::ng-deep .mat-menu {
+:host::ng-deep .mat-menu {
     margin-top: 20px;
 }
 
@@ -27,7 +24,7 @@ body, .navbar {
     margin: auto;
     width: 600px;
     margin-top: auto;
-    /* border-radius: 15px !important; */
+    border-width: 0px !important;
 }
 
 mat-form-field {
@@ -129,7 +126,7 @@ input.mat-input-element {
     font-size: 12px !important;
 }
 
-/* ------------------------- animation starts here ------------------------- */
+/* ------------------------- animation starts ------------------------- */
 
 @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
 
@@ -165,7 +162,6 @@ input.mat-input-element {
     height: 80px;
     animation-delay: 0s;
 }
-
 
 .circles li:nth-child(2){
     left: 10%;
