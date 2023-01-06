@@ -1,0 +1,56 @@
+<div class="container">
+    <form class="education-form" [formGroup]="educationForm" (ngSubmit)="education(educationForm.value)" autocomplete="off">
+        <div class="input-row-1">
+            <div class="row g-2">
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Institute Name</mat-label>
+                        <input type="text" matInput id="institute-name" formControlName="institute_name">
+                        <mat-error>Institute Name is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Location</mat-label>
+                        <input type="text" matInput id="institute-location" formControlName="institute_location">
+                        <mat-error>Location is required</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>  
+        <div class="input-row-2">
+            <div class="row g-2">
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Qualification</mat-label>
+                        <input type="text" matInput id="qualification" formControlName="qualification">
+                        <mat-error>Qualification is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Field of Study</mat-label>
+                        <input type="text" matInput id="field-of-study" formControlName="field_of_study">
+                        <mat-error>Field of Study is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Year of Graduation</mat-label>
+                        <input type="text" matInput id="year-of-graduation" formControlName="year_of_graduation">
+                        <mat-error>Year of Graduation is required</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>   
+        <div class="button row g-2">
+            <div class="col-md">
+                <button mat-stroked-button color="primary" id="education-prev" (click)="toPersonal()">Previous</button>
+            </div>
+            <div class="col-md">
+                <button mat-stroked-button color="primary" id="education-next" [disabled]="!educationForm.valid">Next</button>
+            </div>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,35 @@
+.container {
+    width: 70%;
+    height: 70%;
+    margin-left: 15%;
+    margin-top: 10%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+
+.experience-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+  
+.input-width {
+    width: 90%;
+}
+
+#skills {
+    text-transform: capitalize;
+}
+
+.button {
+    margin-top: 5%;
+}
+
+#skills-prev {
+    margin-left: 10%;
+}
+
+#skills-next {
+    margin-left: 50%;
+}

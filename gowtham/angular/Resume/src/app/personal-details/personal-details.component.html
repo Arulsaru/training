@@ -1,0 +1,84 @@
+<div class="container">
+    <form class="personal-form" [formGroup]="personalForm" (ngSubmit)="personalDetails(personalForm.value)" autocomplete="off">
+        <div class="input-row-1">
+            <div class="row g-2">
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>First Name</mat-label>
+                        <input type="text" matInput id="first-name" formControlName="first_name">
+                        <mat-error>Enter a valid First Name</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md right">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Last Name</mat-label>
+                        <input type="text" matInput id="last-name" formControlName="last_name">
+                        <mat-error>Enter a valid Last Name</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>  
+        <div class="input-row-2">
+            <div class="row g-2">
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>DOB</mat-label>
+                        <input type="date" matInput id="date-of-birth" formControlName="date_of_birth">
+                        <mat-error>Enter a valid Date of Birth</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md right">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Gender</mat-label>
+                        <mat-select id="gender" formControlName="gender">
+                            <mat-option *ngFor="let gender of Gender" [value]="gender.value">
+                                {{gender.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>Select the Gender</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>  
+        <div class="input-row-3">
+            <div class="row g-2">
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Contact Number</mat-label>
+                        <input type="text" matInput id="contact-number" formControlName="contact_number">
+                        <mat-error>Enter a valid Contact Number</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md right">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input type="email" matInput id="email" formControlName="email">
+                        <mat-error>Enter a valid Email</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>  
+        <div class="input-row-4">
+            <div class="row g-2">
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Location</mat-label>
+                        <input type="text" matInput id="location" formControlName="location">
+                        <mat-error>Enter a valid Location</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md right">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Pin Code</mat-label>
+                        <input type="text" matInput id="pin-code" formControlName="pin_code">
+                        <mat-error>Enter a valid Pin Code</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>  
+        <div class="button">
+            <button mat-stroked-button color="primary" id="personal-next" [disabled]="!personalForm.valid" >Next</button>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,32 @@
+.container {
+    width: 70%;
+    height: 70%;
+    margin-left: 25%;
+    margin-top: 10%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+
+.summary-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+  
+.input-width {
+    width: 90%;
+    height: 100%;
+}
+
+.button {
+    margin-top: 5%;
+}
+
+#summary-prev {
+    margin-left: 10%;
+}
+
+#summary-next {
+    margin-left: 50%;
+}

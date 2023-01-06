@@ -1,0 +1,49 @@
+<div class="container">
+    <form class="experience-form" [formGroup]="experienceForm" (ngSubmit)="experience(experienceForm.value)" autocomplete="off">
+        <div class="input-row-1">
+            <div class="row g-2">
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Company Name</mat-label>
+                        <input type="text" matInput id="company-name" formControlName="company_name">
+                        <mat-error>Enter a valid Company Name</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md right">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Job Title</mat-label>
+                        <input type="text" matInput id="job-title" formControlName="job_title">
+                        <mat-error>Enter a valid Job Title</mat-error>
+                    </mat-form-field> 
+                </div>
+            </div>
+        </div>  
+        <div class="input-row-2">
+            <div class="row g-2">
+                <div class="col-md">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Location</mat-label>
+                        <input type="text" matInput id="company-location" formControlName="comapany_location">
+                        <mat-error>Enter a valid Location</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md right">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Years of Experienece</mat-label>
+                        <input type="text" matInput id="years-of-experience" formControlName="years_of_experience">
+                        <mat-error>Enter a valid Year of Experience</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>  
+        <div class="button row g-2">
+            <div class="col-md">
+                <button mat-stroked-button color="primary" id="experience-prev" (click)="toEducation()">Previous</button>
+            </div>
+            <div class="col-md">
+                <button mat-stroked-button color="primary" id="experience-next" [disabled]="!experienceForm.valid">Next</button>
+            </div>
+        </div>
+    </form>
+</div>
+

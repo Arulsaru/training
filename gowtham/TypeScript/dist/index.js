@@ -55,4 +55,19 @@ function dolToInr(currency) {
         return parseInt(currency) * 82.36;
     }
 }
+let result = 100;
+console.log(result);
+//nullable
+function print(string) {
+    if (string)
+        console.log(string.toUpperCase());
+    else if (null)
+        console.log(null);
+    else
+        console.log(undefined);
+}
+print('hello');
+print(null);
+print(undefined);
+//optional Chaining
 //# sourceMappingURL=index.js.map

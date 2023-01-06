@@ -1,0 +1,53 @@
+.container {
+    width: 70%;
+    height: 70%;
+    margin-left: 15%;
+    margin-top: 10%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+
+.experience-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+  
+.input-width {
+    width: 90%;
+}
+
+.input-row-1 {
+    width: 140% !important;
+    margin-bottom: 10px;
+}
+
+.input-row-2 {
+    width: 140% !important;
+    margin-bottom: 10px;
+}
+
+#company-name {
+    text-transform: capitalize;
+}
+
+#job-title {
+    text-transform: capitalize;
+}
+
+#company-location {
+    text-transform: capitalize;
+}
+
+.button {
+    margin-top: 5%;
+}
+
+#experience-prev {
+    margin-left: 30%;
+}
+
+#experience-next {
+    margin-left: 70%;
+}

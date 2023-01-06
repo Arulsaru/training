@@ -1,0 +1,67 @@
+.container {
+    width: 70%;
+    height: 70%;
+    margin-left: 15%;
+    margin-top: 10%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+
+.personal-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+  
+.input-width {
+    width: 90%;
+}
+
+.right {
+    margin-left: 50px;
+}
+
+.input-row-1 {
+    width: 140% !important;
+    margin-bottom: 10px;
+}
+
+.input-row-2 {
+    width: 140% !important;
+    margin-bottom: 10px;
+}
+
+.input-row-3 {
+    width: 140% !important;
+    margin-bottom: 10px;
+}
+
+.input-row-4 {
+    width: 140% !important;
+    margin-bottom: 10px;
+}
+
+.button {
+    width: 140%;
+}
+
+#first-name {
+    text-transform: capitalize;
+}
+
+#last-name {
+    text-transform: capitalize;
+}
+
+#location {
+    text-transform: capitalize;
+}
+
+#personal-next {
+    margin-top :8%;
+    margin-left: 80%;
+}
+
+
+

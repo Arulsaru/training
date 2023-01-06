@@ -1,0 +1,34 @@
+<div class="container">
+    <form class="skills-form" [formGroup]="skillsForm" (ngSubmit)="skillsData()" autocomplete="off">
+        <!-- <div>
+            <mat-form-field class="input-width" appearance="fill">
+                <mat-label>Skills</mat-label>
+                <input type="text" matInput id="skills" formControlName="skills">
+                <mat-error>Enter a valid Skill</mat-error>
+            </mat-form-field>
+        </div> -->
+        <mat-form-field class="input-width" appearance="fill">
+            <mat-label>Skills</mat-label>
+            <mat-chip-list #chipList aria-label="Add Skills">
+                <mat-chip *ngFor="let skill of skills" (removed)="remove(skill)">
+                    {{skill}}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <input matInput id="skills" formControlName="skills" [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-error *ngIf="chipList.errorState">Enter the Skill</mat-error>
+        </mat-form-field>
+        <div class="button row g-2">
+            <div class="col-md">
+                <button mat-stroked-button color="primary" id="skills-prev" (click)="toExperience()">Previous</button>
+            </div>
+            <div class="col-md">
+                <button mat-stroked-button color="primary" id="skills-next" [disabled]="!skillsForm.valid">Next</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -68,6 +68,7 @@ function dolToInr(currency: number | string): number {
 
 //intersection
 
+
 //Literals
 type Value = 50 | 100;
 let result: Value = 100;
