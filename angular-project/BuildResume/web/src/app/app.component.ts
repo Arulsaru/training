@@ -1,6 +1,5 @@
 import { jsPDF } from "jspdf";
 import { Component, OnInit, ViewChild } from '@angular/core';
-// import { FormBuilder, Validators } from '@angular/forms';
 import { COMMA, ENTER, I } from '@angular/cdk/keycodes';
 import { Resume } from "./resume.model";
 import { Subscription } from 'rxjs';
@@ -31,17 +30,14 @@ export class AppComponent implements OnInit {
   career_objective: Array<any> = [];
   countItem: Subscription = new Subscription;
   title = 'BuildResume';
-  constructor(private _formBuilder: FormBuilder, private countService: CountService, private fetch: DetailsService, private route: Router) { }
+  constructor(private _formBuilder: FormBuilder, private fetch: DetailsService) { }
   ngOnInit() {
-    this.countService.currentValue.subscribe(value => {
-      this.count = value;
-    })
   }
   
   personalDetails = this._formBuilder.group({
-    first_name: ['', Validators.required],
-    last_name: ['', Validators.required],
-    email: ['', Validators.required],
+    first_name: ['Arulmozhi', Validators.required],
+    last_name: ['Karunagaran', Validators.required],
+    email: ['saruarul154@gmail.com', Validators.required],
     mobile_no: ['', Validators.required],
     address: ['', Validators.required],
     profilePicture: ['', Validators.required]
@@ -100,10 +96,6 @@ export class AppComponent implements OnInit {
     this.detailService.email = this.personalDetails.value.email;
     this.detailService.address = this.personalDetails.value.address;
     this.detailService.profile_picture = this.personalDetails.value.profilePicture;
-
-    // const temp = this.personalDetails.value.birthday;
-    // const bday: Date = new Date(this.personalDetails.value.birthday);
-    // console.log(bday);
 
     this.detailService.tenth_school_name = this.secondFormGroup.value.tenth_school_name;
     this.detailService.sslc_percent = this.secondFormGroup.value.sslc_percent;
